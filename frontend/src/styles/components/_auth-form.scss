@@ -1,0 +1,92 @@
+@use '../abstracts' as *;
+
+.m-auth-form {
+  inline-size: 100%;
+  max-inline-size: $auth-card-max-inline-size;
+  padding: $auth-card-padding;
+  border-radius: $radius-card;
+  background-color: $color-surface-dark;
+  color: $color-text-on-dark;
+
+  .auth-title {
+    margin-block-end: 0.75rem;
+    font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+    line-height: $line-height-display;
+    letter-spacing: $letter-spacing-display;
+  }
+
+  .accent {
+    font-family: $font-accent;
+    font-weight: $font-weight-medium;
+    color: $color-accent;
+  }
+
+  .auth-intro {
+    margin-block-end: 1.5rem;
+    color: $color-text-muted-on-dark;
+  }
+
+  .auth-alert {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-block-end: 1.5rem;
+    padding: 0.75rem 1rem;
+    border: 2px solid $color-error-on-dark;
+    border-radius: $radius-small;
+    background-color: $color-input-bg;
+    color: $color-text-on-dark;
+
+    svg {
+      flex-shrink: 0;
+      margin-block-start: 0.2em;
+      color: $color-error-on-dark;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .auth-fields {
+    display: grid;
+    row-gap: 1.25rem;
+  }
+
+  .auth-submit {
+    justify-self: start;
+    margin-block-start: 0.5rem;
+    padding: 0.75rem 2rem;
+    border: 0;
+    border-radius: $radius-pill;
+    background-color: $color-accent;
+    color: $color-text-on-light;
+    font-weight: $font-weight-bold;
+
+    @include motion-ok {
+      transition: background-color $duration-fast $ease-out;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: $color-logo-mark-light;
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: progress;
+    }
+  }
+
+  .auth-footer {
+    margin-block-start: 1.5rem;
+
+    p {
+      margin: 0;
+    }
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: 0.3em;
+    }
+  }
+}

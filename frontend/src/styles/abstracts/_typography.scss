@@ -1,0 +1,34 @@
+$fallback-serif: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+$fallback-sans-serif: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$fallback-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+$font-headline: 'Open Sans', $fallback-sans-serif;
+$font-copy: 'Open Sans', $fallback-sans-serif;
+$font-accent: 'Telma', $fallback-serif;
+$font-code: 'Source Code Pro', $fallback-mono;
+
+$font-subclaim: $fallback-sans-serif;
+$font-menu: $fallback-sans-serif;
+$font-quote: $fallback-serif;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+$font-size-display: clamp(2.5rem, 1.25rem + 6vw, 7.5rem);
+$font-size-section: clamp(2rem, 1rem + 4.5vw, 5.5rem);
+$font-size-comment: clamp(1.25rem, 1rem + 1.1vw, 1.875rem);
+$font-size-comment-desktop: clamp(1.125rem, 0.6rem + 1.1vw, 1.75rem);
+$font-size-lead: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+$font-size-card-title: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+$font-size-code-fragment: clamp(0.75rem, 0.6rem + 0.5vw, 1rem);
+$font-size-small: 0.875rem;
+$font-size-tiny: 0.75rem;
+
+$line-height-display: 1.05;
+$line-height-comment: 1.3;
+$line-height-lead: 1.5;
+$line-height-card-title: 1.2;
+$letter-spacing-display: -0.02em;
+$letter-spacing-label: 0.2em;

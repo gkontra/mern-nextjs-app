@@ -1,0 +1,48 @@
+@use '../abstracts' as *;
+
+.m-segment-toggle {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  padding: $toggle-padding;
+  border-radius: $radius-pill;
+  background-color: $color-toggle-track;
+
+  .glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+
+    &.is-first {
+      box-shadow: 0 0 $glow-size $color-glow-mongodb;
+    }
+
+    &.is-second {
+      box-shadow: 0 0 $glow-size $color-glow-convex;
+    }
+  }
+
+  .indicator {
+    position: absolute;
+    inset-block: $toggle-padding;
+    inset-inline-start: $toggle-padding;
+    inline-size: calc((100% - 2 * #{$toggle-padding}) / 2);
+    border-radius: $radius-pill;
+    background-color: $color-toggle-indicator;
+    box-shadow: inset 0 0 0 $selection-edge-width $color-text-muted-on-dark;
+  }
+
+  .segment {
+    position: relative;
+    display: grid;
+    place-items: center;
+    block-size: $toggle-segment-block-size;
+  }
+
+  .logo {
+    display: block;
+    inline-size: auto;
+    block-size: calc(var(--logo-size, 1) * #{$toggle-segment-block-size});
+  }
+}

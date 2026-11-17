@@ -1,0 +1,41 @@
+@use '../abstracts' as *;
+
+.m-multiplayer-cursor {
+  display: inline-flex;
+  align-items: flex-start;
+  pointer-events: none;
+
+  .pointer {
+    flex-shrink: 0;
+    fill: var(--cursor-color);
+    stroke: $color-bg-dark;
+    stroke-width: 1;
+  }
+
+  .name-tag {
+    margin-block-start: 1.25rem;
+    margin-inline-start: -0.25rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: $radius-pill;
+    background-color: var(--cursor-color);
+    color: var(--cursor-text);
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+    white-space: nowrap;
+  }
+
+  &.is-amber {
+    --cursor-color: #{$color-cursor-amber};
+    --cursor-text: #{$color-cursor-amber-text};
+  }
+
+  &.is-teal {
+    --cursor-color: #{$color-cursor-teal};
+    --cursor-text: #{$color-cursor-teal-text};
+  }
+
+  &.is-plum {
+    --cursor-color: #{$color-cursor-plum};
+    --cursor-text: #{$color-cursor-plum-text};
+  }
+}

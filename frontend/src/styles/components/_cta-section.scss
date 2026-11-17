@@ -1,0 +1,52 @@
+@use '../abstracts' as *;
+
+.m-cta-section {
+  --text-split-accent: #{$color-accent-on-light};
+
+  display: grid;
+  align-items: center;
+  overflow: clip;
+  min-block-size: $section-min-height;
+  padding-block: $section-padding-block;
+  background-color: $color-bg-light;
+  color: $color-text-on-light;
+  text-align: center;
+
+  .container {
+    display: grid;
+    justify-items: center;
+    row-gap: clamp(2rem, 1rem + 3vw, 4rem);
+  }
+
+  .headline {
+    margin: 0;
+    font-size: $font-size-display;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-display;
+    letter-spacing: $letter-spacing-display;
+    color: $color-text-on-light;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 2.25rem;
+    border-radius: $radius-pill;
+    background-color: $color-text-on-light;
+    color: $color-text-on-dark;
+    font-size: $font-size-lead;
+    font-weight: $font-weight-bold;
+
+    @include motion-ok {
+      transition: background-color $duration-fast $ease-out;
+    }
+
+    &:hover {
+      background-color: $color-accent-on-light;
+    }
+
+    &:focus-visible {
+      @include focus-ring($color-focus-on-light);
+      opacity: 1 !important;
+    }
+  }
+}

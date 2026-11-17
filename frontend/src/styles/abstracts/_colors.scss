@@ -1,0 +1,67 @@
+$color-1: #5c4b51;
+$color-2: #8cbeb2;
+$color-3: #f2ebbf;
+$color-4: #f3b562;
+$color-5: #f06060;
+$color-6: #2a2a2a;
+
+$color-red: $color-5;
+$color-white: white;
+$color-black: black;
+
+$color-dark-blue: #283e4a;
+$linear-gradient-dark: linear-gradient(180deg, rgba(40, 62, 74, 1) 0%, rgba(24, 32, 38, 1) 100%);
+
+$color-link: $color-2;
+
+$color-bg-dark: $color-6;
+$color-bg-light: $color-3;
+$color-browser-bg: $color-dark-blue;
+$color-surface-dark: color-mix(in srgb, $color-6 88%, $color-3);
+$color-bg-light-soft: color-mix(in srgb, $color-3 45%, $color-white);
+$color-surface-light: color-mix(in srgb, $color-3 15%, $color-white);
+
+$color-text-on-dark: $color-3;
+$color-text-muted-on-dark: color-mix(in srgb, $color-3 75%, $color-6);
+$color-text-on-light: $color-6;
+
+$color-accent: $color-2;
+$color-accent-on-light: $color-1;
+
+$color-focus: $color-2;
+$color-focus-on-light: $color-1;
+
+$color-cursor-amber: $color-4;
+$color-cursor-amber-text: $color-6;
+$color-cursor-teal: $color-2;
+$color-cursor-teal-text: $color-6;
+$color-cursor-plum: $color-1;
+$color-cursor-plum-text: $color-3;
+
+$color-glow-mongodb: $color-2;
+$color-glow-convex: $color-4;
+$color-toggle-track: $color-surface-dark;
+$color-toggle-indicator: color-mix(in srgb, $color-6 60%, $color-3);
+
+$color-selection: $color-2;
+$color-selection-handle: $color-3;
+$color-wireframe: color-mix(in srgb, $color-3 22%, transparent);
+$color-wireframe-strong: color-mix(in srgb, $color-3 40%, transparent);
+$color-text-muted-on-browser: color-mix(in srgb, $color-3 85%, $color-dark-blue);
+
+$color-social-bg: color-mix(in srgb, $color-dark-blue 80%, $color-3);
+
+$color-code-fragment: color-mix(in srgb, $color-6 78%, $color-3);
+
+$color-tag-bg: color-mix(in srgb, $color-3 60%, $color-white);
+$color-tag-border: color-mix(in srgb, $color-1 35%, transparent);
+$color-card-border: color-mix(in srgb, $color-6 12%, transparent);
+
+$color-shadow: color-mix(in srgb, $color-black 45%, transparent);
+
+$color-logo-mark: $color-2;
+$color-logo-mark-light: color-mix(in srgb, $color-2 55%, $color-white);
+
+$color-error-on-dark: color-mix(in srgb, $color-5 55%, $color-3);
+$color-input-bg: $color-6;
+$color-input-border: color-mix(in srgb, $color-3 55%, $color-surface-dark);

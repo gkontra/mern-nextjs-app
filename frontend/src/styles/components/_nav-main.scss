@@ -1,0 +1,65 @@
+@use '../abstracts' as *;
+
+.m-nav-main {
+  background-color: $color-bg-dark;
+
+  &.is-overlay {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+    z-index: $z-nav;
+    background-color: transparent;
+
+    .navbar-collapse {
+      @include bp-down($breakpoint-lg) {
+        padding: 1rem;
+        border-radius: $radius-card;
+        background-color: $color-bg-dark;
+      }
+    }
+  }
+
+  .navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $color-text-on-dark;
+    font-weight: $font-weight-bold;
+
+    svg {
+      inline-size: auto;
+      block-size: 2rem;
+    }
+  }
+
+  .nav-link {
+    color: $color-text-on-dark;
+
+    &:hover {
+      color: $color-accent;
+    }
+
+    &.active {
+      color: $color-accent;
+      text-decoration: underline;
+      text-underline-offset: 0.4em;
+    }
+  }
+
+  .nav-auth-placeholder {
+    min-inline-size: $nav-auth-placeholder-inline-size;
+  }
+
+  .nav-logout {
+    text-align: start;
+  }
+
+  .navbar-brand,
+  .nav-link,
+  .navbar-toggler {
+    &:focus-visible {
+      @include focus-ring;
+      box-shadow: none;
+    }
+  }
+}

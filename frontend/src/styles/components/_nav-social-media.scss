@@ -1,0 +1,39 @@
+@use '../abstracts' as *;
+
+.nav-social-media {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 48px;
+    block-size: 48px;
+    border-radius: $radius-pill;
+    background-color: $color-social-bg;
+    color: $color-text-on-dark;
+
+    @include motion-ok {
+      transition:
+        background-color $duration-base $ease-out,
+        color $duration-base $ease-out;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background-color: $color-accent;
+      color: $color-text-on-light;
+    }
+
+    &:focus-visible {
+      @include focus-ring($color-text-on-dark);
+    }
+  }
+}

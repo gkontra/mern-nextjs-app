@@ -1,0 +1,112 @@
+@use '../abstracts' as *;
+
+.m-modules-section {
+  overflow: clip;
+  min-block-size: $section-min-height;
+  padding-block: $section-padding-block;
+  background-color: $color-bg-light-soft;
+  color: $color-text-on-light;
+
+  .headline {
+    margin: 0 0 clamp(2.5rem, 1.5rem + 4vw, 5rem);
+    font-size: $font-size-section;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-display;
+    letter-spacing: $letter-spacing-display;
+    color: $color-text-on-light;
+  }
+
+  .modules-status {
+    font-size: $font-size-lead;
+
+    p {
+      margin-block-end: 1rem;
+    }
+  }
+
+  .retry-button {
+    padding: 0.625rem 1.5rem;
+    border: 2px solid $color-text-on-light;
+    border-radius: $radius-pill;
+    background-color: transparent;
+    color: $color-text-on-light;
+    font-weight: $font-weight-bold;
+
+    &:hover {
+      background-color: $color-text-on-light;
+      color: $color-text-on-dark;
+    }
+
+    &:focus-visible {
+      @include focus-ring($color-focus-on-light);
+    }
+  }
+
+  .stage {
+    position: relative;
+  }
+
+  .modules-grid {
+    display: grid;
+    gap: $modules-grid-gap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    > li:focus-within {
+      opacity: 1 !important;
+    }
+
+    @include bp-up($breakpoint-lg) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+
+      > li {
+        display: grid;
+        grid-row: span 2;
+      }
+
+      > li:nth-child(odd) {
+        grid-column: 1;
+      }
+
+      > li:nth-child(even) {
+        grid-column: 2;
+      }
+
+      > li:nth-child(2) {
+        grid-row: 2 / span 2;
+      }
+    }
+
+    @include bp-up($breakpoint-xl) {
+      max-inline-size: $modules-grid-max-inline-size;
+      margin-inline: auto;
+    }
+  }
+
+  .cursor-slot {
+    display: none;
+
+    @include bp-up($breakpoint-xl) {
+      position: absolute;
+      z-index: $z-overlay;
+      display: block;
+    }
+  }
+
+  .cursor-slot-1 {
+    inset-block-start: 12%;
+    inset-inline-start: 2%;
+  }
+
+  .cursor-slot-2 {
+    inset-block-start: 45%;
+    inset-inline-end: 4%;
+  }
+
+  .cursor-slot-3 {
+    inset-block-start: 78%;
+    inset-inline-start: 4%;
+  }
+}

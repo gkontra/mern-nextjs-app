@@ -1,0 +1,24 @@
+@use '../abstracts' as *;
+
+.m-text-split {
+  .line {
+    display: block;
+  }
+
+  .word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .word-inner,
+  .char {
+    display: inline-block;
+  }
+
+  .accent {
+    font-family: $font-accent;
+    font-style: normal;
+    font-synthesis: none;
+    color: var(--text-split-accent, #{$color-accent});
+  }
+}

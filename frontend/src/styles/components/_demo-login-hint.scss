@@ -1,0 +1,32 @@
+@use '../abstracts' as *;
+
+.m-demo-login-hint {
+  inline-size: 100%;
+  max-inline-size: $auth-card-max-inline-size;
+  padding: 1.25rem 1.5rem;
+  border: 1px dashed $color-input-border;
+  border-radius: $radius-card;
+  font-size: $font-size-small;
+  color: $color-text-muted-on-dark;
+
+  .hint-title {
+    margin-block-end: 0.5rem;
+    font-size: $font-size-small;
+    letter-spacing: $letter-spacing-label;
+    text-transform: uppercase;
+    color: $color-accent;
+  }
+
+  .hint-list {
+    padding-inline-start: 1.25rem;
+  }
+
+  p:last-child {
+    margin: 0;
+  }
+
+  code {
+    font-family: $font-code;
+    color: $color-text-on-dark;
+  }
+}

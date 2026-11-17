@@ -1,0 +1,81 @@
+@use '../abstracts' as *;
+
+.m-selection-frame {
+  position: relative;
+  padding: $selection-padding;
+
+  .frame-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .edge {
+    position: absolute;
+    background-color: $color-selection;
+  }
+
+  .edge-top,
+  .edge-bottom {
+    inset-inline: 0;
+    block-size: $selection-edge-width;
+  }
+
+  .edge-left,
+  .edge-right {
+    inset-block: 0;
+    inline-size: $selection-edge-width;
+  }
+
+  .edge-top {
+    inset-block-start: 0;
+    transform-origin: left center;
+  }
+
+  .edge-right {
+    inset-inline-end: 0;
+    transform-origin: center top;
+  }
+
+  .edge-bottom {
+    inset-block-end: 0;
+    transform-origin: right center;
+  }
+
+  .edge-left {
+    inset-inline-start: 0;
+    transform-origin: center bottom;
+  }
+
+  .handle {
+    position: absolute;
+    inline-size: $selection-handle-size;
+    block-size: $selection-handle-size;
+    border: $selection-edge-width solid $color-selection;
+    background-color: $color-selection-handle;
+  }
+
+  .handle-top-left,
+  .handle-top-right {
+    inset-block-start: calc(#{$selection-handle-size} / -2 + #{$selection-edge-width} / 2);
+  }
+
+  .handle-bottom-left,
+  .handle-bottom-right {
+    inset-block-end: calc(#{$selection-handle-size} / -2 + #{$selection-edge-width} / 2);
+  }
+
+  .handle-top-left,
+  .handle-bottom-left {
+    inset-inline-start: calc(#{$selection-handle-size} / -2 + #{$selection-edge-width} / 2);
+  }
+
+  .handle-top-right,
+  .handle-bottom-right {
+    inset-inline-end: calc(#{$selection-handle-size} / -2 + #{$selection-edge-width} / 2);
+  }
+
+  .frame-content {
+    position: relative;
+  }
+}

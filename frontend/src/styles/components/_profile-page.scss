@@ -1,0 +1,74 @@
+@use '../abstracts' as *;
+
+.page-profile {
+  padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+
+  .profile-title {
+    margin-block-end: 2rem;
+    font-size: $font-size-section;
+    line-height: $line-height-display;
+    letter-spacing: $letter-spacing-display;
+    overflow-wrap: anywhere;
+  }
+
+  .accent {
+    font-family: $font-accent;
+    font-weight: $font-weight-medium;
+    color: $color-accent;
+  }
+
+  .profile-details {
+    display: grid;
+    gap: 1rem 3rem;
+    margin-block-end: 2rem;
+
+    @include bp-up($breakpoint-md) {
+      grid-template-columns: repeat(2, max-content);
+    }
+
+    dt {
+      font-size: $font-size-small;
+      font-weight: $font-weight-medium;
+      letter-spacing: $letter-spacing-label;
+      text-transform: uppercase;
+      color: $color-text-muted-on-dark;
+    }
+
+    dd {
+      margin: 0;
+      font-size: $font-size-lead;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  .profile-logout {
+    padding: 0.625rem 1.75rem;
+    border: 2px solid $color-accent;
+    border-radius: $radius-pill;
+    background-color: transparent;
+    color: $color-text-on-dark;
+    font-weight: $font-weight-bold;
+
+    &:hover {
+      background-color: $color-accent;
+      color: $color-text-on-light;
+    }
+  }
+
+  .profile-history {
+    margin-block-start: 4rem;
+    padding: $auth-card-padding;
+    border-radius: $radius-card;
+    background-color: $color-surface-dark;
+
+    a {
+      font-weight: $font-weight-bold;
+      text-decoration: underline;
+      text-underline-offset: 0.3em;
+    }
+  }
+
+  .history-title {
+    font-size: $font-size-card-title;
+  }
+}

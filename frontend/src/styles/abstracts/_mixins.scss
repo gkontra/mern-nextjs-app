@@ -1,0 +1,25 @@
+@use 'colors' as *;
+@use 'variables' as *;
+
+@mixin bp-up($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin bp-down($breakpoint) {
+  @media (max-width: ($breakpoint - 0.02px)) {
+    @content;
+  }
+}
+
+@mixin motion-ok {
+  @media (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}
+
+@mixin focus-ring($color: $color-focus) {
+  outline: $focus-ring-width solid $color;
+  outline-offset: $focus-ring-offset;
+}

@@ -1,0 +1,15 @@
+@use '../abstracts' as *;
+
+.m-logo {
+  .mark {
+    fill: $color-logo-mark;
+  }
+
+  .mark-light {
+    fill: $color-logo-mark-light;
+  }
+
+  .type {
+    fill: currentColor;
+  }
+}

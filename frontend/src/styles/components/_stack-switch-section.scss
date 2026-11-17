@@ -1,0 +1,40 @@
+@use '../abstracts' as *;
+
+.m-stack-switch-section {
+  display: grid;
+  align-items: center;
+  overflow: clip;
+  min-block-size: $section-min-height;
+  padding-block: $section-padding-block;
+  background-color: $color-bg-dark;
+  color: $color-text-on-dark;
+  text-align: center;
+
+  .container {
+    display: grid;
+    justify-items: center;
+    row-gap: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+  }
+
+  .headline {
+    margin: 0;
+    font-size: $font-size-section;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-display;
+    letter-spacing: $letter-spacing-display;
+    text-wrap: balance;
+  }
+
+  .subline {
+    display: grid;
+    margin-block-start: 0.25em;
+  }
+
+  .variant {
+    grid-area: 1 / 1;
+    font-family: $font-accent;
+    font-style: normal;
+    font-synthesis: none;
+    color: $color-accent;
+  }
+}

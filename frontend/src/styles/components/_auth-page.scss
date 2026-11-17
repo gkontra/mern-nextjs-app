@@ -1,0 +1,11 @@
+@use '../abstracts' as *;
+
+.page-auth {
+  padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+
+  .container {
+    display: grid;
+    justify-items: center;
+    row-gap: 2rem;
+  }
+}

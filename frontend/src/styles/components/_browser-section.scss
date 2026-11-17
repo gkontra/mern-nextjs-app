@@ -1,0 +1,154 @@
+@use '../abstracts' as *;
+
+.m-browser-section {
+  position: relative;
+  display: grid;
+  align-content: center;
+  row-gap: 3rem;
+  overflow: clip;
+  min-block-size: $section-min-height;
+  padding-block: $section-padding-block;
+  background-color: $color-browser-bg;
+  color: $color-text-on-dark;
+
+  .wireframe {
+    display: grid;
+    justify-content: center;
+    padding-inline: 1.5rem;
+
+    @include bp-up($breakpoint-lg) {
+      position: absolute;
+      inset: 0;
+      grid-template-columns: minmax(0, 15rem) minmax(0, 22rem) minmax(0, 15rem);
+      justify-content: space-between;
+      padding: $section-padding-block 2rem;
+    }
+  }
+
+  .wf-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    inline-size: min(15rem, 70vw);
+    padding: 1.25rem;
+    border: 1px solid $color-wireframe;
+    border-radius: $radius-card;
+
+    @include bp-up($breakpoint-lg) {
+      inline-size: auto;
+    }
+  }
+
+  .wf-column-content,
+  .wf-column-settings {
+    @include bp-down($breakpoint-lg) {
+      display: none;
+    }
+  }
+
+  .wf-column-nav {
+    @include bp-up($breakpoint-lg) {
+      align-self: center;
+    }
+  }
+
+  .wf-column-content {
+    align-self: end;
+  }
+
+  .wf-column-settings {
+    align-self: start;
+  }
+
+  .wf-bar,
+  .wf-bar-short {
+    block-size: 0.75rem;
+    border-radius: $radius-pill;
+    background-color: $color-wireframe;
+  }
+
+  .wf-bar-short {
+    inline-size: 60%;
+  }
+
+  .wf-block {
+    aspect-ratio: 16 / 9;
+    border-radius: $radius-small;
+    background-color: $color-wireframe;
+  }
+
+  .wf-radio,
+  .wf-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    &::before {
+      content: '';
+      flex-shrink: 0;
+      inline-size: 1rem;
+      block-size: 1rem;
+      border: 2px solid $color-wireframe-strong;
+    }
+
+    &::after {
+      content: '';
+      flex: 1;
+      block-size: 0.5rem;
+      border-radius: $radius-pill;
+      background-color: $color-wireframe;
+    }
+  }
+
+  .wf-radio::before {
+    border-radius: $radius-pill;
+  }
+
+  .wf-radio:nth-child(3)::before {
+    box-shadow: inset 0 0 0 0.2rem $color-browser-bg;
+    background-color: $color-wireframe-strong;
+  }
+
+  .wf-checkbox::before {
+    border-radius: 0.2rem;
+  }
+
+  .wf-checkbox:nth-child(2)::before,
+  .wf-checkbox:nth-child(4)::before {
+    background-color: $color-wireframe-strong;
+  }
+
+  .wf-button {
+    inline-size: 50%;
+    block-size: 2rem;
+    border: 2px solid $color-wireframe-strong;
+    border-radius: $radius-pill;
+  }
+
+  .content {
+    position: relative;
+    max-inline-size: 52rem;
+    margin-inline: auto;
+    padding: 1rem;
+    background-color: $color-browser-bg;
+    text-align: center;
+  }
+
+  .headline {
+    margin: 0;
+    font-size: $font-size-section;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-display;
+    letter-spacing: $letter-spacing-display;
+    text-wrap: balance;
+  }
+
+  .intro {
+    max-inline-size: 40rem;
+    margin: 2rem auto 0;
+    font-size: $font-size-lead;
+    line-height: $line-height-lead;
+    color: $color-text-muted-on-browser;
+    text-wrap: pretty;
+  }
+}

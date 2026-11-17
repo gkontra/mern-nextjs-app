@@ -1,0 +1,67 @@
+@use 'sass:list';
+@use '../abstracts' as *;
+
+$fragment-positions: (
+  1: (8%, 6%),
+  2: (14%, 72%),
+  3: (34%, 3%),
+  4: (78%, 62%),
+  5: (84%, 8%),
+  6: (62%, 38%),
+  7: (26%, 46%),
+  8: (34%, 78%),
+);
+
+.m-code-section {
+  position: relative;
+  display: grid;
+  align-items: center;
+  overflow: clip;
+  min-block-size: $section-min-height;
+  padding-block: $section-padding-block;
+  background-color: $color-bg-dark;
+  color: $color-text-on-dark;
+  text-align: center;
+
+  .code-background {
+    position: absolute;
+    inset: 0;
+  }
+
+  .fragment {
+    position: absolute;
+    margin: 0;
+    overflow: visible;
+    font-family: $font-code;
+    font-size: $font-size-code-fragment;
+    color: $color-code-fragment;
+    text-align: start;
+    white-space: pre;
+
+    @each $index, $position in $fragment-positions {
+      &.fragment-#{$index} {
+        inset-block-start: list.nth($position, 1);
+        inset-inline-start: list.nth($position, 2);
+      }
+    }
+
+    @include bp-down($breakpoint-lg) {
+      &:nth-child(n + 5) {
+        display: none;
+      }
+    }
+  }
+
+  .container {
+    position: relative;
+  }
+
+  .headline {
+    margin: 0;
+    font-size: $font-size-display;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-display;
+    letter-spacing: $letter-spacing-display;
+    text-wrap: balance;
+  }
+}
