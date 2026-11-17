@@ -1,48 +1,63 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ------------------------------------------------------------------
+# mearn-nextjs-app – Repository-weite Ignore-Regeln
+# (frontend/.gitignore gilt zusätzlich für den Frontend-Ordner)
+# ------------------------------------------------------------------
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
+# Betriebssystem / Editor
 .DS_Store
-*.pem
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# Abhängigkeiten, Builds, Logs
+node_modules/
+dist/
+*.log
 
-# local env files
-.env*.local
+# Umgebungsvariablen (nur die *-example-Dateien werden geteilt)
 .env
+.env.*
+!.env-example
+!.env.example
 
-# vercel
-.vercel
+# ------------------------------------------------------------------
+# KI- und Agenten-Konfiguration – gehört nicht ins Kurs-Repository
+# Die Dateien bleiben lokal liegen und funktionieren weiter;
+# sie werden nur nicht versioniert bzw. weitergegeben.
+# ------------------------------------------------------------------
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Claude Code: Skills, Settings, Projekt-Memory
+.claude/
+CLAUDE.md
+CLAUDE.local.md
 
-# cache
-.cache
-.eslintcache
-.turbo
-.swc
+# Agenten-Anweisungen (gelten für mehrere Tools)
+AGENTS.md
+AGENTS.override.md
+.agents/
+
+# Arbeitsberichte der Agenten
+docs/reports/
+
+# Weitere KI-Tools
+.cursor/
+.cursorrules
+.cursorignore
+.windsurf/
+.windsurfrules
+.codex/
+.gemini/
+GEMINI.md
+.github/copilot-instructions.md
+.github/instructions/
+.github/prompts/
+.continue/
+.clinerules
+.roo/
+.roomodes
+.aider*
+.junie/
+
+# Rohmaterialien
+MATERIAL/
