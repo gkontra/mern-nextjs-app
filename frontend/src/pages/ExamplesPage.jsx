@@ -1,6 +1,15 @@
 import { useState } from 'react';
+import TweenOnMount from '../components/examples/TweenOnMount';
 
-const EXAMPLES = [];
+const EXAMPLES = [
+  {
+    number: '01',
+    title: 'Tween beim Laden',
+    text: 'gsap.from() animiert die Box einmal beim Laden der Seite – ohne ScrollTrigger. Der Button spielt sie erneut ab.',
+    file: 'TweenOnMount.jsx',
+    Example: TweenOnMount,
+  },
+];
 
 const ExamplesPage = () => {
   const [showMarkers, setShowMarkers] = useState(false);

@@ -1,0 +1,15 @@
+@use '../abstracts' as *;
+
+.m-example-tween-on-mount {
+  @include example-stage($example-stage-min-height-short);
+  align-content: center;
+  gap: 1.5rem;
+
+  .box {
+    @include example-box;
+  }
+
+  .replay {
+    @include example-button;
+  }
+}
