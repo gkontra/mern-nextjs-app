@@ -8,7 +8,7 @@ const NavMain = (props) => {
   const { overlay = false } = props;
   // Hooks
   const { pathname, hash } = useLocation();
-  const collapseRef = useRef(null);
+  const collapseRef = useRef(null); // { current: null } -> render -> {current: <div class="collape ...">..</div>}
 
   const className = `m-nav-main nav-main navbar navbar-expand-lg${overlay ? ' is-overlay' : ''}`;
 
