@@ -1,0 +1,22 @@
+@use '../abstracts' as *;
+
+.m-example-scrub-progress {
+  @include example-stage;
+  align-items: start;
+
+  .track {
+    position: sticky;
+    inset-block-start: 50svh;
+    inline-size: min(100%, 40rem);
+    block-size: $example-bar-block-size;
+    overflow: clip;
+    border-radius: $radius-pill;
+    background-color: $color-surface-dark;
+  }
+
+  .bar {
+    block-size: 100%;
+    background-color: $color-2;
+    transform-origin: left center;
+  }
+}
