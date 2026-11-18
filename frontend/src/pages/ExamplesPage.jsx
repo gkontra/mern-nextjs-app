@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import TweenOnMount from '../components/examples/TweenOnMount';
 import ReducedMotion from '../components/examples/ReducedMotion';
 
@@ -19,8 +19,21 @@ const EXAMPLES = [
   },
 ];
 
+const REDUCE_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+
+const subscribeToReduceMotion = (onChange) => {
+  const mediaQuery = window.matchMedia(REDUCE_MOTION_QUERY);
+
+  mediaQuery.addEventListener('change', onChange);
+
+  return () => mediaQuery.removeEventListener('change', onChange);
+};
+
+const getReduceMotion = () => window.matchMedia(REDUCE_MOTION_QUERY).matches;
+
 const ExamplesPage = () => {
   const [showMarkers, setShowMarkers] = useState(false);
+  const reduceMotion = useSyncExternalStore(subscribeToReduceMotion, getReduceMotion);
 
   return (
     <div className="page-examples">
@@ -29,6 +42,14 @@ const ExamplesPage = () => {
         <p className="intro">
           Jedes Beispiel zeigt genau eine Idee aus GSAP und ScrollTrigger. Scrolle langsam nach unten und wieder nach
           oben und beobachte, was passiert.
+        </p>
+        <p className="motion-status" role="status">
+          Bewegung reduzieren: <strong>{reduceMotion ? 'an' : 'aus'}</strong>
+        </p>
+        <p className="motion-hint">
+          Steht hier „an“, bleiben alle Beispiele ab 02 absichtlich still. Umschalten kannst du unter macOS in
+          Bedienungshilfen → Anzeige → Bewegung reduzieren oder in den Chrome-DevTools unter Rendering →
+          prefers-reduced-motion.
         </p>
         <div className="form-check">
           <input
