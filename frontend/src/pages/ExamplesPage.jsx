@@ -5,6 +5,7 @@ import ToggleActions from '../components/examples/ToggleActions';
 import ScrubProgress from '../components/examples/ScrubProgress';
 import ScrubTimeline from '../components/examples/ScrubTimeline';
 import StaggerList from '../components/examples/StaggerList';
+import SplitChars from '../components/examples/SplitChars';
 
 const EXAMPLES = [
   {
@@ -48,6 +49,13 @@ const EXAMPLES = [
     text: 'Fünf Listeneinträge erscheinen mit 0,1 Sekunden Abstand nacheinander.',
     file: 'StaggerList.jsx',
     Example: StaggerList,
+  },
+  {
+    number: '07',
+    title: 'Buchstaben einzeln',
+    text: 'TextSplit zerlegt die Überschrift in Buchstaben; Screenreader lesen weiterhin den ganzen Satz.',
+    file: 'SplitChars.jsx',
+    Example: SplitChars,
   },
 ];
 

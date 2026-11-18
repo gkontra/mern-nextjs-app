@@ -1,0 +1,15 @@
+@use '../abstracts' as *;
+
+.m-example-split-chars {
+  @include example-stage;
+
+  .headline {
+    margin: 0;
+    font-size: $font-size-section;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-display;
+    letter-spacing: $letter-spacing-display;
+    text-align: center;
+    text-wrap: balance;
+  }
+}
