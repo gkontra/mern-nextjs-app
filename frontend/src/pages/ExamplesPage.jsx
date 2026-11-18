@@ -6,6 +6,7 @@ import ScrubProgress from '../components/examples/ScrubProgress';
 import ScrubTimeline from '../components/examples/ScrubTimeline';
 import StaggerList from '../components/examples/StaggerList';
 import SplitChars from '../components/examples/SplitChars';
+import Parallax from '../components/examples/Parallax';
 
 const EXAMPLES = [
   {
@@ -56,6 +57,13 @@ const EXAMPLES = [
     text: 'TextSplit zerlegt die Überschrift in Buchstaben; Screenreader lesen weiterhin den ganzen Satz.',
     file: 'SplitChars.jsx',
     Example: SplitChars,
+  },
+  {
+    number: '08',
+    title: 'Parallax',
+    text: 'Zwei dekorative Ebenen bewegen sich unterschiedlich schnell, solange der Abschnitt sichtbar ist.',
+    file: 'Parallax.jsx',
+    Example: Parallax,
   },
 ];
 

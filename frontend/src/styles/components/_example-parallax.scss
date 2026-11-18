@@ -1,0 +1,56 @@
+@use '../abstracts' as *;
+
+.m-example-parallax {
+  @include example-stage;
+  position: relative;
+  overflow: clip;
+
+  .layer {
+    position: absolute;
+    inset: 0;
+  }
+
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .layer-back .shape {
+    inline-size: 12rem;
+    aspect-ratio: 1;
+    background-color: $color-1;
+
+    &:first-child {
+      inset-block-start: 20%;
+      inset-inline-start: 10%;
+    }
+
+    &:last-child {
+      inset-block-start: 55%;
+      inset-inline-end: 12%;
+    }
+  }
+
+  .layer-front .shape {
+    inline-size: 5rem;
+    aspect-ratio: 1;
+    background-color: $color-2;
+
+    &:first-child {
+      inset-block-start: 45%;
+      inset-inline-start: 25%;
+    }
+
+    &:last-child {
+      inset-block-start: 75%;
+      inset-inline-end: 30%;
+    }
+  }
+
+  .caption {
+    position: relative;
+    margin: 0;
+    font-size: $font-size-lead;
+    font-weight: $font-weight-bold;
+  }
+}
