@@ -4,6 +4,7 @@ import ReducedMotion from '../components/examples/ReducedMotion';
 import ToggleActions from '../components/examples/ToggleActions';
 import ScrubProgress from '../components/examples/ScrubProgress';
 import ScrubTimeline from '../components/examples/ScrubTimeline';
+import StaggerList from '../components/examples/StaggerList';
 
 const EXAMPLES = [
   {
@@ -40,6 +41,13 @@ const EXAMPLES = [
     text: 'Eine Timeline lässt drei Boxen nacheinander erscheinen; die dritte startet per Positions-Parameter früher.',
     file: 'ScrubTimeline.jsx',
     Example: ScrubTimeline,
+  },
+  {
+    number: '06',
+    title: 'stagger',
+    text: 'Fünf Listeneinträge erscheinen mit 0,1 Sekunden Abstand nacheinander.',
+    file: 'StaggerList.jsx',
+    Example: StaggerList,
   },
 ];
 

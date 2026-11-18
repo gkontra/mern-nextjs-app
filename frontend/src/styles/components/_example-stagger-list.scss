@@ -1,0 +1,21 @@
+@use '../abstracts' as *;
+
+.m-example-stagger-list {
+  @include example-stage;
+
+  .list {
+    display: grid;
+    gap: 0.75rem;
+    inline-size: min(100%, 24rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .item {
+    padding: 1rem 1.25rem;
+    border-radius: $radius-card;
+    background-color: $color-surface-dark;
+    font-weight: $font-weight-bold;
+  }
+}
