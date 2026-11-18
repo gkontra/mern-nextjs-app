@@ -7,14 +7,17 @@ const TweenOnMount = () => {
   const containerRef = useRef(null);
   const tweenRef = useRef(null);
 
-  useGSAP(() => {
-    tweenRef.current = gsap.from('.box', { y: 80, autoAlpha: 0, duration: 0.8, ease: 'power3.out' });
-    // tweenRef.current = gsap.fromTo(
-    //   '.box',
-    //   { x: -500, duration: 0.8, ease: 'power3.out' },
-    //   { x: 500, duration: 0.8, ease: 'power3.out' },
-    // );
-  }, {});
+  useGSAP(
+    () => {
+      tweenRef.current = gsap.from('.box', { y: 80, autoAlpha: 0, duration: 0.8, ease: 'power3.out' });
+      // tweenRef.current = gsap.fromTo(
+      //   '.box',
+      //   { x: -500, duration: 0.8, ease: 'power3.out' },
+      //   { x: 500, duration: 0.8, ease: 'power3.out' },
+      // );
+    },
+    { scope: containerRef },
+  );
 
   const handleClick = () => {
     tweenRef.current?.restart();
