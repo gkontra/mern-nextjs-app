@@ -1,6 +1,7 @@
 import { useState, useSyncExternalStore } from 'react';
 import TweenOnMount from '../components/examples/TweenOnMount';
 import ReducedMotion from '../components/examples/ReducedMotion';
+import ToggleActions from '../components/examples/ToggleActions';
 
 const EXAMPLES = [
   {
@@ -17,6 +18,13 @@ const EXAMPLES = [
     file: 'ReducedMotion.jsx',
     Example: ReducedMotion,
   },
+  {
+    number: '03',
+    title: 'toggleActions',
+    text: 'Die Box fährt von rechts herein und beim Zurückscrollen wieder hinaus.',
+    file: 'ToggleActions.jsx',
+    Example: ToggleActions,
+  },
 ];
 
 const REDUCE_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
@@ -32,7 +40,7 @@ const subscribeToReduceMotion = (onChange) => {
 const getReduceMotion = () => window.matchMedia(REDUCE_MOTION_QUERY).matches;
 
 const ExamplesPage = () => {
-  const [showMarkers, setShowMarkers] = useState(false);
+  const [showMarkers, setShowMarkers] = useState(true);
   const reduceMotion = useSyncExternalStore(subscribeToReduceMotion, getReduceMotion);
 
   return (
