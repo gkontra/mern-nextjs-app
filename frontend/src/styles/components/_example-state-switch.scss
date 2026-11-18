@@ -1,0 +1,25 @@
+@use '../abstracts' as *;
+
+.m-example-state-switch {
+  @include example-stage;
+
+  .stage {
+    display: grid;
+    gap: 1.5rem;
+    inline-size: min(100%, 20rem);
+  }
+
+  .box {
+    display: block;
+    inline-size: 5rem;
+    aspect-ratio: 1;
+    border-radius: $radius-small;
+    background-color: $color-4;
+  }
+
+  .label {
+    margin: 0;
+    font-size: $font-size-lead;
+    font-weight: $font-weight-bold;
+  }
+}

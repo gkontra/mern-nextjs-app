@@ -7,6 +7,7 @@ import ScrubTimeline from '../components/examples/ScrubTimeline';
 import StaggerList from '../components/examples/StaggerList';
 import SplitChars from '../components/examples/SplitChars';
 import Parallax from '../components/examples/Parallax';
+import StateSwitch from '../components/examples/StateSwitch';
 
 const EXAMPLES = [
   {
@@ -64,6 +65,13 @@ const EXAMPLES = [
     text: 'Zwei dekorative Ebenen bewegen sich unterschiedlich schnell, solange der Abschnitt sichtbar ist.',
     file: 'Parallax.jsx',
     Example: Parallax,
+  },
+  {
+    number: '09',
+    title: 'Zustand umschalten',
+    text: 'ScrollTrigger.create() schaltet einen React-State um und spielt eine pausierte Timeline vor oder zurück.',
+    file: 'StateSwitch.jsx',
+    Example: StateSwitch,
   },
 ];
 
