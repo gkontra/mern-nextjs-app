@@ -41,3 +41,11 @@ $z-nav: 20;
 $auth-card-max-inline-size: 28rem;
 $auth-card-padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
 $nav-auth-placeholder-inline-size: 5rem;
+
+$example-stage-min-height: 150svh;
+$example-stage-min-height-short: 60svh;
+$example-stage-min-height-compact: 110svh;
+$example-stage-offset-top: 25svh;
+$example-box-size: clamp(6rem, 4.5rem + 5vw, 10rem);
+$example-bar-block-size: 1.25rem;
+$example-track-max-inline-size: 40rem;

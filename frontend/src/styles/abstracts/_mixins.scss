@@ -23,3 +23,43 @@
   outline: $focus-ring-width solid $color;
   outline-offset: $focus-ring-offset;
 }
+
+@mixin example-stage($min-block-size: $example-stage-min-height) {
+  display: grid;
+  place-items: center;
+  min-block-size: $min-block-size;
+  padding: 2rem 1rem;
+  border-block-start: 1px dashed $color-wireframe-strong;
+}
+
+@mixin example-box($background: $color-2) {
+  display: grid;
+  place-items: center;
+  min-inline-size: $example-box-size;
+  min-block-size: $example-box-size;
+  margin: 0;
+  padding: 1rem;
+  border-radius: $radius-card;
+  background-color: $background;
+  color: $color-6;
+  font-weight: $font-weight-bold;
+  text-align: center;
+}
+
+@mixin example-button {
+  padding: 0.625rem 1.25rem;
+  border: 2px solid $color-2;
+  border-radius: $radius-pill;
+  background-color: transparent;
+  color: $color-3;
+  font-weight: $font-weight-bold;
+
+  &:hover {
+    background-color: $color-2;
+    color: $color-6;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
