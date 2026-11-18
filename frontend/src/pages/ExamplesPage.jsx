@@ -8,6 +8,7 @@ import StaggerList from '../components/examples/StaggerList';
 import SplitChars from '../components/examples/SplitChars';
 import Parallax from '../components/examples/Parallax';
 import StateSwitch from '../components/examples/StateSwitch';
+import Responsive from '../components/examples/Responsive';
 
 const EXAMPLES = [
   {
@@ -72,6 +73,13 @@ const EXAMPLES = [
     text: 'ScrollTrigger.create() schaltet einen React-State um und spielt eine pausierte Timeline vor oder zurück.',
     file: 'StateSwitch.jsx',
     Example: StateSwitch,
+  },
+  {
+    number: '10',
+    title: 'Responsive',
+    text: 'Ab 992 px gleitet die Box von links ein, darunter blendet sie nur ein.',
+    file: 'Responsive.jsx',
+    Example: Responsive,
   },
 ];
 

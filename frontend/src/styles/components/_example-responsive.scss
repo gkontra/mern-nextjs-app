@@ -1,0 +1,23 @@
+@use '../abstracts' as *;
+
+.m-example-responsive {
+  @include example-stage;
+
+  .box {
+    @include example-box;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  @include bp-up($breakpoint-lg) {
+    .desktop {
+      display: inline;
+    }
+
+    .mobile {
+      display: none;
+    }
+  }
+}
