@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import TweenOnMount from '../components/examples/TweenOnMount';
+import ReducedMotion from '../components/examples/ReducedMotion';
 
 const EXAMPLES = [
   {
@@ -8,6 +9,13 @@ const EXAMPLES = [
     text: 'gsap.from() animiert die Box einmal beim Laden der Seite – ohne ScrollTrigger. Der Button spielt sie erneut ab.',
     file: 'TweenOnMount.jsx',
     Example: TweenOnMount,
+  },
+  {
+    number: '02',
+    title: 'Reduced Motion + erster ScrollTrigger',
+    text: 'Die Box fährt einmal von links herein, sobald sie 60 % der Fensterhöhe erreicht – aber nur, wenn ‚Bewegung reduzieren‘ aus ist.',
+    file: 'ReducedMotion.jsx',
+    Example: ReducedMotion,
   },
 ];
 

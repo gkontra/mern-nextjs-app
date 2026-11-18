@@ -1,0 +1,12 @@
+@use '../abstracts' as *;
+
+.m-example-reduced-motion {
+  @include example-stage($example-stage-min-height-compact);
+  align-items: start;
+  overflow-x: clip;
+  padding-block-start: $example-stage-offset-top;
+
+  .box {
+    @include example-box($color-4);
+  }
+}
