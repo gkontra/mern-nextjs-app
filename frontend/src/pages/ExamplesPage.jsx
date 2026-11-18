@@ -2,6 +2,8 @@ import { useState, useSyncExternalStore } from 'react';
 import TweenOnMount from '../components/examples/TweenOnMount';
 import ReducedMotion from '../components/examples/ReducedMotion';
 import ToggleActions from '../components/examples/ToggleActions';
+import ScrubProgress from '../components/examples/ScrubProgress';
+import ScrubTimeline from '../components/examples/ScrubTimeline';
 
 const EXAMPLES = [
   {
@@ -24,6 +26,20 @@ const EXAMPLES = [
     text: 'Die Box fährt von rechts herein und beim Zurückscrollen wieder hinaus.',
     file: 'ToggleActions.jsx',
     Example: ToggleActions,
+  },
+  {
+    number: '04',
+    title: 'scrub mit Fortschrittsbalken',
+    text: 'Der Balken füllt sich genau so weit, wie du durch diesen Abschnitt gescrollt hast.',
+    file: 'ScrubProgress.jsx',
+    Example: ScrubProgress,
+  },
+  {
+    number: '05',
+    title: 'Timeline mit scrub',
+    text: 'Eine Timeline lässt drei Boxen nacheinander erscheinen; die dritte startet per Positions-Parameter früher.',
+    file: 'ScrubTimeline.jsx',
+    Example: ScrubTimeline,
   },
 ];
 

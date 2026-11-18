@@ -1,0 +1,24 @@
+@use '../abstracts' as *;
+
+.m-example-scrub-timeline {
+  @include example-stage;
+
+  .stage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .box {
+    @include example-box;
+  }
+
+  .box-2 {
+    background-color: $color-4;
+  }
+
+  .box-3 {
+    background-color: $color-3;
+  }
+}
