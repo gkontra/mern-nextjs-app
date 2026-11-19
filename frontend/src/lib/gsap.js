@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 ScrollTrigger.config({ ignoreMobileResize: true });
 
+// refresh, wenn Schriften geladen und Schriftgröße bekannt ist.
 document.fonts.ready.then(() => ScrollTrigger.refresh());
 
 export const MEDIA = {
