@@ -1,0 +1,19 @@
+@baseUrl = http://localhost:3000/api
+
+### richtig
+POST {{baseUrl}}/demo/echo
+Content-Type: application/json
+
+{"name":"Ada"}
+
+### falscher Content-Type
+POST {{baseUrl}}/demo/echo
+Content-Type: text/plain
+
+hallo
+
+### kaputtes JSON
+POST {{baseUrl}}/demo/echo
+Content-Type: application/json
+
+{name: "Ada"}

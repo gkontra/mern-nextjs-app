@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { notFound } from '../lib/apiError.js';
+import { requireJson } from '../middleware/requireJson.js';
 
 export const demoRouter = Router();
 
@@ -20,6 +21,10 @@ demoRouter.get('/nicht-da', () => {
 demoRouter.get('/kaputt', async () => {
   await Promise.resolve();
   throw new Error('Absichtlicher Fehler für die Demo');
+});
+
+demoRouter.post('/echo', requireJson, (req, res) => {
+  res.status(201).json({ received: req.body });
 });
 
 export default demoRouter;
