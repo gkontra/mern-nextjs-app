@@ -1,6 +1,8 @@
 import express from 'express';
 import color from 'chalk';
 import apiRouter from './routes/index.js'; // Kompletter Pfad angeben
+import notFound from './middleware/notFound.js';
+import errorHandler from './middleware/errorHandler.js';
 
 export const app = express();
 
@@ -19,8 +21,7 @@ app.use(express.static('./public'));
 // API Routes
 app.use('/api', apiRouter);
 
-app.use((req, res) => {
-  res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Diese Route gibt es nicht.' } });
-});
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;
