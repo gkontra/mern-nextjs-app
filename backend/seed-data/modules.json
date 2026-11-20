@@ -1,0 +1,58 @@
+[
+  {
+    "moduleId": 1,
+    "title": "Einführung JavaScript – Teil 1",
+    "description": "Du schreibst deine ersten Programme mit Variablen, Bedingungen, Schleifen und Funktionen.",
+    "status": "published",
+    "imageKey": "module-1-js",
+    "tags": ["Variablen", "Funktionen", "Schleifen"]
+  },
+  {
+    "moduleId": 2,
+    "title": "Einführung JavaScript – Teil 2",
+    "description": "Du ordnest Daten in Arrays und Objekten und verarbeitest sie mit map, filter und reduce.",
+    "status": "published",
+    "imageKey": "module-2-js",
+    "tags": ["Arrays", "Objekte", "Array-Methoden"]
+  },
+  {
+    "moduleId": 3,
+    "title": "JavaScript für Fortgeschrittene",
+    "description": "Du arbeitest asynchron mit Promises und async/await und lädst Daten per Fetch.",
+    "status": "published",
+    "imageKey": "module-3-js-advanced",
+    "tags": ["Promises", "async/await", "Fetch"]
+  },
+  {
+    "moduleId": 4,
+    "title": "Browser-APIs",
+    "description": "Du steuerst Webseiten über das DOM, reagierst auf Events und speicherst Daten im Browser.",
+    "status": "published",
+    "imageKey": "module-4-browser-apis",
+    "tags": ["DOM", "Events", "Web Storage"]
+  },
+  {
+    "moduleId": 5,
+    "title": "Debugging und Testing",
+    "description": "Du findest Fehler gezielt mit DevTools und Debugger und sicherst deinen Code mit Tests ab.",
+    "status": "published",
+    "imageKey": "module-5-debugging-testing",
+    "tags": ["DevTools", "Debugger", "Vitest"]
+  },
+  {
+    "moduleId": 6,
+    "title": "Einführung TypeScript",
+    "description": "Du beschreibst Daten mit Typen und Interfaces und lässt den Compiler Fehler früh finden.",
+    "status": "published",
+    "imageKey": "module-6-ts",
+    "tags": ["Typen", "Interfaces", "Generics"]
+  },
+  {
+    "moduleId": 7,
+    "title": "Einführung React",
+    "description": "Du baust Oberflächen aus Komponenten mit Hooks, Routing und eigenem State-Management.",
+    "status": "published",
+    "imageKey": "module-7-react",
+    "tags": ["Komponenten", "Hooks", "Router"]
+  }
+]

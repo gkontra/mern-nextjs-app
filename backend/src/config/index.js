@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const PLACEHOLDER_SECRET = 'bitte-durch-einen-langen-zufallswert-ersetzen';
 const MIN_SECRET_LENGTH = 32;
 
