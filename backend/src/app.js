@@ -23,10 +23,10 @@ app.use(
 );
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-  console.info(color.yellow(`${req.method} ${req.url}`));
-  next();
-});
+// app.use((req, res, next) => {
+//   console.info(color.yellow(`${req.method} ${req.url}`));
+//   next();
+// });
 
 // Routes
 app.use(express.static('./public'));
