@@ -1,0 +1,64 @@
+@baseUrl = http://localhost:3000/api/auth
+
+### 1 – registrieren (role wird ignoriert)
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{"name":"  Ada  ","email":" ADA@Example.com ","password":"sicher-genug-1","role":"trainer"}
+
+### 2 – noch einmal → 409
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{"name":"Ada","email":"ada@example.com","password":"sicher-genug-1"}
+
+### 3 – Regeln verletzt → 422
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{"name":"A","email":"kaputt","password":"passwort"}
+
+### 4 – Feld fehlt → 400
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{"email":"x@example.com","password":"sicher-genug-1"}
+
+### 5 – wer bin ich? (Cookie aus 1)
+GET {{baseUrl}}/me
+
+### 8 – falsches Passwort
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{"email":"teilnehmer@example.com","password":"falsch-123"}
+
+### 9 – unbekannte E-Mail
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{"email":"niemand@example.com","password":"falsch-123"}
+
+### 10 – leeres Passwort
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{"email":"teilnehmer@example.com","password":""}
+
+### 11 – absichtlicher Serverfehler
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{"email":"server-fehler@example.com","password":"egal"}
+
+### 12 – Demo-Login
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{"email":"Teilnehmer@example.com","password":"kurs-demo-123"}
+
+### 13 – abmelden
+POST {{baseUrl}}/logout
+
+### 14 – danach
+GET {{baseUrl}}/me
