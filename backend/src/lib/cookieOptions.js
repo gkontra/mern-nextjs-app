@@ -7,7 +7,7 @@ const baseOptions = {
   httpOnly: true,
   sameSite: 'lax',
   path: '/',
-  secure: config.isProduction,
+  secure: config.isProduction, // https if true
 };
 
 export const authCookieOptions = { ...baseOptions, maxAge: ONE_DAY_MS };

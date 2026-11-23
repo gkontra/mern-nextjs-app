@@ -33,6 +33,7 @@ app.use(cookieParser());
 app.use(express.static('./public'));
 
 // API Routes
+// app.use('/auth', authRouter);
 app.use('/api', apiRouter);
 
 app.use(notFound);
