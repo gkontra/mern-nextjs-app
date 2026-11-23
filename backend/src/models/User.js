@@ -1,5 +1,5 @@
 import { Schema, model, SchemaTypes } from 'mongoose';
-import { NAME_LENGTH } from '../lib/authValidation';
+import { NAME_LENGTH } from '../lib/authValidation.js';
 
 export const ROLES = ['participant', 'trainer'];
 
