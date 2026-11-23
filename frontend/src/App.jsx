@@ -5,6 +5,7 @@ import NavMain from './components/navs/NavMain';
 import FooterMain from './components/footers/FooterMain';
 import Router from './routes/Router';
 import ScrollToTop from './components/routes/ScrollToTop';
+import ModulesProvider from './stores/modules/ModulesStore';
 
 const PATHS_WITHOUT_HEADER = ['/'];
 
@@ -14,13 +15,15 @@ function App() {
 
   return (
     <>
-      <ScrollToTop />
-      {!PATHS_WITHOUT_HEADER.includes(pathname) && <HeaderMain />}
-      <NavMain overlay={isHome} />
-      <main id="main">
-        <Router />
-      </main>
-      <FooterMain />
+      <ModulesProvider>
+        <ScrollToTop />
+        {!PATHS_WITHOUT_HEADER.includes(pathname) && <HeaderMain />}
+        <NavMain overlay={isHome} />
+        <main id="main">
+          <Router />
+        </main>
+        <FooterMain />
+      </ModulesProvider>
     </>
   );
 }
