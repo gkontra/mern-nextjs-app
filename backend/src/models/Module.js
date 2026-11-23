@@ -37,8 +37,11 @@ const moduleSchema = new Schema(
       default: [],
     },
   },
-  { timestamps: true },
+  {
+    timestamps: true,
+    //collection: 'modules'
+  },
 );
 
-export const Module = model('Module', moduleSchema);
+export const Module = model('Module', moduleSchema); // , 'modules'
 export default Module;

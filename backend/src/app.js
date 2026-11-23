@@ -14,6 +14,7 @@ app.disable('x-powered-by'); // Es wird in HTTP-Response nicht angegeben, dass e
 // Middleware
 
 app.use(express.json({ limit: '10kb' }));
+// https://enable-cors.org/server.html
 app.use(
   cors({
     origin: config.clientOrigin,

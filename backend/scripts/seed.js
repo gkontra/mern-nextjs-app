@@ -2,7 +2,8 @@ import { readFile } from 'node:fs/promises';
 import color from 'chalk';
 
 import config from '../src/config/index.js';
-import { connectDb, disconnectDb } from '../src/config/db.js';
+// import { connectDb, disconnectDb } from '../src/config/db.js';
+import db from '../src/config/db.js';
 import { insertOnly } from '../src/lib/insertOnly.js';
 import Module from '../src/models/Module.js';
 
@@ -23,7 +24,7 @@ const seedModules = async () => {
 };
 
 try {
-  await connectDb(config.mongodbUri);
+  await db.connect(config.mongodbUri);
   await Module.init();
 
   const modules = await seedModules();
@@ -33,5 +34,5 @@ try {
   console.error(`Seed fehlgeschlagen: ${error.message}`);
   process.exitCode = 1;
 } finally {
-  await disconnectDb();
+  await db.disconnect();
 }
