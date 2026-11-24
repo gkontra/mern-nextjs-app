@@ -10,7 +10,7 @@ Content-Type: application/json
 POST {{baseUrl}}/register
 Content-Type: application/json
 
-{"name":"Ada","email":"ada@example.com","password":"sicher-genug-1"}
+{"name":"Ada","email":"ada2@example.com","password":"sicher-genug-1"}
 
 ### 3 – Regeln verletzt → 422
 POST {{baseUrl}}/register
