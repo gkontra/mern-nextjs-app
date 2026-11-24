@@ -6,6 +6,7 @@ import FooterMain from './components/footers/FooterMain';
 import Router from './routes/Router';
 import ScrollToTop from './components/routes/ScrollToTop';
 import ModulesProvider from './stores/modules/ModulesStore';
+import AuthProvider from './stores/auth/AuthStore';
 
 const PATHS_WITHOUT_HEADER = ['/'];
 
@@ -14,7 +15,7 @@ function App() {
   const isHome = pathname === '/';
 
   return (
-    <>
+    <AuthProvider>
       <ModulesProvider>
         <ScrollToTop />
         {!PATHS_WITHOUT_HEADER.includes(pathname) && <HeaderMain />}
@@ -24,7 +25,7 @@ function App() {
         </main>
         <FooterMain />
       </ModulesProvider>
-    </>
+    </AuthProvider>
   );
 }
 export default App;
