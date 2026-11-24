@@ -1,20 +1,28 @@
-import { Link, NavLink, useLocation } from 'react-router-dom';
-
 import { Collapse } from 'bootstrap';
-import Logo from '../icons/Logo';
 import { useEffect, useRef } from 'react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { AUTH_STATUS, useAuth } from '../../stores/auth';
+import Logo from '../icons/Logo';
+
+const hideMenu = (element) => Collapse.getInstance(element)?.hide();
 
 const NavMain = (props) => {
   const { overlay = false } = props;
-  // Hooks
-  const { pathname, hash } = useLocation();
-  const collapseRef = useRef(null); // { current: null } -> render -> {current: <div class="collape ...">..</div>}
-
   const className = `m-nav-main nav-main navbar navbar-expand-lg${overlay ? ' is-overlay' : ''}`;
+  const { user, isAuthenticated, status, logout } = useAuth();
+  const { pathname, hash } = useLocation();
+  const navigate = useNavigate();
+  const collapseRef = useRef(null);
 
   useEffect(() => {
-    Collapse.getInstance(collapseRef.current)?.hide();
+    hideMenu(collapseRef.current);
   }, [pathname, hash]);
+
+  const handleLogout = () => {
+    hideMenu(collapseRef.current);
+    navigate('/');
+    logout();
+  };
 
   return (
     <nav className={className} aria-label="Hauptnavigation">
@@ -50,6 +58,29 @@ const NavMain = (props) => {
                 Kontakt
               </NavLink>
             </li>
+            {status === AUTH_STATUS.LOADING && <li className="nav-item nav-auth-placeholder" aria-hidden="true" />}
+            {status !== AUTH_STATUS.LOADING && !isAuthenticated && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/login">
+                  Login
+                </NavLink>
+              </li>
+            )}
+            {isAuthenticated && (
+              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link nav-user" to="/profile">
+                    <span className="visually-hidden">Profil von </span>
+                    {user.name}
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <button className="nav-link nav-logout" type="button" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
