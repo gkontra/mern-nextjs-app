@@ -1,0 +1,11 @@
+@baseUrl = http://localhost:3000/api
+
+### richtig
+GET {{baseUrl}}/modules
+
+
+### findOne 
+GET {{baseUrl}}/modules/2
+
+### falsch 
+GET {{baseUrl}}/modules/test
