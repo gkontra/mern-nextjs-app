@@ -2,7 +2,9 @@ import axios from 'axios';
 import api from './api';
 
 export const fetchModules = async ({ signal } = {}) => {
-  const response = await api.get(import.meta.env.VITE_USE_MOCK_API ? '/modules.json' : '/modules', { signal }); //
+  const response = await api.get(import.meta.env.VITE_USE_MOCK_API === 'true' ? '/modules.json' : '/modules', {
+    signal,
+  }); //
 
   if (!Array.isArray(response.data)) {
     throw new Error('Die Antwort enthält keine Modulliste.');
