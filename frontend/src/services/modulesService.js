@@ -1,23 +1,27 @@
-import axios from 'axios';
 import api from './api';
+import { API_ERROR_CODE, ApiError, isRequestCanceled, toApiError } from './apiError';
+
+const IS_MOCK_API = import.meta.env.VITE_USE_MOCK_API === 'true';
+
+const loadMock = () => import('./modulesService.mock.js');
 
 export const fetchModules = async ({ signal } = {}) => {
-  const response = await api.get(import.meta.env.VITE_USE_MOCK_API === 'true' ? '/modules.json' : '/modules', {
-    signal,
-  }); //
-
-  if (!Array.isArray(response.data)) {
-    throw new Error('Die Antwort enthält keine Modulliste.');
+  if (IS_MOCK_API) {
+    return (await loadMock()).fetchModules({ signal });
   }
 
-  return response.data;
-};
+  try {
+    const response = await api.get('/modules', { signal });
 
-export const isRequestCanceled = (error) => axios.isCancel(error);
+    if (!Array.isArray(response.data)) {
+      throw new ApiError({ status: 0, code: API_ERROR_CODE.UNKNOWN, message: 'Die Antwort enthält keine Modulliste.' });
+    }
 
-export const getErrorMessage = (error) => {
-  if (!axios.isAxiosError(error)) return error.message;
-  if (error.response) return `Der Server antwortete mit Status ${error.response.status}.`;
-  if (error.code === 'ECONNABORTED') return 'Der Server hat zu lange nicht geantwortet.';
-  return 'Der Server ist nicht erreichbar.';
+    return response.data;
+  } catch (error) {
+    if (isRequestCanceled(error)) {
+      throw error;
+    }
+    throw toApiError(error);
+  }
 };
