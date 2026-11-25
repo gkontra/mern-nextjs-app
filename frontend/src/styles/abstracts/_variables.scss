@@ -53,3 +53,6 @@ $example-track-max-inline-size: 40rem;
 $code-depth-opacity-far: 0.55;
 $code-depth-opacity-mid: 0.8;
 $code-depth-opacity-near: 1;
+
+$page-padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+$content-max-inline-size: 48rem;

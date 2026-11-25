@@ -66,3 +66,6 @@ $color-logo-mark-light: color-mix(in srgb, $color-2 55%, $color-white);
 $color-error-on-dark: color-mix(in srgb, $color-5 55%, $color-3);
 $color-input-bg: $color-6;
 $color-input-border: color-mix(in srgb, $color-3 55%, $color-surface-dark);
+
+$color-code-inline-bg: color-mix(in srgb, $color-3 10%, $color-6);
+$color-table-border: $color-answer-border;

@@ -89,13 +89,10 @@
 - [JS CheatSheet](https://dev.to/devsmitra/28-javascript-array-hacks-a-cheat-sheet-for-developer-5769)
 - [Tipp10](https://www.tipp10.com/de/)
 
-
-
-
 ## Loader
 
-- https://css-loaders.com/3d/
-- https://cssloaders.github.io/#text
+- <https://css-loaders.com/3d/>
+- [CSS Loaders](https://cssloaders.github.io/#text)
 - https://loading.io/
 
 ## Git
