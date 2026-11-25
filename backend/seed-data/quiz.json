@@ -1,0 +1,1564 @@
+{
+  "categories": [
+    {
+      "slug": "javascript-basics-1",
+      "name": "JavaScript-Grundlagen – Teil 1",
+      "moduleId": 1,
+      "description": "Variablen, Datentypen, Vergleiche, Bedingungen, Schleifen und Funktionen.",
+      "questions": [
+        {
+          "seedKey": "js1-01",
+          "status": "published",
+          "text": "Welche Schlüsselwörter deklarieren eine Variable, der man später einen neuen Wert zuweisen kann?",
+          "answers": [
+            {
+              "text": "<code>let</code>",
+              "isCorrect": true,
+              "explanation": "let erlaubt eine neue Zuweisung, gilt aber nur im Block."
+            },
+            {
+              "text": "<code>var</code>",
+              "isCorrect": true,
+              "explanation": "var erlaubt eine neue Zuweisung; es gilt für die ganze Funktion und wird heute kaum noch benutzt."
+            },
+            {
+              "text": "<code>const</code>",
+              "isCorrect": false,
+              "explanation": "const verbietet eine neue Zuweisung. Der Inhalt eines Objekts darf sich trotzdem ändern."
+            },
+            {
+              "text": "<code>static</code>",
+              "isCorrect": false,
+              "explanation": "static gibt es nur in Klassen, nicht für Variablen."
+            }
+          ],
+          "successMessage": "Richtig: let und var erlauben neue Zuweisungen.",
+          "errorMessage": "Nicht ganz: Neu zuweisen lässt sich nur, was mit let oder var deklariert wurde."
+        },
+        {
+          "seedKey": "js1-02",
+          "status": "published",
+          "text": "Was gibt dieser Code aus?",
+          "code": "console.log(typeof null);",
+          "answers": [
+            {
+              "text": "<code>object</code>",
+              "isCorrect": true,
+              "explanation": "typeof null liefert aus historischen Gründen \"object\"."
+            },
+            {
+              "text": "<code>null</code>",
+              "isCorrect": false,
+              "explanation": "Einen Typ \"null\" kennt typeof nicht."
+            },
+            {
+              "text": "<code>undefined</code>",
+              "isCorrect": false,
+              "explanation": "undefined ist ein eigener Wert, aber nicht das Ergebnis von typeof null."
+            },
+            {
+              "text": "Einen Fehler",
+              "isCorrect": false,
+              "explanation": "typeof wirft bei null keinen Fehler."
+            }
+          ],
+          "successMessage": "Genau: typeof null ergibt \"object\".",
+          "errorMessage": "Das ist ein bekannter Stolperstein: typeof null ergibt \"object\".",
+          "note": "<strong>Zur Info:</strong> Ob ein Wert <code>null</code> ist, prüft man deshalb direkt mit <code>wert === null</code>."
+        },
+        {
+          "seedKey": "js1-03",
+          "status": "published",
+          "text": "Was gibt dieser Code aus?",
+          "code": "console.log(0 == '0', 0 === '0');",
+          "answers": [
+            {
+              "text": "<code>true false</code>",
+              "isCorrect": true,
+              "explanation": "== wandelt '0' in eine Zahl um, === vergleicht auch den Typ."
+            },
+            {
+              "text": "<code>true true</code>",
+              "isCorrect": false,
+              "explanation": "=== vergleicht zusätzlich den Typ: Zahl und Text sind nie gleich."
+            },
+            {
+              "text": "<code>false false</code>",
+              "isCorrect": false,
+              "explanation": "== wandelt die Typen vorher an, deshalb ist 0 == '0' wahr."
+            },
+            {
+              "text": "<code>false true</code>",
+              "isCorrect": false,
+              "explanation": "Strenger als == ist ===, nicht umgekehrt."
+            }
+          ],
+          "successMessage": "Richtig: == wandelt Typen um, === nicht.",
+          "errorMessage": "Denk an den Unterschied: == wandelt Typen um, === vergleicht Wert und Typ.",
+          "note": "<strong>Faustregel:</strong> Im Kurs vergleichen wir immer mit <code>===</code> und <code>!==</code>."
+        },
+        {
+          "seedKey": "js1-04",
+          "status": "published",
+          "text": "Welche dieser Werte sind <em>falsy</em>, gelten in einer Bedingung also als falsch?",
+          "answers": [
+            {
+              "text": "<code>0</code>",
+              "isCorrect": true,
+              "explanation": "Die Zahl 0 ist falsy."
+            },
+            {
+              "text": "<code>''</code> (leerer Text)",
+              "isCorrect": true,
+              "explanation": "Ein leerer Text ist falsy."
+            },
+            {
+              "text": "<code>null</code>",
+              "isCorrect": true,
+              "explanation": "null ist falsy."
+            },
+            {
+              "text": "<code>'0'</code>",
+              "isCorrect": false,
+              "explanation": "Ein Text mit einem Zeichen ist truthy – auch wenn das Zeichen 0 ist."
+            },
+            {
+              "text": "<code>[]</code> (leeres Array)",
+              "isCorrect": false,
+              "explanation": "Jedes Array ist truthy, auch ein leeres."
+            }
+          ],
+          "successMessage": "Richtig: 0, '' und null sind falsy.",
+          "errorMessage": "Nicht ganz: Texte mit Inhalt und alle Arrays sind truthy.",
+          "note": "Die vollständige Liste der falsy-Werte: <code>false</code>, <code>0</code>, <code>-0</code>, <code>0n</code>, <code>''</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>."
+        },
+        {
+          "seedKey": "js1-05",
+          "status": "published",
+          "text": "Was gibt dieser Code aus?",
+          "code": "let summe = 0;\nfor (let i = 1; i <= 4; i++) {\n  summe += i;\n}\nconsole.log(summe);",
+          "answers": [
+            {
+              "text": "<code>10</code>",
+              "isCorrect": true,
+              "explanation": "1 + 2 + 3 + 4 = 10."
+            },
+            {
+              "text": "<code>6</code>",
+              "isCorrect": false,
+              "explanation": "Bei i <= 4 läuft die Schleife auch für i = 4."
+            },
+            {
+              "text": "<code>15</code>",
+              "isCorrect": false,
+              "explanation": "Die 5 ist nicht mehr dabei: Die Bedingung lautet i <= 4."
+            },
+            {
+              "text": "<code>4</code>",
+              "isCorrect": false,
+              "explanation": "Es wird summiert, nicht gezählt."
+            }
+          ],
+          "successMessage": "Richtig: Die Schleife addiert 1 bis 4.",
+          "errorMessage": "Geh die Schleife Schritt für Schritt durch: i nimmt die Werte 1, 2, 3 und 4 an."
+        },
+        {
+          "seedKey": "js1-06",
+          "status": "published",
+          "text": "Was gibt dieser Code aus?",
+          "code": "function gruss(name) {\n  `Hallo ${name}`;\n}\nconsole.log(gruss('Ada'));",
+          "answers": [
+            {
+              "text": "<code>undefined</code>",
+              "isCorrect": true,
+              "explanation": "Die Funktion hat kein return und gibt deshalb undefined zurück."
+            },
+            {
+              "text": "<code>Hallo Ada</code>",
+              "isCorrect": false,
+              "explanation": "Der Text wird gebildet, aber nicht zurückgegeben."
+            },
+            {
+              "text": "Einen Fehler",
+              "isCorrect": false,
+              "explanation": "Eine Funktion ohne return ist erlaubt."
+            },
+            {
+              "text": "Einen leeren Text",
+              "isCorrect": false,
+              "explanation": "Ohne return ist das Ergebnis undefined, nicht ''."
+            }
+          ],
+          "successMessage": "Richtig: Ohne return gibt eine Funktion undefined zurück.",
+          "errorMessage": "Schau genau hin: Im Funktionskörper fehlt das return.",
+          "note": "Bei Pfeilfunktionen ohne geschweifte Klammern ist das <code>return</code> eingebaut: <code>const gruss = (name) =&gt; `Hallo ${name}`;</code>"
+        }
+      ]
+    },
+    {
+      "slug": "javascript-basics-2",
+      "name": "JavaScript-Grundlagen – Teil 2",
+      "moduleId": 2,
+      "description": "Arrays, Objekte, Destructuring und die Array-Methoden map, filter und reduce.",
+      "questions": [
+        {
+          "seedKey": "js2-01",
+          "status": "published",
+          "text": "Was gibt dieser Code aus?",
+          "code": "const zahlen = [1, 2, 3, 4];\nconst ergebnis = zahlen.filter((n) => n % 2 === 0).map((n) => n * 10);\nconsole.log(ergebnis);",
+          "answers": [
+            {
+              "text": "<code>[20, 40]</code>",
+              "isCorrect": true,
+              "explanation": "filter behält 2 und 4, map macht daraus 20 und 40."
+            },
+            {
+              "text": "<code>[10, 20, 30, 40]</code>",
+              "isCorrect": false,
+              "explanation": "filter entfernt vorher die ungeraden Zahlen."
+            },
+            {
+              "text": "<code>[2, 4]</code>",
+              "isCorrect": false,
+              "explanation": "map multipliziert danach noch mit 10."
+            },
+            {
+              "text": "<code>60</code>",
+              "isCorrect": false,
+              "explanation": "map und filter liefern Arrays, keine Summe."
+            }
+          ],
+          "successMessage": "Richtig: erst filtern, dann umwandeln.",
+          "errorMessage": "Lies die Kette von links nach rechts: filter, dann map."
+        },
+        {
+          "seedKey": "js2-02",
+          "status": "published",
+          "text": "Welche Array-Methoden verändern das ursprüngliche Array?",
+          "answers": [
+            {
+              "text": "<code>push</code>",
+              "isCorrect": true,
+              "explanation": "push hängt ein Element an das bestehende Array an."
+            },
+            {
+              "text": "<code>sort</code>",
+              "isCorrect": true,
+              "explanation": "sort sortiert an Ort und Stelle. Eine sortierte Kopie liefert toSorted."
+            },
+            {
+              "text": "<code>splice</code>",
+              "isCorrect": true,
+              "explanation": "splice entfernt oder ersetzt Elemente im bestehenden Array."
+            },
+            {
+              "text": "<code>map</code>",
+              "isCorrect": false,
+              "explanation": "map gibt ein neues Array zurück."
+            },
+            {
+              "text": "<code>slice</code>",
+              "isCorrect": false,
+              "explanation": "slice gibt eine Kopie eines Ausschnitts zurück."
+            }
+          ],
+          "successMessage": "Richtig: push, sort und splice ändern das Original.",
+          "errorMessage": "Nicht ganz: map und slice erzeugen neue Arrays.",
+          "note": "In React ist das wichtig: Den State nie mit <code>push</code> oder <code>sort</code> ändern, sondern ein neues Array bauen."
+        },
+        {
+          "seedKey": "js2-03",
+          "status": "published",
+          "text": "Was gibt dieser Code aus?",
+          "code": "const summe = [3, 5, 2].reduce((zwischensumme, n) => zwischensumme + n, 0);\nconsole.log(summe);",
+          "answers": [
+            {
+              "text": "<code>10</code>",
+              "isCorrect": true,
+              "explanation": "Startwert 0, dann 0 + 3 + 5 + 2 = 10."
+            },
+            {
+              "text": "<code>[3, 5, 2]</code>",
+              "isCorrect": false,
+              "explanation": "reduce fasst das Array zu einem Wert zusammen."
+            },
+            {
+              "text": "<code>352</code>",
+              "isCorrect": false,
+              "explanation": "Es sind Zahlen, keine Texte – sie werden addiert, nicht aneinandergehängt."
+            },
+            {
+              "text": "<code>2</code>",
+              "isCorrect": false,
+              "explanation": "Es wird nicht nur das letzte Element zurückgegeben."
+            }
+          ],
+          "successMessage": "Richtig: reduce addiert alle Werte.",
+          "errorMessage": "reduce startet mit dem zweiten Argument (0) und addiert jede Zahl dazu."
+        },
+        {
+          "seedKey": "js2-04",
+          "status": "published",
+          "text": "Was gibt dieser Code aus?",
+          "code": "const { name, alter = 30 } = { name: 'Lin' };\nconsole.log(name, alter);",
+          "answers": [
+            {
+              "text": "<code>Lin 30</code>",
+              "isCorrect": true,
+              "explanation": "name kommt aus dem Objekt, alter fehlt dort und bekommt den Standardwert."
+            },
+            {
+              "text": "<code>Lin undefined</code>",
+              "isCorrect": false,
+              "explanation": "Der Standardwert = 30 greift, weil alter im Objekt fehlt."
+            },
+            {
+              "text": "<code>undefined 30</code>",
+              "isCorrect": false,
+              "explanation": "name ist im Objekt vorhanden."
+            },
+            {
+              "text": "Einen Fehler",
+              "isCorrect": false,
+              "explanation": "Destructuring einer fehlenden Eigenschaft ist erlaubt."
+            }
+          ],
+          "successMessage": "Richtig: Standardwerte greifen bei fehlenden Eigenschaften.",
+          "errorMessage": "Beim Destructuring gilt der Standardwert, wenn die Eigenschaft undefined ist."
+        },
+        {
+          "seedKey": "js2-05",
+          "status": "published",
+          "text": "Der Name einer Eigenschaft steht in der Variablen <code>feld</code>. Wie liest man den Wert aus dem Objekt <code>person</code>?",
+          "code": "const person = { name: 'Ada', stadt: 'Berlin' };\nconst feld = 'stadt';",
+          "answers": [
+            {
+              "text": "<code>person[feld]</code>",
+              "isCorrect": true,
+              "explanation": "Eckige Klammern werten den Ausdruck aus und benutzen das Ergebnis als Schlüssel."
+            },
+            {
+              "text": "<code>person.feld</code>",
+              "isCorrect": false,
+              "explanation": "Das liest die Eigenschaft mit dem Namen \"feld\"."
+            },
+            {
+              "text": "<code>person-&gt;feld</code>",
+              "isCorrect": false,
+              "explanation": "-> gibt es in JavaScript nicht."
+            },
+            {
+              "text": "<code>person{feld}</code>",
+              "isCorrect": false,
+              "explanation": "Diese Schreibweise gibt es nicht."
+            }
+          ],
+          "successMessage": "Richtig: Mit eckigen Klammern wird der Schlüssel berechnet.",
+          "errorMessage": "Punkt-Schreibweise nimmt den Namen wörtlich, eckige Klammern benutzen den Wert der Variablen."
+        },
+        {
+          "seedKey": "js2-06",
+          "status": "published",
+          "text": "Was gibt dieser Code aus?",
+          "code": "const original = { titel: 'Quiz', tags: ['js'] };\nconst kopie = { ...original };\nkopie.tags.push('react');\nconsole.log(original.tags);",
+          "answers": [
+            {
+              "text": "<code>['js', 'react']</code>",
+              "isCorrect": true,
+              "explanation": "Der Spread-Operator kopiert nur die erste Ebene. Beide Objekte teilen sich dasselbe tags-Array."
+            },
+            {
+              "text": "<code>['js']</code>",
+              "isCorrect": false,
+              "explanation": "Das wäre so bei einer tiefen Kopie, z. B. mit structuredClone."
+            },
+            {
+              "text": "<code>undefined</code>",
+              "isCorrect": false,
+              "explanation": "tags wird mitkopiert – als Verweis auf dasselbe Array."
+            },
+            {
+              "text": "Einen Fehler",
+              "isCorrect": false,
+              "explanation": "push auf einem kopierten Verweis ist erlaubt."
+            }
+          ],
+          "successMessage": "Richtig: { ...original } ist eine flache Kopie.",
+          "errorMessage": "Der Spread-Operator kopiert Verweise auf verschachtelte Arrays und Objekte, nicht ihren Inhalt.",
+          "note": "Eine tiefe Kopie liefert <code>structuredClone(original)</code>."
+        }
+      ]
+    },
+    {
+      "slug": "javascript-async",
+      "name": "Asynchrones JavaScript",
+      "moduleId": 3,
+      "description": "Event Loop, Promises, async/await und Daten laden mit fetch.",
+      "questions": [
+        {
+          "seedKey": "js3-01",
+          "status": "published",
+          "text": "In welcher Reihenfolge erscheinen die Buchstaben?",
+          "code": "console.log('A');\nsetTimeout(() => console.log('B'), 0);\nPromise.resolve().then(() => console.log('C'));\nconsole.log('D');",
+          "answers": [
+            {
+              "text": "A, D, C, B",
+              "isCorrect": true,
+              "explanation": "Erst der synchrone Code, dann Microtasks (Promise), dann Tasks (setTimeout)."
+            },
+            {
+              "text": "A, B, C, D",
+              "isCorrect": false,
+              "explanation": "setTimeout mit 0 ms wartet trotzdem, bis der synchrone Code fertig ist."
+            },
+            {
+              "text": "A, D, B, C",
+              "isCorrect": false,
+              "explanation": "Promise-Callbacks kommen vor setTimeout-Callbacks dran."
+            },
+            {
+              "text": "A, C, D, B",
+              "isCorrect": false,
+              "explanation": "then läuft erst, wenn der synchrone Code (also auch D) fertig ist."
+            }
+          ],
+          "successMessage": "Richtig: synchron, dann Microtasks, dann Tasks.",
+          "errorMessage": "Merke: Synchroner Code zuerst, dann Promise-Callbacks, dann Timer."
+        },
+        {
+          "seedKey": "js3-02",
+          "status": "published",
+          "text": "Welche Aussagen über <code>async</code>-Funktionen stimmen?",
+          "answers": [
+            {
+              "text": "Sie geben immer ein Promise zurück.",
+              "isCorrect": true,
+              "explanation": "Auch ein return 5 wird zu einem Promise, das mit 5 erfüllt wird."
+            },
+            {
+              "text": "<code>await</code> ist nur in <code>async</code>-Funktionen erlaubt – oder auf oberster Ebene eines ES-Moduls.",
+              "isCorrect": true,
+              "explanation": "In einer normalen Funktion ist await ein Syntaxfehler."
+            },
+            {
+              "text": "<code>await</code> hält den ganzen Browser an, bis das Promise fertig ist.",
+              "isCorrect": false,
+              "explanation": "Nur die eine Funktion pausiert, der Rest der Seite läuft weiter."
+            },
+            {
+              "text": "<code>async</code> macht synchronen Code schneller.",
+              "isCorrect": false,
+              "explanation": "async ändert nur, wie das Ergebnis zurückkommt, nicht die Geschwindigkeit."
+            }
+          ],
+          "successMessage": "Richtig: async liefert ein Promise, await pausiert nur die eigene Funktion.",
+          "errorMessage": "Nicht ganz: await pausiert nur die Funktion, in der es steht."
+        },
+        {
+          "seedKey": "js3-03",
+          "status": "published",
+          "text": "Der Server antwortet auf diese Anfrage mit Status 404. Was passiert?",
+          "code": "const res = await fetch('/api/gibt-es-nicht');",
+          "answers": [
+            {
+              "text": "<code>fetch</code> wirft keinen Fehler; <code>res.ok</code> ist <code>false</code>.",
+              "isCorrect": true,
+              "explanation": "fetch lehnt nur bei Netzwerkfehlern ab. HTTP-Fehler muss man selbst über res.ok oder res.status prüfen."
+            },
+            {
+              "text": "<code>fetch</code> wirft einen Fehler, der Code springt in <code>catch</code>.",
+              "isCorrect": false,
+              "explanation": "Ein 404 ist eine gültige Antwort – das Promise wird erfüllt."
+            },
+            {
+              "text": "<code>res.status</code> ist 200, weil die Anfrage angekommen ist.",
+              "isCorrect": false,
+              "explanation": "res.status enthält den echten Status, hier 404."
+            },
+            {
+              "text": "<code>res.json()</code> gibt automatisch <code>null</code> zurück.",
+              "isCorrect": false,
+              "explanation": "res.json() versucht, den Body zu lesen. Ist er kein JSON, schlägt es fehl."
+            }
+          ],
+          "successMessage": "Richtig: fetch meldet HTTP-Fehler nicht von selbst.",
+          "errorMessage": "Achtung: fetch schlägt nur bei Netzwerkfehlern fehl, nicht bei Status 4xx oder 5xx."
+        },
+        {
+          "seedKey": "js3-04",
+          "status": "published",
+          "text": "Welche Aussagen über <code>Promise.all([a, b, c])</code> stimmen?",
+          "answers": [
+            {
+              "text": "Wird eines der Promises abgelehnt, wird das Ganze abgelehnt.",
+              "isCorrect": true,
+              "explanation": "Promise.all bricht beim ersten Fehler ab."
+            },
+            {
+              "text": "Die Ergebnisse kommen in der Reihenfolge des Arrays, nicht in der Reihenfolge des Fertigwerdens.",
+              "isCorrect": true,
+              "explanation": "Das Ergebnis-Array passt Position für Position zum Eingabe-Array."
+            },
+            {
+              "text": "Es wartet auch bei einem Fehler, bis alle fertig sind.",
+              "isCorrect": false,
+              "explanation": "Das macht Promise.allSettled."
+            },
+            {
+              "text": "Die Promises laufen nacheinander.",
+              "isCorrect": false,
+              "explanation": "Die Aufgaben laufen gleichzeitig; Promise.all wartet nur auf alle."
+            }
+          ],
+          "successMessage": "Richtig: Alles oder nichts, Ergebnisse in Array-Reihenfolge.",
+          "errorMessage": "Nicht ganz: Promise.all läuft parallel und bricht beim ersten Fehler ab."
+        },
+        {
+          "seedKey": "js3-05",
+          "status": "published",
+          "text": "Welche Fehler landen im <code>catch</code>-Block?",
+          "code": "async function laden(url) {\n  try {\n    const res = await fetch(url);\n    return await res.json();\n  } catch (error) {\n    return null;\n  }\n}",
+          "answers": [
+            {
+              "text": "Der Server ist nicht erreichbar (Netzwerkfehler).",
+              "isCorrect": true,
+              "explanation": "Dann lehnt fetch ab, await wirft, catch fängt."
+            },
+            {
+              "text": "Die Antwort ist kein gültiges JSON.",
+              "isCorrect": true,
+              "explanation": "Dann lehnt res.json() ab, await wirft, catch fängt."
+            },
+            {
+              "text": "Der Server antwortet mit 404 und gültigem JSON.",
+              "isCorrect": false,
+              "explanation": "fetch und res.json() klappen beide – ohne Prüfung von res.ok kommt kein Fehler."
+            },
+            {
+              "text": "Ein Fehler in einem <code>setTimeout</code>, der später an anderer Stelle läuft.",
+              "isCorrect": false,
+              "explanation": "try/catch fängt nur, was während des Wartens in dieser Funktion passiert."
+            }
+          ],
+          "successMessage": "Richtig: Netzwerk- und JSON-Fehler werden gefangen.",
+          "errorMessage": "Denk daran: Ein HTTP-Status allein löst keinen Fehler aus."
+        },
+        {
+          "seedKey": "js3-06",
+          "status": "published",
+          "text": "Welche Zustände kann ein Promise haben?",
+          "answers": [
+            {
+              "text": "<em>pending</em> (wartend)",
+              "isCorrect": true,
+              "explanation": "Der Anfangszustand."
+            },
+            {
+              "text": "<em>fulfilled</em> (erfüllt)",
+              "isCorrect": true,
+              "explanation": "Das Promise hat einen Wert."
+            },
+            {
+              "text": "<em>rejected</em> (abgelehnt)",
+              "isCorrect": true,
+              "explanation": "Das Promise hat einen Fehlergrund."
+            },
+            {
+              "text": "<em>paused</em> (angehalten)",
+              "isCorrect": false,
+              "explanation": "Einen solchen Zustand gibt es nicht."
+            }
+          ],
+          "successMessage": "Richtig: wartend, erfüllt oder abgelehnt.",
+          "errorMessage": "Ein Promise kennt genau drei Zustände.",
+          "note": "Ist ein Promise erfüllt oder abgelehnt, ändert sich sein Zustand nie wieder."
+        }
+      ]
+    },
+    {
+      "slug": "browser-apis",
+      "name": "Browser-APIs",
+      "moduleId": 4,
+      "description": "DOM, Events, Web Storage und das Laden von Skripten im Browser.",
+      "questions": [
+        {
+          "seedKey": "web-01",
+          "status": "published",
+          "text": "Welche Aussagen stimmen?",
+          "code": "const ersteKarte = document.querySelector('.karte');\nconst alleKarten = document.querySelectorAll('.karte');",
+          "answers": [
+            {
+              "text": "<code>querySelector</code> liefert das erste passende Element oder <code>null</code>.",
+              "isCorrect": true,
+              "explanation": "Gibt es keinen Treffer, kommt null zurück."
+            },
+            {
+              "text": "<code>querySelectorAll</code> liefert eine NodeList mit allen Treffern.",
+              "isCorrect": true,
+              "explanation": "Auch ohne Treffer: dann eine leere NodeList."
+            },
+            {
+              "text": "<code>querySelectorAll</code> liefert ein echtes Array.",
+              "isCorrect": false,
+              "explanation": "Eine NodeList hat forEach, aber kein map. Array.from macht ein Array daraus."
+            },
+            {
+              "text": "<code>querySelector</code> wirft einen Fehler, wenn nichts gefunden wird.",
+              "isCorrect": false,
+              "explanation": "Es gibt null zurück. Den Fehler bekommt man erst beim Zugriff auf null."
+            }
+          ],
+          "successMessage": "Richtig: erstes Element oder null, bzw. eine NodeList.",
+          "errorMessage": "Nicht ganz: querySelectorAll liefert eine NodeList, kein Array."
+        },
+        {
+          "seedKey": "web-02",
+          "status": "published",
+          "text": "Ein Klick-Listener sitzt auf einer <code>&lt;ul&gt;</code>. Geklickt wird auf ein <code>&lt;li&gt;</code> darin. Welche Aussagen stimmen?",
+          "answers": [
+            {
+              "text": "<code>event.target</code> ist das <code>&lt;li&gt;</code>.",
+              "isCorrect": true,
+              "explanation": "target ist das Element, auf das wirklich geklickt wurde."
+            },
+            {
+              "text": "<code>event.currentTarget</code> ist die <code>&lt;ul&gt;</code>.",
+              "isCorrect": true,
+              "explanation": "currentTarget ist das Element, an dem der Listener hängt."
+            },
+            {
+              "text": "Der Listener reagiert nicht, weil der Klick nicht auf der <code>&lt;ul&gt;</code> war.",
+              "isCorrect": false,
+              "explanation": "Klick-Ereignisse steigen zu den Eltern auf (Bubbling)."
+            },
+            {
+              "text": "<code>event.stopPropagation()</code> verhindert, dass ein Link geöffnet wird.",
+              "isCorrect": false,
+              "explanation": "Das macht event.preventDefault(). stopPropagation stoppt nur das Aufsteigen."
+            }
+          ],
+          "successMessage": "Richtig: Das ist Event-Delegation.",
+          "errorMessage": "Denk an das Bubbling: Ereignisse steigen von innen nach außen auf."
+        },
+        {
+          "seedKey": "web-03",
+          "status": "published",
+          "text": "Was gibt dieser Code aus?",
+          "code": "localStorage.setItem('punkte', 5);\nconsole.log(typeof localStorage.getItem('punkte'));",
+          "answers": [
+            {
+              "text": "<code>string</code>",
+              "isCorrect": true,
+              "explanation": "localStorage speichert nur Texte. Die Zahl wird beim Speichern umgewandelt."
+            },
+            {
+              "text": "<code>number</code>",
+              "isCorrect": false,
+              "explanation": "Der Typ geht beim Speichern verloren."
+            },
+            {
+              "text": "<code>object</code>",
+              "isCorrect": false,
+              "explanation": "getItem liefert einen Text oder null."
+            },
+            {
+              "text": "<code>undefined</code>",
+              "isCorrect": false,
+              "explanation": "Der Eintrag wurde gerade gespeichert und ist da."
+            }
+          ],
+          "successMessage": "Richtig: Web Storage kennt nur Texte.",
+          "errorMessage": "localStorage speichert alles als Text. Objekte also mit JSON.stringify speichern und mit JSON.parse lesen."
+        },
+        {
+          "seedKey": "web-04",
+          "status": "published",
+          "text": "Welche Aussagen über <code>&lt;script defer src=\"app.js\"&gt;</code> stimmen?",
+          "answers": [
+            {
+              "text": "Das Skript wird parallel geladen und erst nach dem Einlesen des HTML ausgeführt.",
+              "isCorrect": true,
+              "explanation": "Darum findet es alle Elemente im DOM."
+            },
+            {
+              "text": "Mehrere <code>defer</code>-Skripte laufen in der Reihenfolge, in der sie im HTML stehen.",
+              "isCorrect": true,
+              "explanation": "Anders als bei async bleibt die Reihenfolge erhalten."
+            },
+            {
+              "text": "<code>type=\"module\"</code>-Skripte verhalten sich standardmäßig wie <code>defer</code>.",
+              "isCorrect": true,
+              "explanation": "Module werden aufgeschoben ausgeführt."
+            },
+            {
+              "text": "Das Einlesen des HTML stoppt, bis das Skript geladen ist.",
+              "isCorrect": false,
+              "explanation": "Das passiert bei einem Skript ohne defer und ohne async."
+            }
+          ],
+          "successMessage": "Richtig: defer lädt parallel und führt geordnet nach dem HTML aus.",
+          "errorMessage": "Nicht ganz: Nur ein Skript ohne defer oder async hält das Einlesen an."
+        },
+        {
+          "seedKey": "web-05",
+          "status": "published",
+          "text": "Das Element hat die Klasse <code>aktiv</code> noch nicht. Was passiert beim ersten und beim zweiten Aufruf?",
+          "code": "button.classList.toggle('aktiv');\nbutton.classList.toggle('aktiv');",
+          "answers": [
+            {
+              "text": "Erst wird <code>aktiv</code> hinzugefügt, dann wieder entfernt.",
+              "isCorrect": true,
+              "explanation": "toggle schaltet um: fehlt die Klasse, kommt sie dazu, sonst fällt sie weg."
+            },
+            {
+              "text": "Beide Male wird <code>aktiv</code> hinzugefügt.",
+              "isCorrect": false,
+              "explanation": "Das wäre classList.add."
+            },
+            {
+              "text": "Alle anderen Klassen des Elements werden entfernt.",
+              "isCorrect": false,
+              "explanation": "classList ändert nur die genannte Klasse."
+            },
+            {
+              "text": "Nichts, weil <code>toggle</code> nur bei Checkboxen funktioniert.",
+              "isCorrect": false,
+              "explanation": "classList.toggle funktioniert bei jedem Element."
+            }
+          ],
+          "successMessage": "Richtig: toggle schaltet die Klasse um.",
+          "errorMessage": "classList.toggle fügt hinzu, wenn die Klasse fehlt, und entfernt sie, wenn sie da ist."
+        },
+        {
+          "seedKey": "web-06",
+          "status": "published",
+          "text": "Ein Name aus einem Formular soll auf der Seite erscheinen. Warum ist <code>textContent</code> hier sicherer als <code>innerHTML</code>?",
+          "code": "const name = '<img src=\"x\" onerror=\"alert(1)\">';\nausgabe.textContent = name;",
+          "answers": [
+            {
+              "text": "<code>textContent</code> zeigt den Text an, ohne HTML darin auszuwerten.",
+              "isCorrect": true,
+              "explanation": "Aus <img> wird einfach sichtbarer Text."
+            },
+            {
+              "text": "Mit <code>innerHTML</code> kann eingeschleustes HTML über Attribute wie <code>onerror</code> Code ausführen.",
+              "isCorrect": true,
+              "explanation": "Das ist Cross-Site-Scripting (XSS)."
+            },
+            {
+              "text": "<code>innerHTML</code> führt <code>&lt;script&gt;</code>-Tags immer sofort aus.",
+              "isCorrect": false,
+              "explanation": "Per innerHTML eingefügte script-Tags laufen nicht – Event-Attribute wie onerror aber schon."
+            },
+            {
+              "text": "<code>textContent</code> ist nur schneller, sicherer ist es nicht.",
+              "isCorrect": false,
+              "explanation": "Der wichtigste Unterschied ist die Sicherheit."
+            }
+          ],
+          "successMessage": "Richtig: Nutzereingaben gehören in textContent.",
+          "errorMessage": "Nutzereingaben nie mit innerHTML einfügen – sie könnten Code enthalten.",
+          "note": "React macht das automatisch: <code>{name}</code> in JSX wird immer als Text eingefügt."
+        }
+      ]
+    },
+    {
+      "slug": "debugging-testing",
+      "name": "Debugging und Testing",
+      "moduleId": 5,
+      "description": "Fehlersuche mit DevTools und Debugger, Tests mit Vitest.",
+      "questions": [
+        {
+          "seedKey": "dbg-01",
+          "status": "published",
+          "text": "Was macht die Anweisung <code>debugger;</code> im Code?",
+          "answers": [
+            {
+              "text": "Sie hält das Programm an dieser Stelle an, wenn die DevTools geöffnet sind.",
+              "isCorrect": true,
+              "explanation": "Sie wirkt wie ein Haltepunkt im Code."
+            },
+            {
+              "text": "Ohne geöffnete DevTools passiert nichts.",
+              "isCorrect": true,
+              "explanation": "Dann wird die Zeile einfach übersprungen."
+            },
+            {
+              "text": "Sie wirft einen Fehler, damit man ihn in der Konsole sieht.",
+              "isCorrect": false,
+              "explanation": "debugger wirft keinen Fehler."
+            },
+            {
+              "text": "Sie wird beim Bauen automatisch entfernt.",
+              "isCorrect": false,
+              "explanation": "Das passiert nicht von selbst. Vor dem Commit selbst löschen."
+            }
+          ],
+          "successMessage": "Richtig: Ein Haltepunkt im Code, nur mit offenen DevTools.",
+          "errorMessage": "debugger pausiert nur, wenn die Entwicklerwerkzeuge offen sind."
+        },
+        {
+          "seedKey": "dbg-02",
+          "status": "published",
+          "text": "Welche Arten von Haltepunkten bieten die Chrome-DevTools?",
+          "answers": [
+            {
+              "text": "Bedingter Haltepunkt: hält nur, wenn ein Ausdruck wahr ist.",
+              "isCorrect": true,
+              "explanation": "Rechtsklick auf die Zeilennummer → Conditional breakpoint."
+            },
+            {
+              "text": "Logpoint: schreibt etwas in die Konsole, ohne anzuhalten.",
+              "isCorrect": true,
+              "explanation": "Wie ein console.log, ohne den Code zu ändern."
+            },
+            {
+              "text": "DOM-Haltepunkt: hält, wenn sich ein Element ändert.",
+              "isCorrect": true,
+              "explanation": "Im Elements-Tab: Rechtsklick → Break on."
+            },
+            {
+              "text": "Rückwärts-Haltepunkt: führt den Code ab hier rückwärts aus.",
+              "isCorrect": false,
+              "explanation": "Rückwärts ausführen können die DevTools nicht."
+            }
+          ],
+          "successMessage": "Richtig: bedingt, Logpoint und DOM-Haltepunkt.",
+          "errorMessage": "Nicht ganz: Rückwärts laufen lassen können die DevTools nicht."
+        },
+        {
+          "seedKey": "dbg-03",
+          "status": "published",
+          "text": "Dieser Vitest-Test schlägt fehl. Warum, und was hilft?",
+          "code": "import { expect, it } from 'vitest';\n\nit('addiert', () => {\n  expect(0.1 + 0.2).toBe(0.3);\n});",
+          "answers": [
+            {
+              "text": "0.1 + 0.2 ergibt 0.30000000000000004.",
+              "isCorrect": true,
+              "explanation": "Kommazahlen werden binär gespeichert und sind nicht immer exakt."
+            },
+            {
+              "text": "<code>toBeCloseTo(0.3)</code> statt <code>toBe(0.3)</code> verwenden.",
+              "isCorrect": true,
+              "explanation": "toBeCloseTo erlaubt eine kleine Abweichung."
+            },
+            {
+              "text": "<code>toBe</code> funktioniert nur mit Texten.",
+              "isCorrect": false,
+              "explanation": "toBe vergleicht mit Object.is – auch Zahlen."
+            },
+            {
+              "text": "Der Test schlägt gar nicht fehl.",
+              "isCorrect": false,
+              "explanation": "Er schlägt fehl, weil das Ergebnis nicht genau 0.3 ist."
+            }
+          ],
+          "successMessage": "Richtig: Kommazahlen mit toBeCloseTo vergleichen.",
+          "errorMessage": "Rechne 0.1 + 0.2 einmal in der Konsole nach."
+        },
+        {
+          "seedKey": "dbg-04",
+          "status": "published",
+          "text": "Welche Aussagen über diese beiden Prüfungen stimmen?",
+          "code": "expect({ punkte: 1 }).toEqual({ punkte: 1 });\nexpect({ punkte: 1 }).toBe({ punkte: 1 });",
+          "answers": [
+            {
+              "text": "<code>toEqual</code> besteht: Es vergleicht den Inhalt.",
+              "isCorrect": true,
+              "explanation": "Gleiche Schlüssel mit gleichen Werten reichen."
+            },
+            {
+              "text": "<code>toBe</code> schlägt fehl: Es sind zwei verschiedene Objekte.",
+              "isCorrect": true,
+              "explanation": "toBe prüft, ob es dasselbe Objekt ist."
+            },
+            {
+              "text": "Beide bestehen.",
+              "isCorrect": false,
+              "explanation": "Zwei Objektliterale sind nie dasselbe Objekt."
+            },
+            {
+              "text": "Beide schlagen fehl.",
+              "isCorrect": false,
+              "explanation": "Der Inhalt ist gleich, also besteht toEqual."
+            }
+          ],
+          "successMessage": "Richtig: toEqual vergleicht Inhalt, toBe die Identität.",
+          "errorMessage": "Für Objekte und Arrays toEqual verwenden, für einfache Werte toBe."
+        },
+        {
+          "seedKey": "dbg-05",
+          "status": "published",
+          "text": "Wo seht ihr in den DevTools, welche Daten ein <code>fetch</code> an den Server geschickt hat?",
+          "answers": [
+            {
+              "text": "Network → Anfrage anklicken → Payload",
+              "isCorrect": true,
+              "explanation": "Dort steht der Body der Anfrage."
+            },
+            {
+              "text": "Console",
+              "isCorrect": false,
+              "explanation": "Dort steht es nur, wenn man es selbst ausgibt."
+            },
+            {
+              "text": "Elements",
+              "isCorrect": false,
+              "explanation": "Elements zeigt das DOM, keine Anfragen."
+            },
+            {
+              "text": "Application → Local Storage",
+              "isCorrect": false,
+              "explanation": "Dort liegen nur gespeicherte Daten des Browsers."
+            }
+          ],
+          "successMessage": "Richtig: Anfragen prüft man im Network-Tab.",
+          "errorMessage": "Alles, was über das Netzwerk geht, steht im Network-Tab.",
+          "note": "Im Network-Tab stehen auch Status, Antwort-Header und die Antwort selbst (Preview, Response)."
+        },
+        {
+          "seedKey": "dbg-06",
+          "status": "published",
+          "text": "Was zeichnet einen guten Unit-Test aus?",
+          "answers": [
+            {
+              "text": "Er prüft ein einzelnes Verhalten.",
+              "isCorrect": true,
+              "explanation": "Schlägt er fehl, weiß man sofort, was kaputt ist."
+            },
+            {
+              "text": "Er funktioniert unabhängig von der Reihenfolge der anderen Tests.",
+              "isCorrect": true,
+              "explanation": "Jeder Test bereitet seine Daten selbst vor."
+            },
+            {
+              "text": "Er benutzt Daten, die ein vorheriger Test angelegt hat.",
+              "isCorrect": false,
+              "explanation": "Dann hängen Tests voneinander ab und schlagen zufällig fehl."
+            },
+            {
+              "text": "Er ruft echte Server im Internet auf.",
+              "isCorrect": false,
+              "explanation": "Das macht ihn langsam und unzuverlässig. Externe Dienste werden ersetzt (Mock)."
+            }
+          ],
+          "successMessage": "Richtig: klein, eindeutig und unabhängig.",
+          "errorMessage": "Ein guter Unit-Test ist klein und hängt von nichts anderem ab."
+        }
+      ]
+    },
+    {
+      "slug": "typescript",
+      "name": "TypeScript",
+      "moduleId": 6,
+      "description": "Typen, Interfaces, Union-Typen, Generics und der TypeScript-Compiler.",
+      "questions": [
+        {
+          "seedKey": "ts-01",
+          "status": "published",
+          "text": "Was passiert mit dieser Zeile?",
+          "code": "let alter: number = '30';",
+          "answers": [
+            {
+              "text": "TypeScript meldet einen Fehler: Ein Text passt nicht zum Typ <code>number</code>.",
+              "isCorrect": true,
+              "explanation": "Genau dafür sind Typen da: Der Fehler fällt vor dem Ausführen auf."
+            },
+            {
+              "text": "TypeScript wandelt <code>'30'</code> automatisch in die Zahl 30 um.",
+              "isCorrect": false,
+              "explanation": "TypeScript wandelt nichts um, es prüft nur."
+            },
+            {
+              "text": "Kein Fehler, weil <code>'30'</code> wie eine Zahl aussieht.",
+              "isCorrect": false,
+              "explanation": "Für den Typ zählt nur, dass es ein Text ist."
+            },
+            {
+              "text": "Der Fehler erscheint erst im Browser.",
+              "isCorrect": false,
+              "explanation": "Der Compiler und der Editor melden ihn schon beim Schreiben."
+            }
+          ],
+          "successMessage": "Richtig: Der Typ passt nicht.",
+          "errorMessage": "Ein Text bleibt ein Text, auch wenn er nur Ziffern enthält."
+        },
+        {
+          "seedKey": "ts-02",
+          "status": "published",
+          "text": "Welche Objekte passen zum Typ <code>Nutzer</code>?",
+          "code": "interface Nutzer {\n  name: string;\n  email?: string;\n}",
+          "answers": [
+            {
+              "text": "<code>{ name: 'Ada' }</code>",
+              "isCorrect": true,
+              "explanation": "email ist optional und darf fehlen."
+            },
+            {
+              "text": "<code>{ name: 'Ada', email: 'ada@example.com' }</code>",
+              "isCorrect": true,
+              "explanation": "Beide Eigenschaften mit dem richtigen Typ."
+            },
+            {
+              "text": "<code>{ email: 'ada@example.com' }</code>",
+              "isCorrect": false,
+              "explanation": "name ist Pflicht."
+            },
+            {
+              "text": "<code>{ name: 42 }</code>",
+              "isCorrect": false,
+              "explanation": "name muss ein string sein."
+            }
+          ],
+          "successMessage": "Richtig: Das Fragezeichen macht email optional.",
+          "errorMessage": "Achte auf das Fragezeichen: Nur email darf fehlen."
+        },
+        {
+          "seedKey": "ts-03",
+          "status": "published",
+          "text": "Warum meldet TypeScript hier einen Fehler, und wie behebt man ihn?",
+          "code": "function laut(wert: string | number) {\n  return wert.toUpperCase();\n}",
+          "answers": [
+            {
+              "text": "<code>wert</code> kann eine Zahl sein, und Zahlen haben kein <code>toUpperCase</code>.",
+              "isCorrect": true,
+              "explanation": "Bei einem Union-Typ gilt nur, was alle Teile können."
+            },
+            {
+              "text": "Mit <code>if (typeof wert === 'string')</code> vorher prüfen.",
+              "isCorrect": true,
+              "explanation": "Danach weiß TypeScript, dass wert ein string ist (Narrowing)."
+            },
+            {
+              "text": "Union-Typen sind in Funktionsparametern nicht erlaubt.",
+              "isCorrect": false,
+              "explanation": "Sie sind erlaubt und häufig."
+            },
+            {
+              "text": "Mit <code>wert: any</code> ist das Problem sauber gelöst.",
+              "isCorrect": false,
+              "explanation": "any schaltet nur die Prüfung ab – der Fehler bei Zahlen bleibt."
+            }
+          ],
+          "successMessage": "Richtig: Erst eingrenzen, dann benutzen.",
+          "errorMessage": "Bei string | number darf man nur benutzen, was beide Typen haben."
+        },
+        {
+          "seedKey": "ts-04",
+          "status": "published",
+          "text": "Welche Aussagen über TypeScript zur Laufzeit stimmen?",
+          "answers": [
+            {
+              "text": "Beim Übersetzen nach JavaScript verschwinden die Typen.",
+              "isCorrect": true,
+              "explanation": "Im Browser läuft normales JavaScript."
+            },
+            {
+              "text": "Daten von einer API werden zur Laufzeit nicht automatisch geprüft.",
+              "isCorrect": true,
+              "explanation": "Der Typ ist nur ein Versprechen. Prüfen muss man selbst, z. B. mit einer Bibliothek wie Zod."
+            },
+            {
+              "text": "<code>typeof</code> liefert zur Laufzeit den Namen eines Interfaces.",
+              "isCorrect": false,
+              "explanation": "Interfaces gibt es zur Laufzeit nicht."
+            },
+            {
+              "text": "TypeScript-Code läuft im Browser schneller als JavaScript.",
+              "isCorrect": false,
+              "explanation": "Es ist danach dasselbe JavaScript."
+            }
+          ],
+          "successMessage": "Richtig: Typen helfen nur beim Schreiben und Prüfen.",
+          "errorMessage": "Zur Laufzeit gibt es keine Typen mehr – nur noch JavaScript."
+        },
+        {
+          "seedKey": "ts-05",
+          "status": "published",
+          "text": "Welchen Typ hat <code>ergebnis</code>?",
+          "code": "function erstes<T>(liste: T[]): T | undefined {\n  return liste[0];\n}\n\nconst ergebnis = erstes(['a', 'b']);",
+          "answers": [
+            {
+              "text": "<code>string | undefined</code>",
+              "isCorrect": true,
+              "explanation": "T wird zu string. Bei einer leeren Liste ist das Ergebnis undefined."
+            },
+            {
+              "text": "<code>string</code>",
+              "isCorrect": false,
+              "explanation": "Der Rückgabetyp enthält ausdrücklich undefined."
+            },
+            {
+              "text": "<code>T</code>",
+              "isCorrect": false,
+              "explanation": "T wird beim Aufruf durch den echten Typ ersetzt."
+            },
+            {
+              "text": "<code>any</code>",
+              "isCorrect": false,
+              "explanation": "Mit Generics bleibt der Typ erhalten."
+            }
+          ],
+          "successMessage": "Richtig: T wird aus dem Argument abgeleitet.",
+          "errorMessage": "TypeScript setzt für T den Typ der Listenelemente ein."
+        },
+        {
+          "seedKey": "ts-06",
+          "status": "published",
+          "text": "Welche Aussagen über <code>any</code> und <code>unknown</code> stimmen?",
+          "answers": [
+            {
+              "text": "Bei <code>any</code> prüft TypeScript gar nichts mehr.",
+              "isCorrect": true,
+              "explanation": "Fehler fallen erst zur Laufzeit auf."
+            },
+            {
+              "text": "Einen <code>unknown</code>-Wert muss man erst eingrenzen, bevor man ihn benutzt.",
+              "isCorrect": true,
+              "explanation": "Zum Beispiel mit typeof oder instanceof."
+            },
+            {
+              "text": "<code>unknown</code> und <code>any</code> sind dasselbe.",
+              "isCorrect": false,
+              "explanation": "unknown ist die sichere Variante."
+            },
+            {
+              "text": "Bei <code>unknown</code> darf man jede Methode direkt aufrufen.",
+              "isCorrect": false,
+              "explanation": "Genau das verbietet unknown."
+            }
+          ],
+          "successMessage": "Richtig: unknown ist das sichere any.",
+          "errorMessage": "unknown zwingt zum Prüfen, any schaltet die Prüfung ab."
+        }
+      ]
+    },
+    {
+      "slug": "react",
+      "name": "React",
+      "moduleId": 7,
+      "description": "Komponenten, Props, State, Hooks und Routing in React.",
+      "questions": [
+        {
+          "seedKey": "rct-01",
+          "status": "published",
+          "text": "Welchen Wert hat <code>zahl</code> nach einem Klick?",
+          "code": "const [zahl, setZahl] = useState(0);\n\nfunction klick() {\n  setZahl(zahl + 1);\n  setZahl(zahl + 1);\n}",
+          "answers": [
+            {
+              "text": "1",
+              "isCorrect": true,
+              "explanation": "Beide Aufrufe rechnen mit demselben alten Wert 0."
+            },
+            {
+              "text": "2",
+              "isCorrect": false,
+              "explanation": "Das klappt nur mit setZahl((z) => z + 1)."
+            },
+            {
+              "text": "0",
+              "isCorrect": false,
+              "explanation": "Der State wird geändert, nur nicht zweimal."
+            },
+            {
+              "text": "Einen Fehler",
+              "isCorrect": false,
+              "explanation": "Mehrere set-Aufrufe hintereinander sind erlaubt."
+            }
+          ],
+          "successMessage": "Richtig: zahl ist im ganzen Durchlauf 0.",
+          "errorMessage": "zahl ist während eines Renderns ein fester Wert.",
+          "note": "Hängt der neue Wert vom alten ab, nimmt man die Funktionsform: <code>setZahl((z) =&gt; z + 1)</code>."
+        },
+        {
+          "seedKey": "rct-02",
+          "status": "published",
+          "text": "Was ist ein guter <code>key</code> für die Einträge einer Liste?",
+          "answers": [
+            {
+              "text": "Eine stabile ID aus den Daten, z. B. <code>frage.id</code>.",
+              "isCorrect": true,
+              "explanation": "So erkennt React jeden Eintrag auch nach dem Sortieren wieder."
+            },
+            {
+              "text": "<code>Math.random()</code>",
+              "isCorrect": false,
+              "explanation": "Bei jedem Rendern ein neuer key – React baut alles neu."
+            },
+            {
+              "text": "Ein key, der in der ganzen App nur einmal vorkommt.",
+              "isCorrect": false,
+              "explanation": "Eindeutig muss er nur unter Geschwistern derselben Liste sein."
+            },
+            {
+              "text": "Ein beliebiger Text, weil die Kindkomponente den key als Prop liest.",
+              "isCorrect": false,
+              "explanation": "key ist für React, die Komponente bekommt ihn nicht als Prop."
+            }
+          ],
+          "successMessage": "Richtig: stabil und unter Geschwistern eindeutig.",
+          "errorMessage": "Der key muss stabil bleiben, solange es derselbe Eintrag ist."
+        },
+        {
+          "seedKey": "rct-03",
+          "status": "published",
+          "text": "Wann läuft dieser Effect?",
+          "code": "useEffect(() => {\n  ladeKategorien();\n}, []);",
+          "answers": [
+            {
+              "text": "Nach dem ersten Rendern.",
+              "isCorrect": true,
+              "explanation": "Mit leerem Array läuft der Effect einmal nach dem Einbau."
+            },
+            {
+              "text": "In der Entwicklung mit <code>StrictMode</code> beim Start zweimal.",
+              "isCorrect": true,
+              "explanation": "React baut die Komponente zur Probe ein, aus und wieder ein, um Fehler beim Aufräumen zu finden."
+            },
+            {
+              "text": "Vor dem ersten Rendern.",
+              "isCorrect": false,
+              "explanation": "Effects laufen immer nach dem Rendern."
+            },
+            {
+              "text": "Nach jedem Rendern.",
+              "isCorrect": false,
+              "explanation": "Das wäre ohne das zweite Argument."
+            }
+          ],
+          "successMessage": "Richtig: Einmal nach dem Einbau – in der Entwicklung zur Probe zweimal.",
+          "errorMessage": "Das leere Array heißt: Der Effect hängt von nichts ab."
+        },
+        {
+          "seedKey": "rct-04",
+          "status": "published",
+          "text": "Welche Aussagen über Komponenten und Props stimmen?",
+          "answers": [
+            {
+              "text": "Komponentennamen beginnen mit einem Großbuchstaben.",
+              "isCorrect": true,
+              "explanation": "Kleingeschriebenes hält JSX für HTML-Elemente."
+            },
+            {
+              "text": "Props sind in der Kindkomponente nur lesbar.",
+              "isCorrect": true,
+              "explanation": "Änderungen laufen über State und Funktionen der Eltern."
+            },
+            {
+              "text": "In JSX heißt das HTML-Attribut <code>class</code> <code>className</code>.",
+              "isCorrect": true,
+              "explanation": "class ist in JavaScript ein reserviertes Wort."
+            },
+            {
+              "text": "Ändert die Kindkomponente eine Prop, wird die Elternkomponente neu gerendert.",
+              "isCorrect": false,
+              "explanation": "Props ändert man nicht. Die Eltern geben eine Funktion mit, die ihren State ändert."
+            }
+          ],
+          "successMessage": "Richtig: Großbuchstabe, Props nur lesen, className.",
+          "errorMessage": "Props fließen nur von oben nach unten und sind nur lesbar."
+        },
+        {
+          "seedKey": "rct-05",
+          "status": "published",
+          "text": "Warum benutzt man in einer React-Router-App <code>&lt;Link to=\"/quiz\"&gt;</code> statt <code>&lt;a href=\"/quiz\"&gt;</code>?",
+          "answers": [
+            {
+              "text": "<code>Link</code> wechselt die Seite, ohne sie neu zu laden.",
+              "isCorrect": true,
+              "explanation": "State und geladene Daten bleiben erhalten."
+            },
+            {
+              "text": "<code>&lt;a href&gt;</code> lädt die ganze App neu vom Server.",
+              "isCorrect": true,
+              "explanation": "Dabei geht der State der App verloren."
+            },
+            {
+              "text": "<code>&lt;a&gt;</code>-Tags sind in React verboten.",
+              "isCorrect": false,
+              "explanation": "Für externe Links sind sie richtig."
+            },
+            {
+              "text": "<code>Link</code> ist nur für Suchmaschinen da.",
+              "isCorrect": false,
+              "explanation": "Link rendert ein normales a-Element, das ist nicht der Grund."
+            }
+          ],
+          "successMessage": "Richtig: Link navigiert ohne Neuladen.",
+          "errorMessage": "Innerhalb der App mit Link navigieren, nach außen mit a."
+        },
+        {
+          "seedKey": "rct-06",
+          "status": "published",
+          "text": "Was passiert bei diesem Eingabefeld?",
+          "code": "const [name, setName] = useState('');\n\nreturn <input value={name} />;",
+          "answers": [
+            {
+              "text": "Man kann nichts eintippen.",
+              "isCorrect": true,
+              "explanation": "value ist an den State gebunden, und nichts ändert den State."
+            },
+            {
+              "text": "React warnt in der Konsole, dass <code>onChange</code> fehlt.",
+              "isCorrect": true,
+              "explanation": "Ein gesteuertes Feld braucht value und onChange."
+            },
+            {
+              "text": "Das Feld funktioniert wie ein normales HTML-Feld.",
+              "isCorrect": false,
+              "explanation": "Mit value übernimmt React die Kontrolle."
+            },
+            {
+              "text": "<code>name</code> wird automatisch beim Tippen aktualisiert.",
+              "isCorrect": false,
+              "explanation": "Das muss man selbst in onChange machen."
+            }
+          ],
+          "successMessage": "Richtig: Ein gesteuertes Feld braucht onChange.",
+          "errorMessage": "value allein macht das Feld schreibgeschützt.",
+          "note": "Richtig wäre: <code>&lt;input value={name} onChange={(e) =&gt; setName(e.target.value)} /&gt;</code>"
+        }
+      ]
+    },
+    {
+      "slug": "backend-node-express",
+      "name": "Backend mit Node.js und Express",
+      "moduleId": null,
+      "description": "Node.js, npm, Express, HTTP, MongoDB mit Mongoose und Anmeldung.",
+      "questions": [
+        {
+          "seedKey": "be-01",
+          "status": "published",
+          "text": "Warum steht <code>express.json()</code> vor den Routen?",
+          "code": "app.use(express.json());\napp.use('/api', routes);",
+          "answers": [
+            {
+              "text": "Middleware läuft in der Reihenfolge, in der sie registriert wird. Ohne sie ist <code>req.body</code> in den Routen nicht befüllt.",
+              "isCorrect": true,
+              "explanation": "express.json() liest den JSON-Body und legt ihn in req.body."
+            },
+            {
+              "text": "Die Reihenfolge ist egal, Express sortiert Middleware selbst.",
+              "isCorrect": false,
+              "explanation": "Express sortiert nichts – die Reihenfolge im Code zählt."
+            },
+            {
+              "text": "<code>express.json()</code> wandelt die Antworten in JSON um.",
+              "isCorrect": false,
+              "explanation": "Für Antworten gibt es res.json()."
+            },
+            {
+              "text": "Ohne <code>express.json()</code> startet der Server nicht.",
+              "isCorrect": false,
+              "explanation": "Der Server startet, nur req.body bleibt leer."
+            }
+          ],
+          "successMessage": "Richtig: Middleware läuft von oben nach unten.",
+          "errorMessage": "In Express zählt die Reihenfolge von app.use und den Routen."
+        },
+        {
+          "seedKey": "be-02",
+          "status": "published",
+          "text": "Welche Zuordnungen von HTTP-Status und Bedeutung stimmen?",
+          "answers": [
+            {
+              "text": "201 – etwas wurde angelegt",
+              "isCorrect": true,
+              "explanation": "Zum Beispiel nach POST /attempts."
+            },
+            {
+              "text": "401 – nicht angemeldet",
+              "isCorrect": true,
+              "explanation": "Der Name lautet Unauthorized, gemeint ist: unbekannt."
+            },
+            {
+              "text": "403 – angemeldet, aber nicht erlaubt",
+              "isCorrect": true,
+              "explanation": "Forbidden: Der Server weiß, wer fragt, und sagt nein."
+            },
+            {
+              "text": "404 – der Server ist abgestürzt",
+              "isCorrect": false,
+              "explanation": "404 heißt: Diese Ressource gibt es nicht. Serverfehler sind 5xx."
+            }
+          ],
+          "successMessage": "Richtig: 201, 401 und 403 passen.",
+          "errorMessage": "4xx heißt: Problem bei der Anfrage. 5xx heißt: Problem beim Server."
+        },
+        {
+          "seedKey": "be-03",
+          "status": "published",
+          "text": "Welche Aussagen über <code>package.json</code> stimmen?",
+          "answers": [
+            {
+              "text": "Testwerkzeuge wie Vitest gehören in <code>devDependencies</code>.",
+              "isCorrect": true,
+              "explanation": "Sie werden nur beim Entwickeln gebraucht."
+            },
+            {
+              "text": "Express gehört in <code>dependencies</code>.",
+              "isCorrect": true,
+              "explanation": "Der Server braucht es auch im Betrieb."
+            },
+            {
+              "text": "<code>npm install --omit=dev</code> installiert die <code>devDependencies</code> nicht.",
+              "isCorrect": true,
+              "explanation": "So installiert man auf dem Server."
+            },
+            {
+              "text": "<code>devDependencies</code> werden von <code>npm install</code> nie installiert.",
+              "isCorrect": false,
+              "explanation": "Ohne Option installiert npm install beides."
+            }
+          ],
+          "successMessage": "Richtig: Laufzeit in dependencies, Werkzeuge in devDependencies.",
+          "errorMessage": "npm install ohne Option installiert beide Gruppen."
+        },
+        {
+          "seedKey": "be-04",
+          "status": "published",
+          "text": "Die Collection enthält keine passenden Dokumente. Was liefern die beiden Abfragen?",
+          "code": "const fragen = await Question.find({ status: 'archived' });\nconst frage = await Question.findOne({ status: 'archived' });",
+          "answers": [
+            {
+              "text": "<code>find</code> liefert ein leeres Array.",
+              "isCorrect": true,
+              "explanation": "find gibt immer ein Array zurück."
+            },
+            {
+              "text": "<code>findOne</code> liefert <code>null</code>.",
+              "isCorrect": true,
+              "explanation": "Ohne Treffer gibt es null."
+            },
+            {
+              "text": "Beide werfen einen Fehler.",
+              "isCorrect": false,
+              "explanation": "Keine Treffer sind kein Fehler."
+            },
+            {
+              "text": "Beide liefern <code>undefined</code>.",
+              "isCorrect": false,
+              "explanation": "Mongoose liefert [] bzw. null."
+            }
+          ],
+          "successMessage": "Richtig: [] und null.",
+          "errorMessage": "Kein Treffer ist kein Fehler: find liefert [], findOne null."
+        },
+        {
+          "seedKey": "be-05",
+          "status": "published",
+          "text": "Welche Aussagen zur Anmeldung stimmen?",
+          "answers": [
+            {
+              "text": "Passwörter speichert man nur als Hash, z. B. mit bcrypt.",
+              "isCorrect": true,
+              "explanation": "Selbst wer die Datenbank liest, kennt die Passwörter dann nicht."
+            },
+            {
+              "text": "Ein Cookie mit <code>httpOnly</code> kann JavaScript im Browser nicht lesen.",
+              "isCorrect": true,
+              "explanation": "Das schützt das Token vor eingeschleustem Code."
+            },
+            {
+              "text": "Der Inhalt eines JWT ist verschlüsselt.",
+              "isCorrect": false,
+              "explanation": "Er ist nur signiert. Jeder kann ihn lesen – darum gehört kein Geheimnis hinein."
+            },
+            {
+              "text": "Beim Login vergleicht man das eingegebene Passwort mit dem gespeicherten Klartext.",
+              "isCorrect": false,
+              "explanation": "Man vergleicht mit dem Hash, z. B. mit bcrypt.compare."
+            }
+          ],
+          "successMessage": "Richtig: Hash speichern, Token im httpOnly-Cookie.",
+          "errorMessage": "Ein JWT ist signiert, nicht verschlüsselt."
+        },
+        {
+          "seedKey": "be-06",
+          "status": "published",
+          "text": "Das Backend nutzt ES-Module (<code>\"type\": \"module\"</code>). Welche Aussagen stimmen?",
+          "answers": [
+            {
+              "text": "Pakete lädt man mit <code>import express from 'express'</code>.",
+              "isCorrect": true,
+              "explanation": "Das ist die ESM-Schreibweise."
+            },
+            {
+              "text": "Statt <code>__dirname</code> gibt es <code>import.meta.dirname</code>.",
+              "isCorrect": true,
+              "explanation": "__dirname gibt es nur in CommonJS."
+            },
+            {
+              "text": "Bei eigenen Dateien gehört die Endung dazu: <code>'./config.js'</code>.",
+              "isCorrect": true,
+              "explanation": "In Node.js-ESM wird die Endung nicht ergänzt."
+            },
+            {
+              "text": "<code>require('express')</code> funktioniert genauso.",
+              "isCorrect": false,
+              "explanation": "require gibt es in ES-Modulen nicht."
+            }
+          ],
+          "successMessage": "Richtig: import, import.meta.dirname und Dateiendungen.",
+          "errorMessage": "In ES-Modulen gibt es kein require und kein __dirname."
+        }
+      ]
+    },
+    {
+      "slug": "nextjs",
+      "name": "Next.js",
+      "moduleId": null,
+      "description": "Server- und Client-Komponenten im Admin-Dashboard. Die Fragen sind noch Entwürfe.",
+      "questions": [
+        {
+          "seedKey": "nx-01",
+          "status": "draft",
+          "text": "Welche Aussagen über Server-Komponenten in Next.js stimmen?",
+          "answers": [
+            {
+              "text": "Sie laufen auf dem Server und dürfen direkt auf die Datenbank zugreifen.",
+              "isCorrect": true,
+              "explanation": "Der Code landet nicht im Browser."
+            },
+            {
+              "text": "In ihnen darf man kein <code>useState</code> benutzen.",
+              "isCorrect": true,
+              "explanation": "State braucht eine Client-Komponente."
+            },
+            {
+              "text": "Ihr Code wird als JavaScript an den Browser geschickt.",
+              "isCorrect": false,
+              "explanation": "Der Browser bekommt nur das Ergebnis, nicht den Code."
+            }
+          ],
+          "successMessage": "Richtig: Server-Komponenten laufen nur auf dem Server.",
+          "errorMessage": "Server-Komponenten schicken nur ihr Ergebnis in den Browser."
+        },
+        {
+          "seedKey": "nx-02",
+          "status": "draft",
+          "text": "Was bewirkt <code>'use client'</code> in der ersten Zeile einer Datei?",
+          "answers": [
+            {
+              "text": "Die Komponente darf Hooks wie <code>useState</code> benutzen.",
+              "isCorrect": true,
+              "explanation": "Sie läuft auch im Browser."
+            },
+            {
+              "text": "Alles, was diese Datei importiert, wird ebenfalls Client-Code.",
+              "isCorrect": true,
+              "explanation": "Darum setzt man 'use client' so weit unten im Baum wie möglich."
+            },
+            {
+              "text": "Die Komponente wird nie auf dem Server gerendert.",
+              "isCorrect": false,
+              "explanation": "Client-Komponenten werden für das erste HTML trotzdem auf dem Server gerendert."
+            }
+          ],
+          "successMessage": "Richtig: 'use client' markiert die Grenze zum Browser.",
+          "errorMessage": "'use client' heißt: Ab hier läuft der Code auch im Browser."
+        }
+      ]
+    }
+  ]
+}
