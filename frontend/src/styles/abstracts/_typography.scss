@@ -35,4 +35,7 @@ $line-height-card-title: 1.2;
 $letter-spacing-display: -0.02em;
 $letter-spacing-label: 0.2em;
 
+$font-size-chapter: clamp(1.75rem, 1.2rem + 2.5vw, 3rem);
+$font-size-chapter-kicker: clamp(1rem, 0.8rem + 0.9vw, 1.5rem);
 $line-height-copy: 1.6;
+$font-size-timer: clamp(1.5rem, 1.25rem + 1vw, 2rem);

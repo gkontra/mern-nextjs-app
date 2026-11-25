@@ -35,6 +35,10 @@ $glow-size: 3rem;
 $modules-grid-gap: clamp(1.5rem, 4vw, 4rem);
 $modules-grid-max-inline-size: 56rem;
 
+$code-depth-opacity-far: 0.55;
+$code-depth-opacity-mid: 0.8;
+$code-depth-opacity-near: 1;
+
 $z-overlay: 10;
 $z-nav: 20;
 
@@ -44,15 +48,26 @@ $nav-auth-placeholder-inline-size: 5rem;
 
 $example-stage-min-height: 150svh;
 $example-stage-min-height-short: 60svh;
-$example-stage-min-height-compact: 110svh;
-$example-stage-offset-top: 25svh;
 $example-box-size: clamp(6rem, 4.5rem + 5vw, 10rem);
 $example-bar-block-size: 1.25rem;
+$example-stage-min-height-compact: 110svh;
+$example-stage-offset-top: 25svh;
 $example-track-max-inline-size: 40rem;
 
-$code-depth-opacity-far: 0.55;
-$code-depth-opacity-mid: 0.8;
-$code-depth-opacity-near: 1;
-
+$quiz-max-inline-size: 48rem;
+$quiz-card-padding: clamp(1.25rem, 0.75rem + 2vw, 2.25rem);
+$quiz-progress-button-size: 2.75rem;
+$answer-padding: 0.875rem 1rem;
+$answer-control-size: 1.25rem;
 $page-padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+
 $content-max-inline-size: 48rem;
+$agenda-max-inline-size: 72rem;
+$agenda-gap: clamp(1rem, 0.5rem + 2vw, 2rem);
+$slide-padding: clamp(1.25rem, 0.75rem + 2vw, 2.5rem);
+$slide-chapter-min-block-size: clamp(8rem, 6rem + 8vw, 14rem);
+$slide-chapter-frame-size: 0.375rem;
+$nav-dropdown-min-inline-size: 12rem;
+$result-outcome-border-width: 0.375rem;
+$history-gap: 1rem;
+$result-list-gap: 1.5rem;

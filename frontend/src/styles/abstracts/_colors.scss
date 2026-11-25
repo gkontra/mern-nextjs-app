@@ -67,5 +67,29 @@ $color-error-on-dark: color-mix(in srgb, $color-5 55%, $color-3);
 $color-input-bg: $color-6;
 $color-input-border: color-mix(in srgb, $color-3 55%, $color-surface-dark);
 
+$color-success-on-dark: $color-2;
+$color-wrong-on-dark: $color-error-on-dark;
+$color-warning-on-dark: $color-4;
+$color-answer-bg: $color-6;
+$color-answer-border: color-mix(in srgb, $color-3 55%, $color-6);
+$color-answer-selected-bg: color-mix(in srgb, $color-2 20%, $color-6);
+$color-answer-selected-border: $color-2;
 $color-code-inline-bg: color-mix(in srgb, $color-3 10%, $color-6);
+
+$color-slide-bg: $color-surface-dark;
+$color-slide-border: color-mix(in srgb, $color-3 18%, $color-surface-dark);
+$color-chapter-bg: $color-3;
+$color-chapter-frame: color-mix(in srgb, $color-3 35%, $color-white);
+$color-chapter-text: color-mix(in srgb, $color-1 60%, $color-6);
+$color-dropdown-bg: $color-surface-dark;
+$color-dropdown-border: $color-answer-border;
 $color-table-border: $color-answer-border;
+
+$color-timer-bg: $color-surface-dark;
+$color-timer-border: $color-answer-border;
+$color-timer-warning: $color-warning-on-dark;
+$color-result-correct: $color-success-on-dark;
+$color-result-wrong: $color-wrong-on-dark;
+$color-result-unanswered: $color-text-muted-on-dark;
+$color-marker-bg: $color-6;
+$color-note-border: $color-accent;
