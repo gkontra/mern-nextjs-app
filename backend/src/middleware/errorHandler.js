@@ -1,8 +1,16 @@
-import { ApiError, ERROR_CODE, INTERNAL_ERROR_MESSAGE, badRequest, emailTaken, toErrorBody } from '../lib/apiError.js';
+import {
+  ApiError,
+  ERROR_CODE,
+  INTERNAL_ERROR_MESSAGE,
+  attemptRunning,
+  badRequest,
+  emailTaken,
+  toErrorBody,
+} from '../lib/apiError.js';
 
 const BODY_PARSER_ERRORS = ['entity.parse.failed', 'entity.too.large', 'encoding.unsupported', 'charset.unsupported'];
 
-const isDuplicateEmail = (error) => error?.code === 11000 && Object.hasOwn(error.keyPattern ?? {}, 'email');
+const isDuplicateKey = (error, key) => error?.code === 11000 && Object.hasOwn(error.keyPattern ?? {}, key);
 
 const toApiError = (error) => {
   if (error instanceof ApiError) {
@@ -11,8 +19,11 @@ const toApiError = (error) => {
   if (BODY_PARSER_ERRORS.includes(error?.type)) {
     return badRequest();
   }
-  if (isDuplicateEmail(error)) {
+  if (isDuplicateKey(error, 'email')) {
     return emailTaken();
+  }
+  if (isDuplicateKey(error, 'userId')) {
+    return attemptRunning();
   }
   return null;
 };
