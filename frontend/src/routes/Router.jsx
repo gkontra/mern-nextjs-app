@@ -3,6 +3,7 @@ import HomePage from '../pages/HomePage';
 // import ContentPage from '../pages/ContentPage';
 import ContactPage from '../pages/ContactPage';
 import ExamplesPage from '../pages/ExamplesPage';
+import { lazy, Suspense } from 'react';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import ProfilePage from '../pages/ProfilePage';
