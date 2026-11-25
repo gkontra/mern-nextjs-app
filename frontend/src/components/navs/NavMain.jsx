@@ -3,6 +3,12 @@ import { useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AUTH_STATUS, useAuth } from '../../stores/auth';
 import Logo from '../icons/Logo';
+import NavDropdown from './contents/NavDropdown';
+
+const CONTENT_LINKS = [
+  { to: '/inhalte/agenda', label: 'Agenda' },
+  { to: '/inhalte/links', label: 'Linksammlung' },
+];
 
 const hideMenu = (element) => Collapse.getInstance(element)?.hide();
 
@@ -54,6 +60,7 @@ const NavMain = (props) => {
                 Module
               </Link>
             </li>
+            <NavDropdown id="nav-content-menu" label="Inhalte" items={CONTENT_LINKS} />
             <li className="nav-item">
               <NavLink className="nav-link" to="/contact">
                 Kontakt
