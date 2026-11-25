@@ -1,4 +1,5 @@
-import { fetchModules, getErrorMessage, isRequestCanceled } from '../../services/modulesService';
+import { isRequestCanceled } from '../../services/apiError';
+import { fetchModules } from '../../services/modulesService';
 import { MODULES_ACTION } from './reducer';
 
 export const loadModules = async (dispatch, signal) => {
@@ -11,7 +12,7 @@ export const loadModules = async (dispatch, signal) => {
     if (isRequestCanceled(error)) {
       return;
     }
-    dispatch({ type: MODULES_ACTION.FETCH_FAILURE, payload: getErrorMessage(error) });
+    dispatch({ type: MODULES_ACTION.FETCH_FAILURE, payload: error.message });
   }
 };
 

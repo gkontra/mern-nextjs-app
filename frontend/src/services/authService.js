@@ -1,5 +1,5 @@
 import api from './api';
-import { isRequestCanceled, toApiError } from './apiError';
+import { API_ERROR_CODE, ApiError, isRequestCanceled, toApiError } from './apiError';
 
 const IS_MOCK_API = import.meta.env.VITE_USE_MOCK_API === 'true';
 
@@ -51,4 +51,18 @@ export const fetchMe = async ({ signal } = {}) => {
 
   const data = await send(() => api.get('/auth/me', { signal }));
   return data.user;
+};
+
+export const readUser = (data) => {
+  const user = data?.user;
+
+  if (user === null || typeof user !== 'object' || Array.isArray(user)) {
+    throw new ApiError({
+      status: 0,
+      code: API_ERROR_CODE.UNKNOWN,
+      message: 'Die Antwort enthält keine Benutzerdaten.',
+    });
+  }
+
+  return user;
 };
