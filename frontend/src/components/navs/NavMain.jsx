@@ -15,6 +15,7 @@ const NavMain = (props) => {
   const collapseRef = useRef(null);
 
   useEffect(() => {
+    //  Collapse.getInstance(element)?.hide();
     hideMenu(collapseRef.current);
   }, [pathname, hash]);
 

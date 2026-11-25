@@ -14,6 +14,7 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/contact" element={<ContactPage />} />
+
       <Route element={<ProtectedRoute />}>
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/quiz" element={<h2>Quiz</h2>} />
