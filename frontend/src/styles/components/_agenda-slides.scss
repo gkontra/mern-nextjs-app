@@ -42,18 +42,18 @@
   .content-heading {
     margin-block: 0 1rem;
   }
+  .markdown-content {
+    h2.content-heading {
+      font-size: $font-size-chapter;
+      line-height: $line-height-display;
+      letter-spacing: $letter-spacing-display;
+    }
 
-  h2.content-heading {
-    font-size: $font-size-chapter;
-    line-height: $line-height-display;
-    letter-spacing: $letter-spacing-display;
+    h3.content-heading {
+      font-size: $font-size-card-title;
+      color: $color-accent;
+    }
   }
-
-  h3.content-heading {
-    font-size: $font-size-card-title;
-    color: $color-accent;
-  }
-
   .slide:not(.is-chapter) h2.content-heading {
     font-size: $font-size-card-title;
   }
