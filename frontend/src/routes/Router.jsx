@@ -14,7 +14,9 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/inhalte/links" element={<ContentPage />} />
+      <Route path="/inhalte/agenda" element={<ContentPage doc="agenda" />} />
+      <Route path="/inhalte/links" element={<ContentPage doc="links" />} />
+
       <Route path="/contact" element={<ContactPage />} />
 
       <Route element={<ProtectedRoute />}>

@@ -1,17 +1,37 @@
+import AgendaSlides from '../components/content/AgendaSlides';
 import MarkdownContent from '../components/content/MarkdownContent';
+import agendaSource from '../content/agenda.md?raw';
 import linksSource from '../content/linksammlung.md?raw';
-import { stripLeadingTitle } from '../lib/stripLeadingTitle';
+import { stripLeadingTitle } from '../lib/markdownSource';
 
-// ?raw - info für vite. Inhalt soll als String eingebunden werden und nicht über ein Plugin oder von Vite geparsed werden.
-const ContentPage = () => {
+const DOCS = {
+  agenda: {
+    title: 'Agenda',
+    intro: 'Alle Kurstage im Überblick – von den ersten Zeilen JavaScript bis React.',
+  },
+  links: {
+    title: 'Linksammlung',
+    intro: 'Nachschlagewerke, Werkzeuge und Lernspiele rund um den Kurs.',
+  },
+};
+
+const ContentPage = (props) => {
+  const { doc } = props;
+  const { title, intro } = DOCS[doc];
+
   return (
-    <div className="page-content page-content-links">
-      <title>Linksammlung · JS-Kurs</title>
+    <div className={`page-content page-content-${doc}`}>
+      <title>{`${title} · JS-Kurs`}</title>
       <div className="container">
         <header className="content-header">
-          <h1 className="content-title">Linksammlung</h1>
+          <h1 className="content-title">{title}</h1>
+          <p className="content-intro">{intro}</p>
         </header>
-        <MarkdownContent source={stripLeadingTitle(linksSource)} />
+        {doc === 'agenda' ? (
+          <AgendaSlides source={agendaSource} />
+        ) : (
+          <MarkdownContent source={stripLeadingTitle(linksSource)} />
+        )}
       </div>
     </div>
   );
