@@ -9,6 +9,7 @@ import ProfilePage from '../pages/ProfilePage';
 import NotFoundPage from '../pages/NotFoundPage';
 
 import ProtectedRoute from '../components/routes/ProtectedRoute';
+import ModuleDetailPage from '../pages/ModuleDetailPage';
 
 const ContentPage = lazy(() => import('../pages/ContentPage')); // code splitting
 
@@ -27,6 +28,7 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/modules/:moduleId" element={<ModuleDetailPage />} />
       <Route path="/inhalte/agenda" element={contentPage('agenda')} />
       <Route path="/inhalte/links" element={contentPage('links')} />
 
