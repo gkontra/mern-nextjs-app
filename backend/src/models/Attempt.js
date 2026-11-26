@@ -14,7 +14,7 @@ const itemSchema = new Schema(
   { _id: false },
 );
 
-const resultSchema = new mongoose.Schema(
+const resultSchema = new Schema(
   {
     correct: { type: Number, required: true },
     wrong: { type: Number, required: true },
