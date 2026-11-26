@@ -1,7 +1,20 @@
 import { FaCircleExclamation } from 'react-icons/fa6';
 
 const FormField = (props) => {
-  const { id, label, type = 'text', value, onChange, error, hint, autoComplete, required = false, ref } = props;
+  const {
+    id,
+    label,
+    type = 'text',
+    value,
+    onChange,
+    error,
+    hint,
+    autoComplete,
+    required = false,
+    min,
+    max,
+    ref,
+  } = props;
   const hintId = hint ? `${id}-hint` : null;
   const errorId = error ? `${id}-error` : null;
   const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
@@ -21,6 +34,8 @@ const FormField = (props) => {
         onChange={onChange}
         autoComplete={autoComplete}
         required={required}
+        min={min}
+        max={max}
         aria-invalid={error ? 'true' : undefined}
         aria-describedby={describedBy}
       />
