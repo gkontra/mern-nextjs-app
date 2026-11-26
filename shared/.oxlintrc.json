@@ -1,0 +1,10 @@
+{
+  "plugins": ["oxc", "import"],
+  "env": {
+    "builtin": true,
+    "shared-node-browser": true
+  },
+  "rules": {
+    "no-undef": "error"
+  }
+}
