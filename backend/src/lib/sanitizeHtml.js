@@ -1,6 +1,6 @@
 import sanitize from 'sanitize-html';
+import { ALLOWED_TAGS } from '@mearn/shared/question';
 
-export const ALLOWED_TAGS = ['code', 'pre', 'strong', 'em', 'br'];
 const SANITIZE_OPTIONS = { allowedTags: ALLOWED_TAGS, allowedAttributes: {} };
 
 const divsToLineBreaks = (html) => html.replace(/<div\b[^>]*>/gi, '<br>').replace(/<\/div\s*>/gi, '');

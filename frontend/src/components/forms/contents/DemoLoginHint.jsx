@@ -1,4 +1,6 @@
-import { ROLE_LABELS } from '../../../lib/roles';
+// import { ROLE_LABELS } from '../../../lib/roles';
+import { ROLE_LABELS } from '@mearn/shared/user';
+
 import { DEMO_ACCOUNTS, SERVER_ERROR_EMAIL } from '../../../services/__mocks__/authService.mock';
 
 import { IS_MOCK_API } from '../../../lib/isMockApi';

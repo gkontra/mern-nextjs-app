@@ -1,12 +1,12 @@
-import { Schema, SchemaTypes as Type, model } from 'mongoose';
+import { Schema, SchemaTypes as Types, model } from 'mongoose';
 
 const categorySchema = new Schema(
   {
-    name: { type: Type.String, required: true, unique: true, trim: true },
-    slug: { type: Type.String, required: true, unique: true, trim: true, lowercase: true },
-    description: { type: Type.String, default: '', trim: true },
+    name: { type: Types.String, required: true, unique: true, trim: true },
+    slug: { type: Types.String, required: true, unique: true, trim: true, lowercase: true },
+    description: { type: Types.String, default: '', trim: true },
     moduleId: {
-      type: Type.Number,
+      type: Types.Number,
       default: null,
       min: 1,
       max: 7,

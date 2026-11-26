@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import AttemptHistory from '../components/quiz/AttemptHistory';
-import { ROLE_LABELS } from '../lib/roles';
+import { ROLE_LABELS } from '@mearn/shared/user';
 import { useAuth } from '../stores/auth';
 
 const ProfilePage = () => {

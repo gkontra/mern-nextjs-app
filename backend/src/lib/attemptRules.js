@@ -1,8 +1,9 @@
 import { QUIZ_MESSAGES, validateQuizSetup } from '@mearn/shared/quiz';
+import { ANSWER_COUNT } from '@mearn/shared/question';
 import { isObjectIdOrHexString } from 'mongoose';
 
 export const MAX_CATEGORY_IDS = 20;
-export const MAX_SELECTED_ANSWERS = 6;
+export const MAX_SELECTED_ANSWERS = ANSWER_COUNT.max;
 export const SUBMIT_TOLERANCE_MS = 15_000;
 export const HISTORY_LIMIT = 50;
 

@@ -1,47 +1,25 @@
-import { SchemaTypes, Schema, model } from 'mongoose';
-
-export const MODULE_STATUS = ['draft', 'published'];
+import { MODULE_ID, MODULE_MESSAGES, MODULE_STATUS } from '@mearn/shared/module';
+import { Schema, SchemaTypes as Types, model } from 'mongoose';
 
 const moduleSchema = new Schema(
   {
     moduleId: {
-      type: SchemaTypes.Number,
+      type: Types.Number,
       required: true,
       unique: true,
-      min: 1,
-      max: 10,
-      validate: { validator: Number.isInteger, message: 'moduleId muss eine ganze Zahl sein' },
+      min: MODULE_ID.min,
+      max: MODULE_ID.max,
+      validate: { validator: Number.isInteger, message: MODULE_MESSAGES.moduleIdInteger },
     },
-    title: {
-      type: SchemaTypes.String,
-      required: true,
-      trim: true,
-    },
-    description: {
-      type: SchemaTypes.String,
-      required: true,
-      trim: true,
-    },
-    status: {
-      type: SchemaTypes.String,
-      enum: MODULE_STATUS,
-      default: 'draft',
-    },
-    imageKey: {
-      type: SchemaTypes.String,
-      required: true,
-      trim: true,
-    },
-    tags: {
-      type: [SchemaTypes.String],
-      default: [],
-    },
+    title: { type: Types.String, required: true, trim: true },
+    description: { type: Types.String, required: true, trim: true },
+    status: { type: Types.String, enum: MODULE_STATUS, default: 'draft' },
+    imageKey: { type: Types.String, required: true, trim: true },
+    tags: { type: [Types.String], default: [] },
   },
-  {
-    timestamps: true,
-    //collection: 'modules'
-  },
+  { timestamps: true },
 );
 
-export const Module = model('Module', moduleSchema); // , 'modules'
+export const Module = model('Module', moduleSchema);
+
 export default Module;
