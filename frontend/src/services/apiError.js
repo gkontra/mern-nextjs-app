@@ -5,7 +5,11 @@ export const API_ERROR_CODE = {
   VALIDATION_FAILED: 'VALIDATION_FAILED',
   INVALID_CREDENTIALS: 'INVALID_CREDENTIALS',
   UNAUTHENTICATED: 'UNAUTHENTICATED',
+  FORBIDDEN: 'FORBIDDEN',
+  NOT_FOUND: 'NOT_FOUND',
   EMAIL_TAKEN: 'EMAIL_TAKEN',
+  ATTEMPT_RUNNING: 'ATTEMPT_RUNNING',
+  ATTEMPT_CLOSED: 'ATTEMPT_CLOSED',
   INTERNAL_ERROR: 'INTERNAL_ERROR',
   NETWORK_ERROR: 'NETWORK_ERROR',
   TIMEOUT: 'TIMEOUT',
@@ -22,17 +26,6 @@ export class ApiError extends Error {
   }
 }
 
-// wie es sein soll: { "id": "string", "name": "string", "email": "string", "role": "participant" }
-// wie ein Fehler zurückgegeben werden soll:
-/*
-{
-  "error": {
-    "code": "VALIDATION_FAILED",
-    "message": "Bitte prüfe deine Eingaben.",
-    "fields": { "password": "Das Passwort muss 8 bis 72 Zeichen lang sein." }
-  }
-}
-*/
 export const isRequestCanceled = (error) => axios.isCancel(error) || error?.name === 'AbortError';
 
 export const toApiError = (error) => {
@@ -70,3 +63,15 @@ export const toApiError = (error) => {
     fields: body?.fields ?? null,
   });
 };
+
+// wie es sein soll: { "id": "string", "name": "string", "email": "string", "role": "participant" }
+// wie ein Fehler zurückgegeben werden soll:
+/*
+{
+  "error": {
+    "code": "VALIDATION_FAILED",
+    "message": "Bitte prüfe deine Eingaben.",
+    "fields": { "password": "Das Passwort muss 8 bis 72 Zeichen lang sein." }
+  }
+}
+*/

@@ -3,8 +3,8 @@
 # Nach A2 die IDs von „browser-apis“ und „nextjs“ hier eintragen:
 
 @baseUrl = http://localhost:3000/api
-@domId = HIER_DOM_ID_EINTRAGEN
-@nextjsId = HIER_NEXTJS_ID_EINTRAGEN
+@domId = 6b062b890c84a3b97bb23c12
+@nextjsId = 6b062b890c84a3b97bb23c17
 
 ### A1 — Verlauf ohne Cookie → 401
 # @no-cookie-jar
@@ -19,25 +19,25 @@ Content-Type: application/json
 ### A2 — Kategorien (Browser-APIs 6 Fragen, Next.js 0)
 GET {{baseUrl}}/categories
 
-### A3 — mehr Fragen als vorhanden → 422 questionCount
+### A3 FAIL — mehr Fragen als vorhanden → 422 questionCount
 POST {{baseUrl}}/attempts
 Content-Type: application/json
 
 { "categoryIds": ["{{domId}}"], "questionCount": 30, "timeLimitSec": 600 }
 
-### A4 — Zeitlimit nicht erlaubt → 422 timeLimitSec
+### A4 FAIL - Zeitlimit nicht erlaubt → 422 timeLimitSec
 POST {{baseUrl}}/attempts
 Content-Type: application/json
 
 { "categoryIds": ["{{domId}}"], "questionCount": 5, "timeLimitSec": 420 }
 
-### A5 — leere Kategorie (Next.js, nur Entwürfe) → 422 categoryIds
+### A5 FAIL — leere Kategorie (Next.js, nur Entwürfe) → 422 categoryIds
 POST {{baseUrl}}/attempts
 Content-Type: application/json
 
 { "categoryIds": ["{{nextjsId}}"], "questionCount": 5, "timeLimitSec": 300 }
 
-### A6 — falscher Typ → 400
+### A6 FAIL —  falscher Typ → 400
 POST {{baseUrl}}/attempts
 Content-Type: application/json
 
@@ -72,7 +72,7 @@ Content-Type: application/json
   ]
 }
 
-### A11 — erfundene Antwort-ID → 422 answers
+### A11 FAIL — erfundene Antwort-ID → 422 answers
 PUT {{baseUrl}}/attempts/{{start.response.body.$.id}}/answers
 Content-Type: application/json
 
