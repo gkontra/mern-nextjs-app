@@ -1,0 +1,143 @@
+@use '../abstracts' as *;
+
+.m-quiz-result-item {
+  padding: $quiz-card-padding;
+  border-inline-start: $result-outcome-border-width solid $color-result-unanswered;
+  border-radius: $radius-card;
+  background-color: $color-surface-dark;
+
+  &.is-correct {
+    border-inline-start-color: $color-result-correct;
+  }
+
+  &.is-wrong {
+    border-inline-start-color: $color-result-wrong;
+  }
+
+  .item-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-block-end: 1rem;
+  }
+
+  .item-title {
+    margin: 0;
+    font-size: $font-size-card-title;
+  }
+
+  .item-outcome {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 0;
+    font-weight: $font-weight-bold;
+    color: $color-result-unanswered;
+  }
+
+  &.is-correct .item-outcome {
+    color: $color-result-correct;
+  }
+
+  &.is-wrong .item-outcome {
+    color: $color-result-wrong;
+  }
+
+  .item-text {
+    margin-block-end: 1rem;
+    font-size: $font-size-lead;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-lead;
+  }
+
+  .item-code {
+    margin-block: 0 1rem;
+    padding: 1rem;
+    border-radius: $radius-small;
+    background-color: $color-input-bg;
+    color: $color-text-on-dark;
+    font-family: $font-code;
+    font-size: $font-size-small;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .item-feedback {
+    margin-block-end: 1rem;
+  }
+
+  .item-removed {
+    margin: 0;
+  }
+
+  .result-answers {
+    display: grid;
+    gap: 0.625rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .result-answer {
+    padding: $answer-padding;
+    border: 1px solid $color-answer-border;
+    border-radius: $radius-small;
+    background-color: $color-answer-bg;
+
+    &.is-selected {
+      background-color: $color-answer-selected-bg;
+    }
+
+    &.is-correct {
+      border-color: $color-result-correct;
+      box-shadow: inset 0 0 0 1px $color-result-correct;
+    }
+  }
+
+  .answer-markers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block: 0.5rem 0;
+  }
+
+  .marker {
+    display: inline-flex;
+    gap: 0.375rem;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border: 1px solid $color-answer-border;
+    border-radius: $radius-pill;
+    background-color: $color-marker-bg;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+
+    &.is-correct {
+      border-color: $color-result-correct;
+      color: $color-result-correct;
+    }
+  }
+
+  .answer-explanation {
+    margin-block: 0.5rem 0;
+    font-size: $font-size-small;
+    color: $color-text-muted-on-dark;
+  }
+
+  .item-note {
+    margin-block-start: 1rem;
+    padding: 0.75rem 1rem;
+    border-inline-start: 3px solid $color-note-border;
+    background-color: $color-input-bg;
+  }
+
+  .note-title {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-block-end: 0.25rem;
+    font-weight: $font-weight-bold;
+  }
+}

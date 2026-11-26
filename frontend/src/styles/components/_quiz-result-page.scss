@@ -28,6 +28,24 @@
     }
   }
 
+  .result-details {
+    margin-block-start: 3rem;
+  }
+
+  .details-title {
+    margin-block-end: 1.5rem;
+    font-size: $font-size-card-title;
+  }
+
+  .result-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: $result-list-gap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
   .retry-button {
     @include button-secondary;
   }

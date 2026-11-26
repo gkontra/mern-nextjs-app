@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import QuizResultItem from '../components/quiz/QuizResultItem';
 import QuizSummary from '../components/quiz/QuizSummary';
 import { isRequestCanceled } from '../services/apiError';
 import { fetchAttempt } from '../services/quizService';
@@ -63,7 +64,23 @@ const QuizResultPage = () => {
             </div>
           </div>
         )}
-        {!isLoading && attempt && <QuizSummary attempt={attempt} />}
+        {!isLoading && attempt && (
+          <>
+            <QuizSummary attempt={attempt} />
+            <section className="result-details" aria-labelledby="details-title">
+              <h2 className="details-title" id="details-title">
+                Deine Antworten
+              </h2>
+              <ol className="result-list">
+                {attempt.questions.map((question, index) => (
+                  <li key={question.id}>
+                    <QuizResultItem question={question} position={index + 1} />
+                  </li>
+                ))}
+              </ol>
+            </section>
+          </>
+        )}
       </div>
     </div>
   );
