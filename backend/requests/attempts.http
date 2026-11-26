@@ -1,0 +1,138 @@
+# Quiz-Endpunkte mit der VS-Code-Extension „REST Client“ (humao.rest-client) ausprobieren.
+# Reihenfolge von oben nach unten. Das Cookie merkt sich REST Client selbst.
+# Nach A2 die IDs von „browser-apis“ und „nextjs“ hier eintragen:
+
+@baseUrl = http://localhost:3000/api
+@domId = HIER_DOM_ID_EINTRAGEN
+@nextjsId = HIER_NEXTJS_ID_EINTRAGEN
+
+### A1 — Verlauf ohne Cookie → 401
+# @no-cookie-jar
+GET {{baseUrl}}/attempts?mine=true
+
+### Login als Teilnehmer:in
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{ "email": "teilnehmer@example.com", "password": "kurs-demo-123" }
+
+### A2 — Kategorien (Browser-APIs 6 Fragen, Next.js 0)
+GET {{baseUrl}}/categories
+
+### A3 — mehr Fragen als vorhanden → 422 questionCount
+POST {{baseUrl}}/attempts
+Content-Type: application/json
+
+{ "categoryIds": ["{{domId}}"], "questionCount": 30, "timeLimitSec": 600 }
+
+### A4 — Zeitlimit nicht erlaubt → 422 timeLimitSec
+POST {{baseUrl}}/attempts
+Content-Type: application/json
+
+{ "categoryIds": ["{{domId}}"], "questionCount": 5, "timeLimitSec": 420 }
+
+### A5 — leere Kategorie (Next.js, nur Entwürfe) → 422 categoryIds
+POST {{baseUrl}}/attempts
+Content-Type: application/json
+
+{ "categoryIds": ["{{nextjsId}}"], "questionCount": 5, "timeLimitSec": 300 }
+
+### A6 — falscher Typ → 400
+POST {{baseUrl}}/attempts
+Content-Type: application/json
+
+{ "categoryIds": ["{{domId}}"], "questionCount": "5", "timeLimitSec": 300 }
+
+### A7 — gültiger Start → 201, keine Lösungen im Body
+# @name start
+POST {{baseUrl}}/attempts
+Content-Type: application/json
+
+{ "categoryIds": ["{{domId}}"], "questionCount": 5, "timeLimitSec": 300 }
+
+### A8 — zweiter Start → 409 ATTEMPT_RUNNING
+POST {{baseUrl}}/attempts
+Content-Type: application/json
+
+{ "categoryIds": ["{{domId}}"], "questionCount": 5, "timeLimitSec": 300 }
+
+### A9 — Test laden (zweimal: gleiche Fragen, gleiche Reihenfolge)
+GET {{baseUrl}}/attempts/{{start.response.body.$.id}}
+
+### A10 — eine Antwort speichern → 204, danach A9 → selectedAnswerIds gesetzt
+PUT {{baseUrl}}/attempts/{{start.response.body.$.id}}/answers
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "questionId": "{{start.response.body.$.questions[0].id}}",
+      "selectedAnswerIds": ["{{start.response.body.$.questions[0].answers[0].id}}"]
+    }
+  ]
+}
+
+### A11 — erfundene Antwort-ID → 422 answers
+PUT {{baseUrl}}/attempts/{{start.response.body.$.id}}/answers
+Content-Type: application/json
+
+{
+  "answers": [
+    { "questionId": "{{start.response.body.$.questions[0].id}}", "selectedAnswerIds": ["000000000000000000000000"] }
+  ]
+}
+
+### A12 — Login als Trainer:in, dann fremden Test laden → 403
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{ "email": "trainer@example.com", "password": "trainer-demo-123" }
+
+###
+GET {{baseUrl}}/attempts/{{start.response.body.$.id}}
+
+### wieder als Teilnehmer:in anmelden
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{ "email": "teilnehmer@example.com", "password": "kurs-demo-123" }
+
+### A13 — keine gültige ID → 404
+GET {{baseUrl}}/attempts/abc
+
+### A13 — gültige, unbekannte ID → 404
+GET {{baseUrl}}/attempts/000000000000000000000000
+
+### A14 — abgeben → 200 mit result, outcome und isCorrect
+POST {{baseUrl}}/attempts/{{start.response.body.$.id}}/submit
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "questionId": "{{start.response.body.$.questions[1].id}}",
+      "selectedAnswerIds": ["{{start.response.body.$.questions[1].answers[0].id}}"]
+    }
+  ]
+}
+
+### A15 — nochmal abgeben → 409 ATTEMPT_CLOSED
+POST {{baseUrl}}/attempts/{{start.response.body.$.id}}/submit
+Content-Type: application/json
+
+{ "answers": [] }
+
+### A16 — neuer Test mit 1 Frage
+# Danach im Terminal die Startzeit 400 s zurücksetzen (<id> aus der Antwort):
+# mongosh mearn-app --quiet --eval 'db.attempts.updateOne({ _id: ObjectId("<id>") }, { $set: { startedAt: new Date(Date.now() - 400000) } })'
+# @name expired
+POST {{baseUrl}}/attempts
+Content-Type: application/json
+
+{ "categoryIds": ["{{domId}}"], "questionCount": 1, "timeLimitSec": 300 }
+
+### A16 — laden → status "submitted", timedOut true, submittedAt = deadline
+GET {{baseUrl}}/attempts/{{expired.response.body.$.id}}
+
+### A17 — Verlauf → beide Tests, neuester zuerst, ohne questions
+GET {{baseUrl}}/attempts?mine=true
