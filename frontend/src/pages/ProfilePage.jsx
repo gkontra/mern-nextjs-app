@@ -1,4 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import AttemptHistory from '../components/quiz/AttemptHistory';
 import { ROLE_LABELS } from '../lib/roles';
 import { useAuth } from '../stores/auth';
 
@@ -35,8 +36,7 @@ const ProfilePage = () => {
           <h2 className="history-title" id="history-title">
             Testverlauf
           </h2>
-          <p>Hier erscheinen bald deine abgeschlossenen Tests.</p>
-          <Link to="/#modules">Zu den Modulen</Link>
+          <AttemptHistory />
         </section>
       </div>
     </div>

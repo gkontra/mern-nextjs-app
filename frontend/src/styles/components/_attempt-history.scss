@@ -1,0 +1,85 @@
+@use '../abstracts' as *;
+
+.m-attempt-history {
+  a {
+    font-weight: $font-weight-bold;
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .history-error,
+  .history-empty {
+    display: grid;
+    justify-items: start;
+    row-gap: 1rem;
+  }
+
+  .retry-button {
+    @include button-secondary;
+  }
+
+  .history-list {
+    display: grid;
+    gap: $history-gap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .history-item {
+    display: grid;
+    gap: 0.25rem 1.5rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid $color-answer-border;
+    border-radius: $radius-small;
+    background-color: $color-answer-bg;
+
+    @include bp-up($breakpoint-md) {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+    }
+
+    &.is-running {
+      border-color: $color-warning-on-dark;
+    }
+  }
+
+  .history-date {
+    font-size: $font-size-small;
+    color: $color-text-muted-on-dark;
+  }
+
+  .history-categories {
+    overflow-wrap: anywhere;
+
+    @include bp-up($breakpoint-md) {
+      grid-column: 1;
+    }
+  }
+
+  .history-result {
+    font-size: $font-size-lead;
+    font-weight: $font-weight-extrabold;
+
+    @include bp-up($breakpoint-md) {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+  }
+
+  .is-running .history-result {
+    color: $color-warning-on-dark;
+  }
+
+  .history-link {
+    justify-self: start;
+
+    @include bp-up($breakpoint-md) {
+      grid-column: 1 / -1;
+    }
+  }
+}
