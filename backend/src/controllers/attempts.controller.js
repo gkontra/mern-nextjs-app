@@ -1,7 +1,15 @@
-import { attemptRunning, validationFailed } from '../lib/apiError.js';
-import { onlyAvailableMessage, uniqueIds, validateSelection, validateStartAttempt } from '../lib/attemptRules.js';
-import { toRunningView } from '../lib/attemptView.js';
+import { attemptClosed, attemptRunning, validationFailed } from '../lib/apiError.js';
+import {
+  onlyAvailableMessage,
+  uniqueIds,
+  validateAnswers,
+  validateSelection,
+  validateStartAttempt,
+} from '../lib/attemptRules.js';
+import { PHASE, phaseAt } from '../lib/attemptTiming.js';
+import { toRunningView, toSubmittedView } from '../lib/attemptView.js';
 import { countPublishedByCategory, drawQuestions } from '../lib/drawQuestions.js';
+import { finalizeAttempt, loadAnswerKeys } from '../lib/finalizeAttempt.js';
 import Attempt from '../models/Attempt.js';
 import Category from '../models/Category.js';
 
@@ -58,5 +66,71 @@ export const createAttempt = async (req, res) => {
 };
 
 export const getAttempt = async (req, res) => {
-  res.json(await toRunningView(req.attempt, new Date()));
+  const { attempt } = req;
+
+  res.json(attempt.status === 'running' ? await toRunningView(attempt, new Date()) : await toSubmittedView(attempt));
+};
+
+export const saveAnswers = async (req, res) => {
+  const { attempt } = req;
+  const { answers } = req.body;
+  const now = new Date();
+
+  if (attempt.status !== 'running') {
+    throw attemptClosed();
+  }
+  if (phaseAt(attempt, now) === PHASE.closed) {
+    await finalizeAttempt(attempt, { now });
+    throw attemptClosed();
+  }
+
+  const fields = validateAnswers(answers, attempt, await loadAnswerKeys(attempt));
+
+  if (hasFields(fields)) {
+    throw validationFailed(fields);
+  }
+
+  const indexById = new Map(attempt.items.map(({ questionId }, index) => [String(questionId), index]));
+  const changes = Object.fromEntries(
+    answers.map(({ questionId, selectedAnswerIds }) => [
+      `items.${indexById.get(questionId)}.selectedAnswerIds`,
+      uniqueIds(selectedAnswerIds),
+    ]),
+  );
+
+  if (answers.length > 0) {
+    const { matchedCount } = await Attempt.updateOne({ _id: attempt._id, status: 'running' }, { $set: changes });
+
+    if (matchedCount === 0) {
+      throw attemptClosed();
+    }
+  }
+
+  res.status(204).end();
+};
+
+export const submitAttempt = async (req, res) => {
+  const { attempt } = req;
+  const now = new Date();
+
+  if (attempt.status !== 'running') {
+    throw attemptClosed();
+  }
+
+  const isClosed = phaseAt(attempt, now) === PHASE.closed;
+  const answerKeys = await loadAnswerKeys(attempt);
+  const answers = isClosed ? [] : req.body.answers;
+  const fields = validateAnswers(answers, attempt, answerKeys);
+
+  if (hasFields(fields)) {
+    throw validationFailed(fields);
+  }
+
+  const submitted = await finalizeAttempt(attempt, { answers, answerKeys, now });
+
+  if (!submitted) {
+    throw attemptClosed();
+  }
+
+  res.json(await toSubmittedView(submitted));
 };

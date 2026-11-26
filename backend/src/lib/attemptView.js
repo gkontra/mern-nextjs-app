@@ -1,7 +1,13 @@
 import Category from '../models/Category.js';
 import Question from '../models/Question.js';
-import { deadlineOf } from './attemptTiming.js';
+import { deadlineOf, durationSecOf } from './attemptTiming.js';
 import { sanitizeHtml } from './sanitizeHtml.js';
+
+const OUTCOME = new Map([
+  [true, 'correct'],
+  [false, 'wrong'],
+  [null, 'unanswered'],
+]);
 
 const byId = (docs) => new Map(docs.map((doc) => [String(doc._id), doc]));
 
@@ -55,6 +61,43 @@ const toRunningQuestion = (item, question) => {
   };
 };
 
+const toSubmittedQuestion = (item, question) => {
+  const selectedAnswerIds = item.selectedAnswerIds.map(String);
+
+  if (!question) {
+    return { id: String(item.questionId), removed: true, outcome: OUTCOME.get(null), selectedAnswerIds };
+  }
+
+  return {
+    ...toQuestionBase(question),
+    outcome: OUTCOME.get(item.isCorrect ?? null),
+    selectedAnswerIds,
+    successMessage: question.successMessage,
+    errorMessage: question.errorMessage,
+    note: sanitizeHtml(question.note),
+    answers: inStoredOrder(question.answers, item.answerOrder).map(({ _id, text, isCorrect, explanation }) => ({
+      id: String(_id),
+      text: sanitizeHtml(text),
+      isCorrect,
+      explanation,
+    })),
+  };
+};
+
+export const toHistoryItem = (attempt, categoriesById) => ({
+  ...toBase(attempt, categoriesById),
+  submittedAt: attempt.submittedAt ?? null,
+  durationSec: durationSecOf(attempt),
+  timedOut: attempt.timedOut,
+  result: attempt.result ?? null,
+});
+
+export const toHistory = async (attempts) => {
+  const categoriesById = await loadCategories(attempts);
+
+  return attempts.map((attempt) => toHistoryItem(attempt, categoriesById));
+};
+
 export const toRunningView = async (attempt, now) => {
   const [categoriesById, questionsById] = await Promise.all([loadCategories([attempt]), loadQuestions(attempt)]);
 
@@ -62,5 +105,14 @@ export const toRunningView = async (attempt, now) => {
     ...toBase(attempt, categoriesById),
     serverNow: now,
     questions: attempt.items.map((item) => toRunningQuestion(item, questionsById.get(String(item.questionId)))),
+  };
+};
+
+export const toSubmittedView = async (attempt) => {
+  const [categoriesById, questionsById] = await Promise.all([loadCategories([attempt]), loadQuestions(attempt)]);
+
+  return {
+    ...toHistoryItem(attempt, categoriesById),
+    questions: attempt.items.map((item) => toSubmittedQuestion(item, questionsById.get(String(item.questionId)))),
   };
 };
