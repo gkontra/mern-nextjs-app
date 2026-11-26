@@ -1,9 +1,11 @@
-import { useEffect, useRef } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { FaCircleExclamation } from 'react-icons/fa6';
+import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom';
 import QuizProgress from '../components/quiz/QuizProgress';
 import QuizQuestion from '../components/quiz/QuizQuestion';
 import { QUIZ_STATUS } from '../hooks/quizAttemptReducer';
 import useQuizAttempt from '../hooks/useQuizAttempt';
+import { countUnanswered, formatQuestionCount } from '../lib/quizRules';
 
 const toPosition = (value, total) => {
   const position = Number.parseInt(value ?? '', 10);
@@ -14,11 +16,18 @@ const toPosition = (value, total) => {
 const QuizAttemptPage = () => {
   const { attemptId } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { status, attempt, answers, unsavedIds, error, select, reload } = useQuizAttempt(attemptId);
+  const { status, attempt, answers, unsavedIds, error, submitError, select, submit, reload } =
+    useQuizAttempt(attemptId);
+  const [isConfirming, setIsConfirming] = useState(false);
   const headingRef = useRef(null);
+  const confirmRef = useRef(null);
+  const submitRef = useRef(null);
   const previousPosition = useRef(null);
+  const wasConfirming = useRef(false);
   const questions = attempt?.questions ?? [];
   const position = questions.length > 0 ? toPosition(searchParams.get('frage'), questions.length) : null;
+  const unanswered = countUnanswered(questions, answers);
+  const isSubmitting = status === QUIZ_STATUS.SUBMITTING;
 
   useEffect(() => {
     if (previousPosition.current !== null && previousPosition.current !== position) {
@@ -27,7 +36,30 @@ const QuizAttemptPage = () => {
     previousPosition.current = position;
   }, [position]);
 
+  useEffect(() => {
+    if (isConfirming) {
+      confirmRef.current?.focus();
+    } else if (wasConfirming.current) {
+      submitRef.current?.focus();
+    }
+    wasConfirming.current = isConfirming;
+  }, [isConfirming]);
+
+  if (status === QUIZ_STATUS.SUBMITTED) {
+    return <Navigate to={`/quiz/${attemptId}/result`} replace />;
+  }
+
   const goTo = (next) => setSearchParams({ frage: String(next) });
+
+  const handleSubmitClick = () => {
+    if (unanswered > 0) {
+      setIsConfirming(true);
+      return;
+    }
+    submit();
+  };
+
+  const cancelConfirm = () => setIsConfirming(false);
 
   const question = position ? questions[position - 1] : null;
 
@@ -83,6 +115,38 @@ const QuizAttemptPage = () => {
               </p>
             )}
             <QuizProgress questions={questions} answers={answers} current={position} onSelect={goTo} />
+            <div className="attempt-submit">
+              {submitError && (
+                <div className="attempt-alert" role="alert">
+                  <FaCircleExclamation aria-hidden="true" focusable="false" />
+                  <p>{submitError}</p>
+                </div>
+              )}
+              {isConfirming && unanswered > 0 ? (
+                <div className="submit-confirm">
+                  <p className="confirm-text" tabIndex={-1} ref={confirmRef}>
+                    Du hast {formatQuestionCount(unanswered)} nicht beantwortet. Trotzdem abgeben?
+                  </p>
+                  <div className="attempt-actions">
+                    <button className="primary-button" type="button" disabled={isSubmitting} onClick={submit}>
+                      {isSubmitting ? 'Wird abgegeben …' : 'Ja, abgeben'}
+                    </button>
+                    <button className="secondary-button" type="button" onClick={cancelConfirm}>
+                      Weiter beantworten
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  className="primary-button"
+                  type="button"
+                  ref={submitRef}
+                  disabled={isSubmitting}
+                  onClick={handleSubmitClick}>
+                  {isSubmitting ? 'Wird abgegeben …' : 'Test abgeben'}
+                </button>
+              )}
+            </div>
           </>
         )}
       </div>

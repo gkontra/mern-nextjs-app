@@ -45,9 +45,11 @@
 @forward 'markdown-content';
 @forward 'nav-drowdown';
 
+@forward 'richt-text';
 @forward 'quiz-setup-form';
 @forward 'quiz-setup-page';
-@forward 'richt-text';
-@forward 'quiz-question';
 @forward 'quiz-attempt-page';
+@forward 'quiz-question';
 @forward 'quiz-progress';
+@forward 'quiz-result-page';
+@forward 'quiz-summary';

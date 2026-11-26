@@ -13,6 +13,7 @@ import ProtectedRoute from '../components/routes/ProtectedRoute';
 import ModuleDetailPage from '../pages/ModuleDetailPage';
 import QuizSetupPage from '../pages/QuizSetupPage';
 import QuizAttemptPage from '../pages/QuizAttemptPage';
+import QuizResultPage from '../pages/QuizResultPage';
 
 const ContentPage = lazy(() => import('../pages/ContentPage')); // code splitting
 
@@ -41,6 +42,7 @@ const Router = () => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/quiz" element={<QuizSetupPage />} />
         <Route path="/quiz/:attemptId" element={<QuizAttemptPage />} />
+        <Route path="/quiz/:attemptId/result" element={<QuizResultPage />} />
       </Route>
 
       <Route path="/login" element={<LoginPage />} />

@@ -1,0 +1,52 @@
+@use '../abstracts' as *;
+
+.m-quiz-summary {
+  padding: $quiz-card-padding;
+  border-radius: $radius-card;
+  background-color: $color-surface-dark;
+
+  .summary-title {
+    font-size: $font-size-card-title;
+  }
+
+  .summary-score {
+    margin-block-end: 0.75rem;
+    font-size: clamp(1.75rem, 1.25rem + 2vw, 2.5rem);
+    font-weight: $font-weight-extrabold;
+    line-height: $line-height-card-title;
+  }
+
+  .summary-counts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin-block-end: 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .summary-timeout {
+    font-weight: $font-weight-bold;
+    color: $color-warning-on-dark;
+  }
+
+  .summary-categories {
+    color: $color-text-muted-on-dark;
+  }
+
+  .summary-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-block-start: 1.5rem;
+  }
+
+  .summary-link {
+    @include button-secondary;
+    display: inline-block;
+
+    &.is-primary {
+      @include button-primary;
+    }
+  }
+}
