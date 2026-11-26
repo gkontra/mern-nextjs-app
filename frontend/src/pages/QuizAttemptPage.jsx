@@ -3,7 +3,9 @@ import { FaCircleExclamation } from 'react-icons/fa6';
 import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom';
 import QuizProgress from '../components/quiz/QuizProgress';
 import QuizQuestion from '../components/quiz/QuizQuestion';
+import QuizTimer from '../components/quiz/QuizTimer';
 import { QUIZ_STATUS } from '../hooks/quizAttemptReducer';
+import useCountdown from '../hooks/useCountdown';
 import useQuizAttempt from '../hooks/useQuizAttempt';
 import { countUnanswered, formatQuestionCount } from '../lib/quizRules';
 
@@ -16,18 +18,21 @@ const toPosition = (value, total) => {
 const QuizAttemptPage = () => {
   const { attemptId } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { status, attempt, answers, unsavedIds, error, submitError, select, submit, reload } =
+  const { status, attempt, clockOffsetMs, answers, unsavedIds, error, submitError, select, submit, reload } =
     useQuizAttempt(attemptId);
+  const remainingMs = useCountdown(attempt?.deadline, clockOffsetMs);
   const [isConfirming, setIsConfirming] = useState(false);
   const headingRef = useRef(null);
   const confirmRef = useRef(null);
   const submitRef = useRef(null);
   const previousPosition = useRef(null);
   const wasConfirming = useRef(false);
+  const hasAutoSubmitted = useRef(false);
   const questions = attempt?.questions ?? [];
   const position = questions.length > 0 ? toPosition(searchParams.get('frage'), questions.length) : null;
   const unanswered = countUnanswered(questions, answers);
   const isSubmitting = status === QUIZ_STATUS.SUBMITTING;
+  const isTimeUp = remainingMs !== null && remainingMs <= 0;
 
   useEffect(() => {
     if (previousPosition.current !== null && previousPosition.current !== position) {
@@ -44,6 +49,13 @@ const QuizAttemptPage = () => {
     }
     wasConfirming.current = isConfirming;
   }, [isConfirming]);
+
+  useEffect(() => {
+    if (isTimeUp && status === QUIZ_STATUS.READY && !hasAutoSubmitted.current) {
+      hasAutoSubmitted.current = true;
+      submit();
+    }
+  }, [isTimeUp, status, submit]);
 
   if (status === QUIZ_STATUS.SUBMITTED) {
     return <Navigate to={`/quiz/${attemptId}/result`} replace />;
@@ -68,8 +80,11 @@ const QuizAttemptPage = () => {
       <title>Test · JS-Kurs</title>
       <div className="container">
         <header className="attempt-header">
-          <h1 className="attempt-title">Dein Test</h1>
-          {attempt && <p className="attempt-categories">{attempt.categories.map(({ name }) => name).join(' · ')}</p>}
+          <div className="attempt-heading">
+            <h1 className="attempt-title">Dein Test</h1>
+            {attempt && <p className="attempt-categories">{attempt.categories.map(({ name }) => name).join(' · ')}</p>}
+          </div>
+          <QuizTimer remainingMs={remainingMs} timeLimitSec={attempt?.timeLimitSec ?? 0} />
         </header>
         {status === QUIZ_STATUS.LOADING && <p role="status">Test wird geladen …</p>}
         {status === QUIZ_STATUS.ERROR && (

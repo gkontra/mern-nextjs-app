@@ -1,0 +1,58 @@
+@use '../abstracts' as *;
+
+.m-quiz-timer {
+  display: grid;
+  justify-items: end;
+  row-gap: 0.375rem;
+
+  .timer-clock {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    border: 2px solid $color-timer-border;
+    border-radius: $radius-pill;
+    background-color: $color-timer-bg;
+  }
+
+  .timer-icon {
+    color: $color-text-muted-on-dark;
+  }
+
+  .timer-label {
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    letter-spacing: $letter-spacing-label;
+    text-transform: uppercase;
+    color: $color-text-muted-on-dark;
+  }
+
+  .timer-value {
+    font-family: $font-code;
+    font-size: $font-size-timer;
+    font-weight: $font-weight-bold;
+    font-variant-numeric: tabular-nums;
+    line-height: $line-height-display;
+  }
+
+  .timer-warning {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 0;
+    font-weight: $font-weight-bold;
+    color: $color-timer-warning;
+  }
+
+  &.is-warning {
+    .timer-clock {
+      border-color: $color-timer-warning;
+    }
+
+    .timer-icon,
+    .timer-value {
+      color: $color-timer-warning;
+    }
+  }
+}
