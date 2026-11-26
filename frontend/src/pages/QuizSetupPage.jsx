@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import QuizSetupForm from '../components/quiz/QuizSetupForm';
+import QuizSetupForm from '../components/forms/QuizSetupForm';
 import { formatDuration } from '../lib/formatDuration';
 import { secondsUntilDeadline } from '../lib/quizRules';
 import { API_ERROR_CODE, isRequestCanceled } from '../services/apiError';
