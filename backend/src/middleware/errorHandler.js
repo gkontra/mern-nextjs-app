@@ -1,12 +1,5 @@
-import {
-  ApiError,
-  ERROR_CODE,
-  INTERNAL_ERROR_MESSAGE,
-  attemptRunning,
-  badRequest,
-  emailTaken,
-  toErrorBody,
-} from '../lib/apiError.js';
+import { ERROR_CODE, ERROR_MESSAGES } from '@mearn/shared/errors';
+import { ApiError, attemptRunning, badRequest, emailTaken, toErrorBody } from '../lib/apiError.js';
 
 const BODY_PARSER_ERRORS = ['entity.parse.failed', 'entity.too.large', 'encoding.unsupported', 'charset.unsupported'];
 
@@ -42,7 +35,7 @@ export const errorHandler = (error, req, res, next) => {
   }
 
   console.error(error);
-  res.status(500).json(toErrorBody({ code: ERROR_CODE.INTERNAL_ERROR, message: INTERNAL_ERROR_MESSAGE }));
+  res.status(500).json(toErrorBody({ code: ERROR_CODE.INTERNAL_ERROR, message: ERROR_MESSAGES.INTERNAL_ERROR }));
 };
 
 export default errorHandler;

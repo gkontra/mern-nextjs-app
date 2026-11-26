@@ -1,10 +1,10 @@
+import { validateLogin, validateRegistration } from '@mearn/shared/auth';
+import { ERROR_MESSAGES } from '@mearn/shared/errors';
 import { API_ERROR_CODE, ApiError } from '../apiError';
 
 const SESSION_KEY = 'mearn:mock-auth:session';
 const USERS_KEY = 'mearn:mock-auth:users';
 export const SERVER_ERROR_EMAIL = 'server-fehler@example.com';
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PASSWORD_BLOCKLIST = ['passwort', 'password', '12345678', 'passwort1', 'qwertz123'];
 
 export const DEMO_ACCOUNTS = [
   {
@@ -23,8 +23,8 @@ export const DEMO_ACCOUNTS = [
   },
 ];
 
-const fail = (status, code, message, fields) => {
-  throw new ApiError({ status, code, message, fields: fields ?? null });
+const fail = (status, code, fields = null) => {
+  throw new ApiError({ status, code, message: ERROR_MESSAGES[code], fields });
 };
 
 const abortError = () => new DOMException('Die Anfrage wurde abgebrochen.', 'AbortError');
@@ -66,56 +66,20 @@ const startSession = (account) => {
 
 const failOnServerErrorEmail = (email) => {
   if (email === SERVER_ERROR_EMAIL) {
-    fail(
-      500,
-      API_ERROR_CODE.INTERNAL_ERROR,
-      'Auf dem Server ist ein Fehler aufgetreten. Bitte versuche es später erneut.',
-    );
+    fail(500, API_ERROR_CODE.INTERNAL_ERROR);
   }
 };
 
 const requireStrings = (body, keys) => {
   if (keys.some((key) => typeof body?.[key] !== 'string')) {
-    fail(400, API_ERROR_CODE.BAD_REQUEST, 'Die Anfrage ist ungültig.');
+    fail(400, API_ERROR_CODE.BAD_REQUEST);
   }
 };
 
 const failIfInvalid = (fields) => {
   if (Object.keys(fields).length > 0) {
-    fail(422, API_ERROR_CODE.VALIDATION_FAILED, 'Bitte prüfe deine Eingaben.', fields);
+    fail(422, API_ERROR_CODE.VALIDATION_FAILED, fields);
   }
-};
-
-const validateRegistration = ({ name, email, password }) => {
-  const fields = {};
-  const trimmedName = name.trim();
-
-  if (trimmedName.length < 2 || trimmedName.length > 50) {
-    fields.name = 'Der Name muss 2 bis 50 Zeichen lang sein.';
-  }
-  if (!EMAIL_PATTERN.test(email)) {
-    fields.email = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-  }
-  if (password.length < 8 || password.length > 72) {
-    fields.password = 'Das Passwort muss 8 bis 72 Zeichen lang sein.';
-  } else if (PASSWORD_BLOCKLIST.includes(password.toLowerCase())) {
-    fields.password = 'Dieses Passwort ist zu leicht zu erraten.';
-  }
-
-  failIfInvalid(fields);
-};
-
-const validateLogin = ({ email, password }) => {
-  const fields = {};
-
-  if (!EMAIL_PATTERN.test(email)) {
-    fields.email = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-  }
-  if (password.length === 0) {
-    fields.password = 'Bitte gib dein Passwort ein.';
-  }
-
-  failIfInvalid(fields);
 };
 
 export const register = async (body) => {
@@ -124,10 +88,10 @@ export const register = async (body) => {
 
   const email = body.email.trim().toLowerCase();
   failOnServerErrorEmail(email);
-  validateRegistration({ ...body, email });
+  failIfInvalid(validateRegistration({ ...body, email }));
 
   if (readUsers().some((account) => account.email === email)) {
-    fail(409, API_ERROR_CODE.EMAIL_TAKEN, 'Diese E-Mail-Adresse ist bereits registriert.');
+    fail(409, API_ERROR_CODE.EMAIL_TAKEN);
   }
 
   const account = {
@@ -149,12 +113,12 @@ export const login = async (body) => {
   const email = body.email.trim().toLowerCase();
   failOnServerErrorEmail(email);
 
-  validateLogin({ email, password: body.password });
+  failIfInvalid(validateLogin({ email, password: body.password }));
 
   const account = readUsers().find((item) => item.email === email && item.password === body.password);
 
   if (!account) {
-    fail(401, API_ERROR_CODE.INVALID_CREDENTIALS, 'E-Mail oder Passwort ist falsch.');
+    fail(401, API_ERROR_CODE.INVALID_CREDENTIALS);
   }
 
   return startSession(account);
@@ -172,7 +136,7 @@ export const fetchMe = async ({ signal } = {}) => {
   const account = readUsers().find((item) => item.id === userId);
 
   if (!account) {
-    fail(401, API_ERROR_CODE.UNAUTHENTICATED, 'Bitte melde dich an.');
+    fail(401, API_ERROR_CODE.UNAUTHENTICATED);
   }
 
   return toPublicUser(account);

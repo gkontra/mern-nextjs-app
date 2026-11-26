@@ -1,15 +1,4 @@
-export const ERROR_CODE = {
-  BAD_REQUEST: 'BAD_REQUEST',
-  VALIDATION_FAILED: 'VALIDATION_FAILED',
-  INVALID_CREDENTIALS: 'INVALID_CREDENTIALS',
-  UNAUTHENTICATED: 'UNAUTHENTICATED',
-  FORBIDDEN: 'FORBIDDEN',
-  NOT_FOUND: 'NOT_FOUND',
-  EMAIL_TAKEN: 'EMAIL_TAKEN',
-  ATTEMPT_RUNNING: 'ATTEMPT_RUNNING',
-  ATTEMPT_CLOSED: 'ATTEMPT_CLOSED',
-  INTERNAL_ERROR: 'INTERNAL_ERROR',
-};
+import { ERROR_CODE, ERROR_MESSAGES } from '@mearn/shared/errors';
 
 export class ApiError extends Error {
   constructor(status, code, message, fields = null) {
@@ -21,33 +10,25 @@ export class ApiError extends Error {
   }
 }
 
-export const INTERNAL_ERROR_MESSAGE = 'Auf dem Server ist ein Fehler aufgetreten. Bitte versuche es später erneut.';
-
-export const badRequest = () => new ApiError(400, ERROR_CODE.BAD_REQUEST, 'Die Anfrage ist ungültig.');
+export const badRequest = () => new ApiError(400, ERROR_CODE.BAD_REQUEST, ERROR_MESSAGES.BAD_REQUEST);
 
 export const validationFailed = (fields) =>
-  new ApiError(422, ERROR_CODE.VALIDATION_FAILED, 'Bitte prüfe deine Eingaben.', fields);
+  new ApiError(422, ERROR_CODE.VALIDATION_FAILED, ERROR_MESSAGES.VALIDATION_FAILED, fields);
 
 export const invalidCredentials = () =>
-  new ApiError(401, ERROR_CODE.INVALID_CREDENTIALS, 'E-Mail oder Passwort ist falsch.');
+  new ApiError(401, ERROR_CODE.INVALID_CREDENTIALS, ERROR_MESSAGES.INVALID_CREDENTIALS);
 
-export const unauthenticated = () => new ApiError(401, ERROR_CODE.UNAUTHENTICATED, 'Bitte melde dich an.');
+export const unauthenticated = () => new ApiError(401, ERROR_CODE.UNAUTHENTICATED, ERROR_MESSAGES.UNAUTHENTICATED);
 
-export const forbidden = () => new ApiError(403, ERROR_CODE.FORBIDDEN, 'Dieser Test gehört zu einem anderen Konto.');
+export const forbidden = () => new ApiError(403, ERROR_CODE.FORBIDDEN, ERROR_MESSAGES.FORBIDDEN);
 
 export const notFound = (message) => new ApiError(404, ERROR_CODE.NOT_FOUND, message);
 
-export const emailTaken = () =>
-  new ApiError(409, ERROR_CODE.EMAIL_TAKEN, 'Diese E-Mail-Adresse ist bereits registriert.');
+export const emailTaken = () => new ApiError(409, ERROR_CODE.EMAIL_TAKEN, ERROR_MESSAGES.EMAIL_TAKEN);
 
-export const attemptRunning = () =>
-  new ApiError(
-    409,
-    ERROR_CODE.ATTEMPT_RUNNING,
-    'Du hast bereits einen laufenden Test. Setze ihn fort oder gib ihn ab.',
-  );
+export const attemptRunning = () => new ApiError(409, ERROR_CODE.ATTEMPT_RUNNING, ERROR_MESSAGES.ATTEMPT_RUNNING);
 
-export const attemptClosed = () => new ApiError(409, ERROR_CODE.ATTEMPT_CLOSED, 'Dieser Test ist bereits abgegeben.');
+export const attemptClosed = () => new ApiError(409, ERROR_CODE.ATTEMPT_CLOSED, ERROR_MESSAGES.ATTEMPT_CLOSED);
 
 export const toErrorBody = ({ code, message, fields }) => ({
   error: fields ? { code, message, fields } : { code, message },
