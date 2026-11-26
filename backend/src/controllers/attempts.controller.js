@@ -1,5 +1,6 @@
-import { attemptClosed, attemptRunning, validationFailed } from '../lib/apiError.js';
+import { attemptClosed, attemptRunning, badRequest, validationFailed } from '../lib/apiError.js';
 import {
+  HISTORY_LIMIT,
   onlyAvailableMessage,
   uniqueIds,
   validateAnswers,
@@ -7,9 +8,9 @@ import {
   validateStartAttempt,
 } from '../lib/attemptRules.js';
 import { PHASE, phaseAt } from '../lib/attemptTiming.js';
-import { toRunningView, toSubmittedView } from '../lib/attemptView.js';
+import { toHistory, toRunningView, toSubmittedView } from '../lib/attemptView.js';
 import { countPublishedByCategory, drawQuestions } from '../lib/drawQuestions.js';
-import { finalizeAttempt, loadAnswerKeys } from '../lib/finalizeAttempt.js';
+import { finalizeAttempt, loadAnswerKeys, settleIfExpired } from '../lib/finalizeAttempt.js';
 import Attempt from '../models/Attempt.js';
 import Category from '../models/Category.js';
 
@@ -41,8 +42,9 @@ const checkStartRules = async (body, categoryIds) => {
 export const createAttempt = async (req, res) => {
   const { userId } = req.auth;
   const now = new Date();
+  const running = await findRunning(userId);
 
-  if (await findRunning(userId)) {
+  if (running && (await settleIfExpired(running, now)).status === 'running') {
     throw attemptRunning();
   }
 
@@ -65,10 +67,28 @@ export const createAttempt = async (req, res) => {
   res.status(201).json(await toRunningView(attempt.toObject(), now));
 };
 
-export const getAttempt = async (req, res) => {
-  const { attempt } = req;
+export const listMine = async (req, res) => {
+  if (req.query.mine !== 'true') {
+    throw badRequest();
+  }
 
-  res.json(attempt.status === 'running' ? await toRunningView(attempt, new Date()) : await toSubmittedView(attempt));
+  const { userId } = req.auth;
+  const running = await findRunning(userId);
+
+  if (running) {
+    await settleIfExpired(running, new Date());
+  }
+
+  const attempts = await Attempt.find({ userId }).sort({ startedAt: -1 }).limit(HISTORY_LIMIT).lean();
+
+  res.json(await toHistory(attempts));
+};
+
+export const getAttempt = async (req, res) => {
+  const now = new Date();
+  const attempt = await settleIfExpired(req.attempt, now);
+
+  res.json(attempt.status === 'running' ? await toRunningView(attempt, now) : await toSubmittedView(attempt));
 };
 
 export const saveAnswers = async (req, res) => {

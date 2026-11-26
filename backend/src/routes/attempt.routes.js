@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createAttempt, getAttempt, saveAnswers, submitAttempt } from '../controllers/attempts.controller.js';
+import { createAttempt, getAttempt, listMine, saveAnswers, submitAttempt } from '../controllers/attempts.controller.js';
 import loadOwnAttempt from '../middleware/loadOwnAttempt.js';
 import requireAuth from '../middleware/requireAuth.js';
 import requireJson from '../middleware/requireJson.js';
@@ -10,6 +10,7 @@ export const attemptsRouter = Router();
 attemptsRouter.use(requireAuth);
 
 attemptsRouter.post('/', requireJson, requireAttemptBody, createAttempt);
+attemptsRouter.get('/', listMine);
 attemptsRouter.get('/:id', loadOwnAttempt, getAttempt);
 attemptsRouter.put('/:id/answers', requireJson, requireAnswersBody, loadOwnAttempt, saveAnswers);
 attemptsRouter.post('/:id/submit', requireJson, requireAnswersBody, loadOwnAttempt, submitAttempt);
