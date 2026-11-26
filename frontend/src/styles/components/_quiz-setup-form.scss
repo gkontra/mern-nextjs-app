@@ -1,0 +1,86 @@
+@use '../abstracts' as *;
+
+.m-quiz-setup-form {
+  display: grid;
+  row-gap: 2rem;
+  padding: $quiz-card-padding;
+  border-radius: $radius-card;
+  background-color: $color-surface-dark;
+
+  .setup-alert {
+    @include alert-box;
+  }
+
+  .setup-group {
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    &.has-error {
+      padding-inline-start: 1rem;
+      border-inline-start: 3px solid $color-error-on-dark;
+    }
+  }
+
+  .group-legend {
+    margin-block-end: 0.75rem;
+    font-size: $font-size-lead;
+    font-weight: $font-weight-bold;
+  }
+
+  .category-list {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include bp-up($breakpoint-md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .option {
+    @include option-row;
+    block-size: 100%;
+  }
+
+  .option-name {
+    flex: 1;
+    min-inline-size: 0;
+    font-weight: $font-weight-medium;
+  }
+
+  .option-meta {
+    flex-shrink: 0;
+    font-size: $font-size-small;
+    color: $color-text-muted-on-dark;
+  }
+
+  .time-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .field-error {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    margin: 0.75rem 0 0;
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    color: $color-error-on-dark;
+
+    svg {
+      flex-shrink: 0;
+      margin-block-start: 0.2em;
+    }
+  }
+
+  .setup-submit {
+    @include button-primary;
+    justify-self: start;
+  }
+}
