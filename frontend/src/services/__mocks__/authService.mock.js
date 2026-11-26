@@ -1,4 +1,4 @@
-import { API_ERROR_CODE, ApiError } from './apiError';
+import { API_ERROR_CODE, ApiError } from '../apiError';
 
 const SESSION_KEY = 'mearn:mock-auth:session';
 const USERS_KEY = 'mearn:mock-auth:users';

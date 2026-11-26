@@ -1,9 +1,8 @@
 import api from './api';
 import { API_ERROR_CODE, ApiError, isRequestCanceled, toApiError } from './apiError';
+import { IS_MOCK_API } from '../lib/isMockApi.js';
 
-const IS_MOCK_API = import.meta.env.VITE_USE_MOCK_API === 'true';
-
-const loadMock = () => import('./modulesService.mock.js');
+const loadMock = () => import('./__mocks__/modulesService.mock.js');
 
 export const fetchModules = async ({ signal } = {}) => {
   if (IS_MOCK_API) {

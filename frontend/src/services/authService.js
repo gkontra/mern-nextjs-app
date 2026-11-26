@@ -1,10 +1,9 @@
 import api from './api';
 import { API_ERROR_CODE, ApiError, isRequestCanceled, toApiError } from './apiError';
-
-const IS_MOCK_API = import.meta.env.VITE_USE_MOCK_API === 'true';
+import { IS_MOCK_API } from '../lib/isMockApi.js';
 
 // dynamic import
-const loadMock = () => import('./authService.mock.js');
+const loadMock = () => import('./__mocks__/authService.mock.js');
 
 const send = async (request) => {
   try {

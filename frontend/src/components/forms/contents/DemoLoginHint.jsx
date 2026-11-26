@@ -1,7 +1,7 @@
 import { ROLE_LABELS } from '../../../lib/roles';
-import { DEMO_ACCOUNTS, SERVER_ERROR_EMAIL } from '../../../services/authService.mock';
+import { DEMO_ACCOUNTS, SERVER_ERROR_EMAIL } from '../../../services/__mocks__/authService.mock';
 
-const IS_MOCK_API = import.meta.env.VITE_USE_MOCK_API === 'true';
+import { IS_MOCK_API } from '../../../lib/isMockApi';
 
 const DemoLoginHint = () => {
   return (

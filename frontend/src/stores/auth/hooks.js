@@ -48,5 +48,5 @@ export const useAuth = () => {
     dispatch({ type: AUTH_ACTION.LOGOUT });
   }, [dispatch]);
 
-  return { user, isAuthenticated: user !== null, status, error, login, register, logout };
+  return { user, isAuthenticated: !(user === null || user === undefined), status, error, login, register, logout };
 };
