@@ -10,7 +10,7 @@ import AuthProvider from './stores/auth/AuthStore';
 import DemoModeStatusBar from './components/ui/DemoModeStatusBar';
 
 const PATHS_WITHOUT_HEADER = ['/', '/login', '/register', '/profile'];
-const SECTIONS_WITHOUT_HEADER = ['/inhalte', '/docs'];
+const SECTIONS_WITHOUT_HEADER = ['/inhalte', '/docs', '/quiz'];
 
 const isInSection = (pathname, section) => pathname === section || pathname.startsWith(`${section}/`);
 

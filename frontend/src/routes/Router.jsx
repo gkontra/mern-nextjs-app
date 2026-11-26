@@ -11,6 +11,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 
 import ProtectedRoute from '../components/routes/ProtectedRoute';
 import ModuleDetailPage from '../pages/ModuleDetailPage';
+import QuizSetupPage from '../pages/QuizSetupPage';
 
 const ContentPage = lazy(() => import('../pages/ContentPage')); // code splitting
 
@@ -37,7 +38,7 @@ const Router = () => {
 
       <Route element={<ProtectedRoute />}>
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/quiz" element={<h2>Quiz</h2>} />
+        <Route path="/quiz" element={<QuizSetupPage />} />
       </Route>
 
       <Route path="/login" element={<LoginPage />} />

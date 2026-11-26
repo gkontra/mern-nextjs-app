@@ -60,6 +60,11 @@ const NavMain = (props) => {
                 Module
               </Link>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/quiz">
+                Quiz
+              </NavLink>
+            </li>
             <NavDropdown id="nav-content-menu" label="Inhalte" items={CONTENT_LINKS} />
             <li className="nav-item">
               <NavLink className="nav-link" to="/contact">

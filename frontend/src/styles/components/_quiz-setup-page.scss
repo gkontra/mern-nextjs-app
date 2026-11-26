@@ -1,0 +1,49 @@
+@use '../abstracts' as *;
+
+.page-quiz-setup {
+  @include quiz-page;
+
+  .setup-title {
+    margin-block-end: 1rem;
+    font-size: $font-size-section;
+    line-height: $line-height-display;
+    letter-spacing: $letter-spacing-display;
+  }
+
+  .setup-intro {
+    margin-block-end: 2rem;
+    font-size: $font-size-lead;
+    color: $color-text-muted-on-dark;
+  }
+
+  .setup-running {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    align-items: center;
+    margin-block-end: 2rem;
+    padding: 1rem 1.25rem;
+    border: 2px solid $color-warning-on-dark;
+    border-radius: $radius-small;
+
+    p {
+      margin: 0;
+    }
+
+    a {
+      font-weight: $font-weight-bold;
+      text-decoration: underline;
+      text-underline-offset: 0.3em;
+    }
+  }
+
+  .setup-error {
+    display: grid;
+    justify-items: start;
+    row-gap: 1rem;
+  }
+
+  .retry-button {
+    @include button-secondary;
+  }
+}
