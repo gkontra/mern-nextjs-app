@@ -7,6 +7,7 @@ import Router from './routes/Router';
 import ScrollToTop from './components/routes/ScrollToTop';
 import ModulesProvider from './stores/modules/ModulesStore';
 import AuthProvider from './stores/auth/AuthStore';
+import DemoModeStatusBar from './components/ui/DemoModeStatusBar';
 
 const PATHS_WITHOUT_HEADER = ['/', '/login', '/register', '/profile'];
 const SECTIONS_WITHOUT_HEADER = ['/inhalte', '/docs'];
@@ -22,6 +23,7 @@ function App() {
   return (
     <AuthProvider>
       <ModulesProvider>
+        <DemoModeStatusBar />
         <ScrollToTop />
         {hasHeader && <HeaderMain />}
         <NavMain overlay={isHome} />
