@@ -1,0 +1,83 @@
+@use '../abstracts' as *;
+
+.page-quiz-attempt {
+  @include quiz-page;
+
+  .attempt-header {
+    margin-block-end: 2rem;
+  }
+
+  .attempt-title {
+    margin-block-end: 0.5rem;
+    font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+    line-height: $line-height-display;
+    letter-spacing: $letter-spacing-display;
+  }
+
+  .attempt-categories {
+    margin: 0;
+    color: $color-text-muted-on-dark;
+  }
+
+  .attempt-steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-block-start: 1.5rem;
+  }
+
+  .attempt-unsaved {
+    margin-block: 1rem 0;
+    color: $color-warning-on-dark;
+  }
+
+  .attempt-submit {
+    display: grid;
+    justify-items: start;
+    row-gap: 1rem;
+    padding-block-start: 2rem;
+    border-block-start: 1px solid $color-answer-border;
+  }
+
+  .attempt-alert {
+    @include alert-box;
+  }
+
+  .submit-confirm {
+    padding: 1rem 1.25rem;
+    border: 2px solid $color-warning-on-dark;
+    border-radius: $radius-small;
+    background-color: $color-surface-dark;
+  }
+
+  .confirm-text {
+    margin-block-end: 1rem;
+    font-weight: $font-weight-bold;
+  }
+
+  .attempt-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    align-items: center;
+
+    a {
+      font-weight: $font-weight-bold;
+      text-decoration: underline;
+      text-underline-offset: 0.3em;
+    }
+  }
+
+  .attempt-error {
+    display: grid;
+    row-gap: 1rem;
+  }
+
+  .primary-button {
+    @include button-primary;
+  }
+
+  .secondary-button {
+    @include button-secondary;
+  }
+}
