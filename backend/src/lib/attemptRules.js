@@ -1,7 +1,6 @@
+import { QUIZ_MESSAGES, validateQuizSetup } from '@mearn/shared/quiz';
 import { isObjectIdOrHexString } from 'mongoose';
 
-export const TIME_LIMITS_SEC = [300, 600, 900, 1200];
-export const QUESTION_COUNT = { min: 1, max: 30 };
 export const MAX_CATEGORY_IDS = 20;
 export const MAX_SELECTED_ANSWERS = 6;
 export const SUBMIT_TOLERANCE_MS = 15_000;
@@ -14,22 +13,11 @@ export const ANSWER_MESSAGES = {
 
 export const uniqueIds = (ids) => [...new Set(ids.map(String))];
 
-export const onlyAvailableMessage = (available) =>
-  available === 1 ? 'In deiner Auswahl gibt es nur 1 Frage.' : `In deiner Auswahl gibt es nur ${available} Fragen.`;
+export const validateStartAttempt = (body) => {
+  const fields = validateQuizSetup(body);
 
-export const validateStartAttempt = ({ categoryIds, questionCount, timeLimitSec }) => {
-  const fields = {};
-
-  if (categoryIds.length === 0) {
-    fields.categoryIds = 'Bitte wähle mindestens eine Kategorie.';
-  } else if (!categoryIds.every(isObjectIdOrHexString)) {
-    fields.categoryIds = 'Mindestens eine gewählte Kategorie gibt es nicht.';
-  }
-  if (questionCount < QUESTION_COUNT.min || questionCount > QUESTION_COUNT.max) {
-    fields.questionCount = `Die Anzahl der Fragen muss zwischen ${QUESTION_COUNT.min} und ${QUESTION_COUNT.max} liegen.`;
-  }
-  if (!TIME_LIMITS_SEC.includes(timeLimitSec)) {
-    fields.timeLimitSec = 'Bitte wähle 5, 10, 15 oder 20 Minuten.';
+  if (!fields.categoryIds && !body.categoryIds.every(isObjectIdOrHexString)) {
+    fields.categoryIds = QUIZ_MESSAGES.categoryUnknown;
   }
 
   return fields;
@@ -39,18 +27,18 @@ export const validateSelection = ({ categoryIds, categories, publishedCountById,
   const categoryById = new Map(categories.map((category) => [String(category._id), category]));
 
   if (!categoryIds.every((id) => categoryById.has(id))) {
-    return { categoryIds: 'Mindestens eine gewählte Kategorie gibt es nicht.' };
+    return { categoryIds: QUIZ_MESSAGES.categoryUnknown };
   }
 
   const emptyId = categoryIds.find((id) => !publishedCountById.get(id));
 
   if (emptyId) {
-    return { categoryIds: `Die Kategorie „${categoryById.get(emptyId).name}“ enthält noch keine Fragen.` };
+    return { categoryIds: QUIZ_MESSAGES.categoryEmpty(categoryById.get(emptyId).name) };
   }
 
   const available = categoryIds.reduce((sum, id) => sum + publishedCountById.get(id), 0);
 
-  return questionCount > available ? { questionCount: onlyAvailableMessage(available) } : {};
+  return questionCount > available ? { questionCount: QUIZ_MESSAGES.onlyAvailable(available) } : {};
 };
 
 export const validateAnswers = (answers, attempt, answerKeys) => {
