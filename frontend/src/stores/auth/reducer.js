@@ -5,6 +5,7 @@ export const AUTH_ACTION = {
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_FAILURE: 'LOGIN_FAILURE',
   LOGOUT: 'LOGOUT',
+  SESSION_RESTORE_REQUEST: 'SESSION_RESTORE_REQUEST',
   SESSION_RESTORED: 'SESSION_RESTORED',
 };
 
@@ -22,6 +23,8 @@ export const authReducer = (state, action) => {
       return { ...state, status: AUTH_STATUS.READY, user: null, error: null };
     case AUTH_ACTION.SESSION_RESTORED:
       return { ...state, status: AUTH_STATUS.READY, user: payload.user, error: payload.error };
+    case AUTH_ACTION.SESSION_RESTORE_REQUEST:
+      return { ...state, status: AUTH_STATUS.LOADING, error: null };
     default:
       return state;
   }

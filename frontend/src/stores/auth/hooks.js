@@ -48,5 +48,19 @@ export const useAuth = () => {
     dispatch({ type: AUTH_ACTION.LOGOUT });
   }, [dispatch]);
 
-  return { user, isAuthenticated: !(user === null || user === undefined), status, error, login, register, logout };
+  const retrySession = useCallback(() => {
+    dispatch({ type: AUTH_ACTION.SESSION_RESTORE_REQUEST });
+    return restoreSession(dispatch);
+  }, [dispatch]);
+
+  return {
+    user,
+    isAuthenticated: !(user === null || user === undefined),
+    status,
+    error,
+    login,
+    register,
+    logout,
+    retrySession,
+  };
 };

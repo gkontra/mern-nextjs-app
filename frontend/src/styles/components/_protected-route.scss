@@ -1,0 +1,17 @@
+@use '../abstracts' as *;
+
+.m-protected-route {
+  display: grid;
+  justify-items: start;
+  row-gap: 1rem;
+  padding-block: $page-padding-block;
+  color-scheme: dark;
+
+  .session-alert {
+    @include alert-box;
+  }
+
+  .retry-button {
+    @include button-secondary;
+  }
+}
