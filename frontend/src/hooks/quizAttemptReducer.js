@@ -21,6 +21,7 @@ export const QUIZ_ACTION = {
 export const createInitialState = () => ({
   status: QUIZ_STATUS.LOADING,
   attempt: null,
+  clockOffsetMs: 0,
   answers: {},
   unsavedIds: [],
   error: null,
@@ -29,6 +30,9 @@ export const createInitialState = () => ({
 
 const toAnswers = (questions) =>
   Object.fromEntries(questions.map(({ id, selectedAnswerIds }) => [id, selectedAnswerIds ?? []]));
+
+const toClockOffsetMs = ({ attempt, receivedAt }) =>
+  attempt.serverNow ? Date.parse(attempt.serverNow) - receivedAt : 0;
 
 const without = (ids, id) => ids.filter((current) => current !== id);
 
@@ -41,9 +45,10 @@ export const quizAttemptReducer = (state, action) => {
     case QUIZ_ACTION.LOAD_SUCCESS:
       return {
         ...state,
-        status: payload.status === 'submitted' ? QUIZ_STATUS.SUBMITTED : QUIZ_STATUS.READY,
-        attempt: payload,
-        answers: toAnswers(payload.questions),
+        status: payload.attempt.status === 'submitted' ? QUIZ_STATUS.SUBMITTED : QUIZ_STATUS.READY,
+        attempt: payload.attempt,
+        clockOffsetMs: toClockOffsetMs(payload),
+        answers: toAnswers(payload.attempt.questions),
       };
     case QUIZ_ACTION.LOAD_FAILURE:
       return { ...state, status: QUIZ_STATUS.ERROR, error: payload };

@@ -20,7 +20,12 @@ export const useQuizAttempt = (attemptId) => {
     dispatch({ type: QUIZ_ACTION.LOAD_REQUEST });
 
     fetchAttempt(attemptId, { signal: controller.signal }).then(
-      (attempt) => dispatch({ type: QUIZ_ACTION.LOAD_SUCCESS, payload: attempt }),
+      (attempt) =>
+        dispatch({
+          type: QUIZ_ACTION.LOAD_SUCCESS, //
+          payload: attempt,
+          receivedAt: Date.now(),
+        }),
       (error) => {
         if (!isRequestCanceled(error)) {
           dispatch({ type: QUIZ_ACTION.LOAD_FAILURE, payload: error.message });
