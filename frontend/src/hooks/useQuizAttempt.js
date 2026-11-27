@@ -23,8 +23,7 @@ export const useQuizAttempt = (attemptId) => {
       (attempt) =>
         dispatch({
           type: QUIZ_ACTION.LOAD_SUCCESS, //
-          payload: attempt,
-          receivedAt: Date.now(),
+          payload: { attempt, receivedAt: Date.now() },
         }),
       (error) => {
         if (!isRequestCanceled(error)) {
