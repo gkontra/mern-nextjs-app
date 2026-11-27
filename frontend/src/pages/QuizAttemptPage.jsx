@@ -1,3 +1,4 @@
+import { formatQuestionCount } from '@mearn/shared/quiz';
 import { useEffect, useRef, useState } from 'react';
 import { FaCircleExclamation } from 'react-icons/fa6';
 import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom';
@@ -7,7 +8,7 @@ import QuizTimer from '../components/quiz/QuizTimer';
 import { QUIZ_STATUS } from '../hooks/quizAttemptReducer';
 import useCountdown from '../hooks/useCountdown';
 import useQuizAttempt from '../hooks/useQuizAttempt';
-import { countUnanswered, formatQuestionCount } from '../lib/quizRules';
+import { countUnanswered } from '../lib/quizRules';
 
 const toPosition = (value, total) => {
   const position = Number.parseInt(value ?? '', 10);

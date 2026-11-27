@@ -14,6 +14,7 @@
   },
   "keywords": [],
   "dependencies": {
+    "@mearn/shared": "file:../shared",
     "bcryptjs": "^3.0.3",
     "chalk": "^6.0.1",
     "cookie-parser": "^1.4.7",

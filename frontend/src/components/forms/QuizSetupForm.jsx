@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
-import { FaCircleExclamation } from 'react-icons/fa6';
 import {
   DEFAULT_QUESTION_COUNT,
   DEFAULT_TIME_LIMIT_SEC,
@@ -8,7 +6,9 @@ import {
   formatQuestionCount,
   maxQuestionCount,
   validateQuizSetup,
-} from '../../lib/quizRules';
+} from '@mearn/shared/quiz';
+import { useEffect, useRef, useState } from 'react';
+import { FaCircleExclamation } from 'react-icons/fa6';
 import FormField from './contents/FormField';
 
 const FIELD_ORDER = ['categoryIds', 'questionCount', 'timeLimitSec'];

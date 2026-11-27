@@ -1,10 +1,10 @@
+import { validateLogin } from '@mearn/shared/auth';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
 import AuthForm from '../components/forms/AuthForm';
 import FormField from '../components/forms/contents/FormField';
 import useAuthForm from '../hooks/useAuthForm';
-import { validateLogin } from '../lib/authValidation';
 import { getSafeRedirectPath } from '../lib/safeRedirect';
 import { AUTH_STATUS, useAuth } from '../stores/auth';
 

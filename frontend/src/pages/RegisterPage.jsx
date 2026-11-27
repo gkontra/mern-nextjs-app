@@ -1,9 +1,9 @@
+import { AUTH_MESSAGES } from '@mearn/shared/auth';
 import { Link, Navigate, useLocation } from 'react-router-dom';
-
 import AuthForm from '../components/forms/AuthForm';
 import FormField from '../components/forms/contents/FormField';
 import useAuthForm from '../hooks/useAuthForm';
-import { PASSWORD_MIN_LENGTH, validateRegister } from '../lib/authValidation';
+import { validateRegister } from '../lib/authValidation';
 import { getSafeRedirectPath } from '../lib/safeRedirect';
 import { API_ERROR_CODE } from '../services/apiError';
 import { AUTH_STATUS, useAuth } from '../stores/auth';
@@ -55,7 +55,7 @@ const RegisterPage = () => {
               label="Passwort"
               type="password"
               autoComplete="new-password"
-              hint={`Mindestens ${PASSWORD_MIN_LENGTH} Zeichen.`}
+              hint={AUTH_MESSAGES.passwordHint()}
               required
             />
             <FormField

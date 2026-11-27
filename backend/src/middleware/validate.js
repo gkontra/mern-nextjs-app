@@ -1,5 +1,6 @@
+import { QUESTION_COUNT } from '@mearn/shared/quiz';
 import { badRequest, validationFailed } from '../lib/apiError.js';
-import { MAX_CATEGORY_IDS, MAX_SELECTED_ANSWERS, QUESTION_COUNT } from '../lib/attemptRules.js';
+import { MAX_CATEGORY_IDS, MAX_SELECTED_ANSWERS } from '../lib/attemptRules.js';
 
 const isStringArray = (value, maxLength) =>
   Array.isArray(value) && value.length <= maxLength && value.every((item) => typeof item === 'string');

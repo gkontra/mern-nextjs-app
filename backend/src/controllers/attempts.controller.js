@@ -1,7 +1,6 @@
 import { attemptClosed, attemptRunning, badRequest, validationFailed } from '../lib/apiError.js';
 import {
   HISTORY_LIMIT,
-  onlyAvailableMessage,
   uniqueIds,
   validateAnswers,
   validateSelection,

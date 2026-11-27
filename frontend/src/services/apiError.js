@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { ERROR_CODE } from '@mearn/shared/errors';
-import axios from 'axios';
 
 export const API_ERROR_CODE = {
   ...ERROR_CODE,

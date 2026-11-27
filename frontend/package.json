@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@mearn/shared": "file:../shared",
     "@splidejs/react-splide": "^0.7.12",
     "axios": "^1.21.1",
     "bootstrap": "^5.3.9",
